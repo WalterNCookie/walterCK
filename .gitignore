@@ -1,0 +1,9 @@
+# Ignore OS junk
+Thumbs.db
+Desktop.ini
+*.log
+
+# Ignore user-specific stuff
+*.tmp
+*.bak
+AppData/

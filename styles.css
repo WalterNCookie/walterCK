@@ -1,0 +1,36 @@
+:root{--bg:#0b1220; --fg:#e6eef6; --muted:#9fb0c4; --accent:#6ab7ff; --card:#0a1220;}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg); color:var(--fg); -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+.container{max-width:980px;margin:0 auto;padding:10px;}
+.site-header{background:transparent;position:sticky;top:0;backdrop-filter: blur(6px);z-index:10;}
+.site-header .container{display:flex;align-items:center;gap:16px;}
+.logo{font-weight:700;text-decoration:none;color:var(--fg);font-size:18px}
+.nav{margin-left:auto;display:flex;align-items:center;gap:12px}
+.nav a{color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:6px}
+.nav a:hover{color:var(--fg);background:rgba(10,132,255,0.08)}
+.btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;text-decoration:none;border:none;cursor:pointer}
+.hamburger{display:none;background:transparent;border:none;font-size:22px;margin-left:auto}
+.hero{padding:72px 0;background:linear-gradient(180deg, rgba(10,132,255,0.06), transparent)}
+.hero-inner{display:grid;gap:14px}
+.hero h1{font-size:40px;margin:0}
+.tagline{color:var(--muted);font-size:16px;margin:0}
+.about, .projects, .contact{padding:40px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(11,18,32,0.04)}
+.card h3{margin:0 0 8px 0}
+.tags{color:var(--muted);font-size:13px}
+.link{display:inline-block;margin-top:12px;color:var(--accent);text-decoration:none}
+.site-footer{padding:24px 0;color:var(--muted);text-align:center}
+.meta {list-style: none;padding: 0;margin: 0;}
+.meta li {display: block;margin-bottom: 0.3em;}
+.contact-list a{color:var(--accent)}
+@media(max-width:760px){
+  .nav{position:fixed;right:0;top:56px;background:var(--bg);flex-direction:column;padding:12px;border-left:1px solid rgba(0,0,0,0.04);transform:translateX(100%);transition:transform .18s ease}
+  .nav.show{transform:translateX(0)}
+  .hamburger{display:block}
+  .site-header .container{padding:8px 16px}
+}
+
