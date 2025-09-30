@@ -1,0 +1,4 @@
+cd C:/Users/insan/Downloads/Desktop/WebsiteX
+git add .
+git commit -m "Update"
+git push origin main
