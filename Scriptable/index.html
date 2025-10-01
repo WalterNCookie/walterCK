@@ -6,10 +6,175 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WalterX — Scriptable</title>
-  <meta name="description" content="WalterHQ — Shortcuts page" />
-  <link rel="stylesheet" href="../styles.css" /> <!-- use the shared styles -->
+  <meta name="description" content="WalterHQ — Scriptable scripts" />
+  <link rel="stylesheet" href="../styles.css" /> <!-- shared styles -->
+  <style>
+    /* --- Page-scoped styles - paste into styles.css if you prefer global override --- */
+    :root {
+      --accent: #6b8cff;
+      --accent-2: #7ef0c7;
+      --bg: #0f1115;
+      --card-bg: rgba(255,255,255,0.03);
+      --muted: #9aa3b2;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius: 12px;
+      --ani: 220ms;
+    }
+
+    .scriptable-hero {
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .scriptable-hero .left {
+      min-width: 0;
+    }
+    .scriptable-hero h1 { margin:0 0 6px 0; font-size:1.6rem; letter-spacing:-0.02em; }
+    .scriptable-hero p { margin:0; color:var(--muted); font-size:0.95rem; }
+
+    .controls {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .search {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:var(--glass);
+      padding:8px 10px;
+      border-radius:999px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+      min-width:220px;
+    }
+    .search input {
+      background:transparent;
+      border:0;
+      outline:0;
+      color:inherit;
+      width:260px;
+      font-size:0.95rem;
+    }
+    .control-select, .btn-ghost {
+      background:var(--glass-2);
+      padding:8px 12px;
+      border-radius:10px;
+      border:0;
+      color:inherit;
+      cursor:pointer;
+      font-size:0.92rem;
+    }
+
+    .chips {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .chip {
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.03);
+      padding:6px 10px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:0.86rem;
+      color:var(--muted);
+    }
+    .chip.active {
+      border-color:transparent;
+      background: linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);
+      color:#071019;
+      font-weight:600;
+      box-shadow: 0 6px 18px rgba(107,140,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    /* grid/cards */
+    .cards-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:16px;
+      margin-top:14px;
+    }
+
+    .sp-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      transition: transform var(--ani) ease, box-shadow var(--ani) ease;
+      border:1px solid rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+    .sp-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px rgba(2,6,23,0.55); }
+
+    .card-top {
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .file-icon {
+      width:48px; height:48px; flex:0 0 48px; border-radius:9px;
+      display:grid; place-items:center;
+      background: linear-gradient(180deg, rgba(107,140,255,0.12), rgba(126,240,199,0.06));
+      color: white;
+      font-weight:700;
+      font-size:18px;
+    }
+    .card-title { font-size:1.05rem; margin:0; }
+    .card-desc { margin:0; color:var(--muted); font-size:0.92rem; min-height:1.6rem; }
+
+    .card-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+    .tag-pill { font-size:0.78rem; padding:6px 8px; border-radius:999px; background:rgba(255,255,255,0.02); color:var(--muted); border:1px solid rgba(255,255,255,0.01); }
+
+    .card-actions { display:flex; gap:8px; margin-top:auto; }
+    .btn {
+      padding:9px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:600; font-size:0.9rem;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+    .btn.primary {
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#02121d;
+      box-shadow: 0 8px 24px rgba(107,140,255,0.14);
+    }
+    .btn.ghost {
+      background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted);
+    }
+
+    .small {
+      font-size:0.82rem; color:var(--muted);
+    }
+
+    /* compact list view */
+    .compact .cards-grid { grid-template-columns: 1fr; }
+    .compact .sp-card { flex-direction:row; align-items:center; gap:14px; padding:10px; }
+    .compact .card-top { flex-direction:row; align-items:center; gap:12px }
+    .compact .card-desc { display:none; }
+    .compact .card-actions { margin-left:auto; }
+
+    /* toast */
+    .toast {
+      position:fixed; left:50%; transform:translateX(-50%); bottom:40px;
+      background: rgba(0,0,0,0.8); color:#fff; padding:10px 14px; border-radius:8px; z-index:9999;
+      font-size:0.95rem; opacity:0; transition:opacity 200ms ease;
+    }
+    .toast.show { opacity:1; }
+
+    /* responsive tweaks */
+    @media (max-width:620px) {
+      .search input { width:140px; }
+      .file-icon { width:44px; height:44px; }
+    }
+  </style>
 </head>
-<body>
+<body class="scriptable-page">
   <header class="site-header">
     <div class="container">
       <a class="logo" href="../index.html">WalterHQ</a>
@@ -23,34 +188,41 @@
   </header>
 
   <main class="container">
-    <h1>My Shortcuts</h1>
-    <p>Shortcut for everything, hit me up for unreleased versions!</p>
+    <section class="scriptable-hero">
+      <div class="left">
+        <h1>Scriptable scripts</h1>
+        <p class="small">Fresh scripts from your iCloud → always up-to-date. Click Download to open the public Gist / copy the link.</p>
+      </div>
 
-    <div class="grid">
-      <article class="card">
-        <h3>Lie Detector</h3>
-        <p>Fun to play with friends, are they lying or not? 🤔</p>
-        <p class="tags">Scriptable • iOS</p>
-        <a class="link" href="#">Download / Repo</a>
-      </article>
+      <div class="controls" aria-hidden="false">
+        <div class="search" role="search" title="Search scripts">
+          <!-- search icon (SVG) -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.85">
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <input id="searchInput" placeholder="Search scripts (title, desc, tags)"/>
+        </div>
 
-      <article class="card">
-        <h3>Time Tracker</h3>
-        <p>Track the day, week, month, year and your life with a clean widget</p>
-        <p class="tags">Scriptable • iOS</p>
-        <a class="link" href="#">Download / Repo</a>
-      </article>
+        <select id="sortSelect" class="control-select" title="Sort">
+          <option value="alpha">Title (A → Z)</option>
+          <option value="alpha-desc">Title (Z → A)</option>
+          <option value="has-desc">Has description first</option>
+        </select>
 
-      <article class="card">
-        <h3>Reaction Time</h3>
-        <p>Test how fast you can react with this accurate, tested timer.</p>
-        <p class="tags">Scriptable • iOS</p>
-        <a class="link" href="#">Download / Repo</a>
-      </article>
+        <button id="viewToggle" class="btn-ghost" title="Toggle compact/list view">Toggle view</button>
+      </div>
+    </section>
+
+    <div class="chips" id="chipsContainer" aria-hidden="false"></div>
+
+    <div id="scriptable-grid" class="cards-grid" aria-live="polite">
+      <!-- cards injected here -->
     </div>
 
-    <a class="
-    <a class="btn" href="../index.html" style="margin-top:50px;">Back to Home</a>
+    <div id="emptyState" style="display:none; margin-top:20px; color:var(--muted); font-size:0.98rem;">
+      No scripts found. Try clearing filters or check scriptable.json.
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -59,6 +231,236 @@
     </div>
   </footer>
 
-  <script src="../script.js"></script> <!-- shared JS -->
+  <script src="../script.js"></script> <!-- shared JS: theme + mobile nav -->
+  <script>
+    (function () {
+      const grid = document.getElementById('scriptable-grid');
+      const chipsContainer = document.getElementById('chipsContainer');
+      const searchInput = document.getElementById('searchInput');
+      const sortSelect = document.getElementById('sortSelect');
+      const viewToggle = document.getElementById('viewToggle');
+      const emptyState = document.getElementById('emptyState');
+
+      let items = [];
+      let activeTag = null;
+      let compactView = false;
+      let uniqueTags = [];
+
+      // Try a few candidate paths for flexibility
+      const pathsToTry = [
+        './scriptable.json',
+        'scriptable.json',
+        '../scriptable/scriptable.json',
+        '/scriptable/scriptable.json'
+      ];
+
+      async function fetchJson() {
+        for (const p of pathsToTry) {
+          try {
+            const res = await fetch(p, {cache: "no-store"});
+            if (!res.ok) throw new Error('not ok');
+            const json = await res.json();
+            return json;
+          } catch (e) {
+            // continue to next path
+          }
+        }
+        throw new Error('Could not fetch scriptable.json from known locations.');
+      }
+
+      function makeIcon(title) {
+        // simple SVG initial with gradient background
+        const initial = (title && title[0]) ? title[0].toUpperCase() : '?';
+        return `<div class="file-icon" aria-hidden="true">${initial}</div>`;
+      }
+
+      function buildCard(item) {
+        const tags = (item.tags || '').split(/[,•]/).map(t => t.trim()).filter(Boolean);
+        const tagsHtml = tags.map(t => `<span class="tag-pill">${t}</span>`).join('');
+        const desc = item.desc ? item.desc : '';
+
+        const html = `
+          <div class="sp-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(desc)}" data-tags="${escapeHtml(item.tags || '')}">
+            <div class="card-top">
+              ${makeIcon(item.title)}
+              <div style="min-width:0; flex:1;">
+                <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                <p class="card-desc">${escapeHtml(desc)}</p>
+                <div class="card-tags">${tagsHtml}</div>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <a class="btn primary" href="${escapeAttr(item.link)}" target="_blank" rel="noopener noreferrer" title="Open Gist / Download">
+                <!-- download svg -->
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.95"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15V3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Download
+              </a>
+
+              <button class="btn ghost" data-link="${escapeAttr(item.link)}" title="Copy link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="opacity:.95"><path d="M15 7h4a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 13L21 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Copy link
+              </button>
+            </div>
+          </div>
+        `;
+        return html;
+      }
+
+      function escapeHtml(str) {
+        if (!str && str !== 0) return '';
+        return String(str)
+          .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+          .replaceAll('"','&quot;').replaceAll("'",'&#39;');
+      }
+      function escapeAttr(s) { return escapeHtml(s); }
+
+      function renderList(list) {
+        if (!list || list.length === 0) {
+          grid.innerHTML = '';
+          emptyState.style.display = 'block';
+          return;
+        }
+        emptyState.style.display = 'none';
+        grid.innerHTML = list.map(buildCard).join('');
+        attachButtons();
+      }
+
+      function attachButtons() {
+        document.querySelectorAll('.btn.ghost[data-link]').forEach(btn=>{
+          btn.addEventListener('click', async (e)=>{
+            const link = btn.getAttribute('data-link') || '';
+            if (!link) return showToast('No link available');
+            await copyToClipboard(link);
+            showToast('Link copied');
+          });
+        });
+      }
+
+      async function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try { await navigator.clipboard.writeText(text); return; } catch(e){}
+        }
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e){}
+        ta.remove();
+      }
+
+      function showToast(msg) {
+        let t = document.querySelector('.toast');
+        if (!t) {
+          t = document.createElement('div');
+          t.className = 'toast';
+          document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timeout);
+        t._timeout = setTimeout(()=> t.classList.remove('show'), 1800);
+      }
+
+      function buildChips(allTags) {
+        chipsContainer.innerHTML = '';
+        const btnAll = document.createElement('button');
+        btnAll.className = 'chip' + (activeTag === null ? ' active' : '');
+        btnAll.textContent = 'All';
+        btnAll.addEventListener('click', ()=> { activeTag = null; applyFilters(); updateChips(); });
+        chipsContainer.appendChild(btnAll);
+
+        allTags.forEach(tag=>{
+          const b = document.createElement('button');
+          b.className = 'chip' + (activeTag === tag ? ' active' : '');
+          b.textContent = tag;
+          b.addEventListener('click', ()=> {
+            activeTag = (activeTag === tag) ? null : tag;
+            applyFilters();
+            updateChips();
+          });
+          chipsContainer.appendChild(b);
+        });
+      }
+
+      function updateChips() {
+        document.querySelectorAll('.chip').forEach(el=>{
+          el.classList.remove('active');
+          if ((activeTag === null && el.textContent === 'All') || (activeTag !== null && el.textContent === activeTag)) el.classList.add('active');
+        });
+      }
+
+      function gatherUniqueTags(data) {
+        const set = new Set();
+        data.forEach(it=>{
+          const ts = (it.tags || '').split(/[•,]/).map(t=>t.trim()).filter(Boolean);
+          ts.forEach(t=>set.add(t));
+        });
+        return Array.from(set).sort((a,b)=>a.localeCompare(b));
+      }
+
+      function applyFilters() {
+        const q = (searchInput.value || '').trim().toLowerCase();
+        let filtered = items.filter(it=>{
+          // tag filter
+          if (activeTag) {
+            const tags = (it.tags || '').split(/[•,]/).map(t=>t.trim().toLowerCase());
+            if (!tags.includes(activeTag.toLowerCase())) return false;
+          }
+          // search
+          if (q) {
+            const hay = ((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.tags||'')).toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+
+        // sort
+        const mode = sortSelect.value;
+        if (mode === 'alpha') filtered.sort((a,b)=>a.title.localeCompare(b.title));
+        else if (mode === 'alpha-desc') filtered.sort((a,b)=>b.title.localeCompare(a.title));
+        else if (mode === 'has-desc') filtered.sort((a,b)=>{
+          const aHas = (a.desc||'').trim() ? 0 : 1;
+          const bHas = (b.desc||'').trim() ? 0 : 1;
+          return aHas - bHas || a.title.localeCompare(b.title);
+        });
+
+        renderList(filtered);
+      }
+
+      function initUI() {
+        // search debounce
+        let t;
+        searchInput.addEventListener('input', ()=>{
+          clearTimeout(t);
+          t = setTimeout(()=> applyFilters(), 200);
+        });
+
+        sortSelect.addEventListener('change', applyFilters);
+        viewToggle.addEventListener('click', ()=>{
+          compactView = !compactView;
+          document.body.classList.toggle('compact', compactView);
+        });
+      }
+
+      // start
+      (async function start(){
+        try {
+          items = await fetchJson();
+          if (!Array.isArray(items)) throw new Error('bad json');
+          uniqueTags = gatherUniqueTags(items);
+          buildChips(uniqueTags);
+          initUI();
+          applyFilters();
+        } catch (err) {
+          grid.innerHTML = `<div style="color:var(--muted); padding:20px;">Failed to load scriptable.json — make sure the exporter wrote <code>scriptable.json</code> into this folder.<br><small style="color:var(--muted)">${escapeHtml(String(err))}</small></div>`;
+          emptyState.style.display = 'none';
+          console.error(err);
+        }
+      })();
+
+    })();
+  </script>
 </body>
 </html>
