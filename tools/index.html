@@ -20,7 +20,6 @@
       </nav>
 
       <div style="display:flex; gap:8px; align-items:center;">
-        <button id="theme-toggle">Dark</button>
         <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
       </div>
     </div>
@@ -35,7 +34,7 @@
         </div>
 
         <div style="display:flex; gap:10px; align-items:center;">
-          <a class="btn ghost" href="../index.html">Back to Home</a>
+          <a class="btn primary" href="../index.html">Back to Home</a>
         </div>
       </div>
 
@@ -75,24 +74,20 @@
     const q = document.getElementById('q');
     const sort = document.getElementById('sort');
     const toggleView = document.getElementById('toggleView');
-    const refreshBtn = document.getElementById('refreshBtn');
     const empty = document.getElementById('empty');
 
     let items = [];
     let viewCompact = false;
     let activeTag = null;
 
-    // Try to load a single combined file first, otherwise try separate files and merge
+    // ******** FETCH: try the canonical tools path first (what exporter writes) ********
     async function fetchData(){
-      const trySingle = ['./tools.json','./data.json','../tools.json','../data.json','./tools/tools.json'];
-      for (const p of trySingle) {
-        try {
-          const r = await fetch(p, {cache:'no-store'});
-          if (r.ok) return await r.json();
-        } catch(e){}
-      }
-
-      // fallback: try individual scriptable & shortcuts files
+      const primary = './tools/tools.json'; // preferred (site root /tools/tools.json)
+      try {
+        const r = await fetch(primary, {cache:'no-store'});
+        if (r.ok) return await r.json();
+      } catch(e){}
+      // fallback candidates used earlier
       const candidates = [
         './scriptable/scriptable.json','./shortcuts/shortcuts.json',
         '../scriptable/scriptable.json','../shortcuts/shortcuts.json',
@@ -121,20 +116,17 @@
     }
 
     function detectType(item){
-      // priority: explicit tag -> link heuristics -> fallback to Scriptable
       if (item.tags) {
         const n = normalizeTagRaw(item.tags);
         if (n) return n;
       }
       if (item.link && typeof item.link === 'string' && item.link.includes('/shortcuts/')) return 'Shortcuts';
-      // fallback: if file extension .js or gist raw url ending .js? assume Scriptable
       return 'Scriptable';
     }
 
     function normalizeItems(raw){
       return (raw||[]).map(it=>{
         const t = detectType(it);
-        // ensure clean tags string just contains the type
         return {
           title: it.title || (it.path ? (it.path.split('/').pop().replace(/\.js$/i,'')) : 'Untitled'),
           desc: it.desc || '',
@@ -277,13 +269,6 @@
     q.addEventListener('input', ()=>{ clearTimeout(debounce); debounce = setTimeout(applyFilters, 200);});
     sort.addEventListener('change', applyFilters);
     toggleView.addEventListener('click', ()=>{ viewCompact = !viewCompact; document.body.classList.toggle('compact', viewCompact); });
-
-    refreshBtn.addEventListener('click', async ()=>{
-      refreshBtn.textContent = 'Refreshing...';
-      await loadAll();
-      refreshBtn.textContent = 'Refresh';
-      showToast('Data refreshed');
-    });
 
     // initial load
     loadAll();
