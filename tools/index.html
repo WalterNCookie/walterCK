@@ -81,31 +81,12 @@
     let activeTag = null;
 
     // ******** FETCH: try the canonical tools path first (what exporter writes) ********
-    async function fetchData(){
-      const primary = './tools/tools.json'; // preferred (site root /tools/tools.json)
-      try {
-        const r = await fetch(primary, {cache:'no-store'});
-        if (r.ok) return await r.json();
-      } catch(e){}
-      // fallback candidates used earlier
-      const candidates = [
-        './scriptable/scriptable.json','./shortcuts/shortcuts.json',
-        '../scriptable/scriptable.json','../shortcuts/shortcuts.json',
-        'scriptable/scriptable.json','shortcuts/shortcuts.json',
-        './scriptable.json','./shortcuts.json'
-      ];
-      let collected = [];
-      for (const p of candidates) {
-        try {
-          const r = await fetch(p, {cache:'no-store'});
-          if (r.ok) {
-            const j = await r.json();
-            if (Array.isArray(j)) collected = collected.concat(j);
-          }
-        } catch(e){}
-      }
-      return collected;
-    }
+async function fetchData(){
+  const r = await fetch('/tools/tools.json', {cache:'no-store'});
+  if (!r.ok) throw new Error('tools.json not found');
+  return await r.json();
+}
+
 
     function normalizeTagRaw(t){
       if(!t) return null;
