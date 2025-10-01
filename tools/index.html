@@ -1,0 +1,295 @@
+<!-- TOOLS -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Helpful Tools — WalterCK</title>
+  <meta name="description" content="Combined Shortcuts & Scriptable scripts — always up-to-date.">
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="../index.html">WalterCK</a>
+      <nav class="nav" id="nav">
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button id="theme-toggle">Dark</button>
+        <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="tools-hero">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div>
+          <h1>Helpful Tools</h1>
+          <p class="small">Shortcuts and Scriptable scripts — synced from iCloud/Gists and displayed here. Filter by type, search, and copy links.</p>
+        </div>
+
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn ghost" href="../index.html">Back to Home</a>
+          <a class="btn primary" href="#" id="refreshBtn">Refresh</a>
+        </div>
+      </div>
+
+      <div class="controls" style="margin-top:12px;">
+        <div class="search" role="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
+          <input id="q" placeholder="Search title, desc or tag" />
+        </div>
+
+        <select id="sort" class="control-select">
+          <option value="alpha">Title (A → Z)</option>
+          <option value="alpha-desc">Title (Z → A)</option>
+          <option value="type-first">Type first</option>
+        </select>
+
+        <button id="toggleView" class="btn ghost">Toggle View</button>
+      </div>
+
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <div id="grid" class="cards-grid" aria-live="polite"></div>
+    <div id="empty" class="small" style="margin-top:18px; display:none;">No items. Check your JSON or exporter.</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© WalterCK — built for fun. Hosted on Netlify.</small>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+  (function(){
+    const grid = document.getElementById('grid');
+    const chips = document.getElementById('chips');
+    const q = document.getElementById('q');
+    const sort = document.getElementById('sort');
+    const toggleView = document.getElementById('toggleView');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const empty = document.getElementById('empty');
+
+    let items = [];
+    let viewCompact = false;
+    let activeTag = null;
+
+    // Try to load a single combined file first, otherwise try separate files and merge
+    async function fetchData(){
+      const trySingle = ['./tools.json','./data.json','../tools.json','../data.json','./tools/tools.json'];
+      for (const p of trySingle) {
+        try {
+          const r = await fetch(p, {cache:'no-store'});
+          if (r.ok) return await r.json();
+        } catch(e){}
+      }
+
+      // fallback: try individual scriptable & shortcuts files
+      const candidates = [
+        './scriptable/scriptable.json','./shortcuts/shortcuts.json',
+        '../scriptable/scriptable.json','../shortcuts/shortcuts.json',
+        'scriptable/scriptable.json','shortcuts/shortcuts.json',
+        './scriptable.json','./shortcuts.json'
+      ];
+      let collected = [];
+      for (const p of candidates) {
+        try {
+          const r = await fetch(p, {cache:'no-store'});
+          if (r.ok) {
+            const j = await r.json();
+            if (Array.isArray(j)) collected = collected.concat(j);
+          }
+        } catch(e){}
+      }
+      return collected;
+    }
+
+    function normalizeTagRaw(t){
+      if(!t) return null;
+      const s = String(t).toLowerCase();
+      if (s.includes('scriptable') || s.includes('script') || s.includes('jellycuts')) return 'Scriptable';
+      if (s.includes('shortcut') || s.includes('shortcuts') || s.includes('/shortcuts/')) return 'Shortcuts';
+      return null;
+    }
+
+    function detectType(item){
+      // priority: explicit tag -> link heuristics -> fallback to Scriptable
+      if (item.tags) {
+        const n = normalizeTagRaw(item.tags);
+        if (n) return n;
+      }
+      if (item.link && typeof item.link === 'string' && item.link.includes('/shortcuts/')) return 'Shortcuts';
+      // fallback: if file extension .js or gist raw url ending .js? assume Scriptable
+      return 'Scriptable';
+    }
+
+    function normalizeItems(raw){
+      return (raw||[]).map(it=>{
+        const t = detectType(it);
+        // ensure clean tags string just contains the type
+        return {
+          title: it.title || (it.path ? (it.path.split('/').pop().replace(/\.js$/i,'')) : 'Untitled'),
+          desc: it.desc || '',
+          tags: t,
+          link: it.link || ''
+        };
+      });
+    }
+
+    function escapeHtml(s){ if(!s && s !== 0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;"); }
+
+    function makeIcon(title,type){
+      const initial = title && title[0] ? title[0].toUpperCase() : '?';
+      const color = (type === 'Shortcuts') ? 'background: linear-gradient(180deg, rgba(91,224,192,0.12), rgba(107,140,255,0.04));' : 'background: linear-gradient(180deg, rgba(107,140,255,0.12), rgba(91,224,192,0.04));';
+      return `<div class="icon" style="${color}">${initial}</div>`;
+    }
+
+    function renderCard(item){
+      const tagsHtml = `<div class="tag-pill">${escapeHtml(item.tags)}</div>`;
+      const desc = escapeHtml(item.desc || '');
+      const link = escapeHtml(item.link || '#');
+
+      return `<article class="tool-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc)}" data-tags="${escapeHtml(item.tags)}">
+        <div class="card-top">
+          ${makeIcon(item.title,item.tags)}
+          <div style="min-width:0;flex:1;">
+            <h3 style="margin:0 0 6px 0;">${escapeHtml(item.title)}</h3>
+            <p class="card-desc">${desc}</p>
+            <div class="card-tags">${tagsHtml}</div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a class="btn small primary" href="${link}" target="_blank" rel="noopener noreferrer">Open</a>
+          <button class="btn small ghost copy-btn" data-link="${link}">Copy link</button>
+        </div>
+      </article>`;
+    }
+
+    function attachCopyButtons(){
+      document.querySelectorAll('.copy-btn').forEach(b=>{
+        b.removeEventListener('click', copyHandler);
+        b.addEventListener('click', copyHandler);
+      });
+    }
+    async function copyHandler(e){
+      const link = e.currentTarget.getAttribute('data-link') || '';
+      if (!link) { showToast('No link available'); return; }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(link);
+        } else {
+          const ta = document.createElement('textarea'); ta.value = link; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove();
+        }
+        showToast('Link copied');
+      } catch (err){ showToast('Copy failed'); }
+    }
+
+    function showToast(msg){
+      let t = document.querySelector('.toast');
+      if (!t) { t = document.createElement('div'); t.className='toast'; document.body.appendChild(t); }
+      t.textContent = msg; t.classList.add('show'); clearTimeout(t._to);
+      t._to = setTimeout(()=> t.classList.remove('show'), 1600);
+    }
+
+    function renderList(list){
+      if (!list || list.length === 0) {
+        grid.innerHTML = ''; empty.style.display = 'block'; return;
+      }
+      empty.style.display = 'none';
+      grid.innerHTML = list.map(renderCard).join('');
+      attachCopyButtons();
+    }
+
+    function gatherTags(list){
+      const s = new Set();
+      list.forEach(it => s.add(it.tags || 'Scriptable'));
+      return Array.from(s).sort();
+    }
+
+    function buildChips(allTags){
+      chips.innerHTML = '';
+      const btnAll = document.createElement('button');
+      btnAll.className = 'chip' + (activeTag === null ? ' active' : '');
+      btnAll.textContent = 'All';
+      btnAll.addEventListener('click', ()=>{ activeTag = null; applyFilters(); updateChips(); });
+      chips.appendChild(btnAll);
+
+      allTags.forEach(t=>{
+        const b = document.createElement('button');
+        b.className = 'chip' + (activeTag === t ? ' active' : '');
+        b.textContent = t;
+        b.addEventListener('click', ()=> {
+          activeTag = (activeTag === t) ? null : t;
+          applyFilters();
+          updateChips();
+        });
+        chips.appendChild(b);
+      });
+    }
+    function updateChips(){
+      document.querySelectorAll('.chip').forEach(el=>{
+        el.classList.remove('active');
+        if ((activeTag === null && el.textContent === 'All') || (activeTag !== null && el.textContent === activeTag)) el.classList.add('active');
+      });
+    }
+
+    function applyFilters(){
+      const qv = (q.value || '').trim().toLowerCase();
+      let filtered = items.slice();
+
+      if (activeTag) filtered = filtered.filter(it => (it.tags||'').toLowerCase() === activeTag.toLowerCase());
+      if (qv) filtered = filtered.filter(it => ((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.tags||'')).toLowerCase().includes(qv));
+
+      // sort
+      if (sort.value === 'alpha') filtered.sort((a,b)=>a.title.localeCompare(b.title));
+      else if (sort.value === 'alpha-desc') filtered.sort((a,b)=>b.title.localeCompare(a.title));
+      else if (sort.value === 'type-first') filtered.sort((a,b)=> a.tags.localeCompare(b.tags) || a.title.localeCompare(b.title));
+
+      renderList(filtered);
+    }
+
+    async function loadAll(){
+      try {
+        const raw = await fetchData();
+        const normalized = normalizeItems(raw);
+        items = normalized;
+        const tags = gatherTags(items);
+        buildChips(tags);
+        applyFilters();
+      } catch (err){
+        grid.innerHTML = `<div style="color:var(--muted); padding:18px;">Failed to load data. Make sure exporter wrote a JSON file into the same repo (tools.json or scriptable/shortcuts json).<br><small>${escapeHtml(String(err))}</small></div>`;
+        empty.style.display='none';
+        console.error(err);
+      }
+    }
+
+    // ui hooks
+    let debounce;
+    q.addEventListener('input', ()=>{ clearTimeout(debounce); debounce = setTimeout(applyFilters, 200);});
+    sort.addEventListener('change', applyFilters);
+    toggleView.addEventListener('click', ()=>{ viewCompact = !viewCompact; document.body.classList.toggle('compact', viewCompact); });
+
+    refreshBtn.addEventListener('click', async ()=>{
+      refreshBtn.textContent = 'Refreshing...';
+      await loadAll();
+      refreshBtn.textContent = 'Refresh';
+      showToast('Data refreshed');
+    });
+
+    // initial load
+    loadAll();
+
+  })();
+  </script>
+</body>
+</html>

@@ -5,76 +5,85 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WalterHQ — Walter's personal site</title>
-  <meta name="description" content="WalterHQ — projects, notes, and weird cookie lore." />
+  <title>WalterCK — Walter's personal site</title>
+  <meta name="description" content="WalterCK — projects, notes, and weird cookie lore." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="logo" href="#">WalterX</a>
+      <a class="logo" href="#">WalterCK</a>
       <nav class="nav" id="nav">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
+
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button id="theme-toggle">Dark</button>
+        <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="hero">
       <div class="container hero-inner">
-        <h1>Hey — I’m Walter.</h1>
-        <p class="tagline" style = "margin-bottom: 20px;">Year 8. Code tinkerer. Cookie enthusiast. Building dumb-cool shortcuts and small web things.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#projects">See Projects</a>
-          <a class="btn ghost" href="#contact">Contact</a>
+        <div>
+          <h1>Hey — I’m WalterCK.</h1>
+          <p class="tagline">Year 8. Code tinkerer. Cookie enthusiast. Building dumb-cool shortcuts and small web things.</p>
+
+          <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="#projects">See Projects</a>
+            <a class="btn ghost" href="tools/index.html">Helpful Tools</a>
+          </div>
+        </div>
+
+        <div style="min-width:220px; text-align:right;">
+          <p class="small">Current toys: Shortcuts, Scriptable, small web builds. Want a feature? Send cookie recipes & ideas.</p>
         </div>
       </div>
     </section>
 
     <section id="about" class="container about">
       <h2>About</h2>
-      <p>I’m into automation, Scriptable/Jellycuts stuff, and making small tools that actually get used. I like cookies and my cat Annie. This site is where I dump projects, notes, and dumb experiments.</p>
-             <ul class="meta">
-              <li>📍 Australia</li>
-              <li>🎂 Mar 1, 2012</li>
-              <li>📱 iPhone 12 Pro Max</li>
-             </ul>
-
-
+      <p>I’m into automation, Scriptable/Jellycuts, and making small tools that actually get used. I like cookies and my cat Annie. This site is where I dump projects, notes, and dumb experiments.</p>
+      <ul class="meta">
+        <li>📍 Australia</li>
+        <li>🎂 Mar 1, 2012</li>
+        <li>📱 iPhone 12 Pro Max</li>
+      </ul>
     </section>
 
     <section id="projects" class="container projects">
       <h2>Projects</h2>
       <div class="grid">
         <article class="card">
-          <h3>My Shortcuts</h3>
-          <p>Shortcut for everything, hit me up for unreleased versions!</p>
-          <p class="tags"><a href="https://apps.apple.com/app/shortcuts/id1462947752" target="_blank">Shortcuts • iOS</a></p>
-          <a class="link" href="/shortcuts">Click Here!</a>
+          <h3>Helpful Tools</h3>
+          <p>Combined Shortcuts & Scriptable scripts — live from iCloud / GitHub Gists.</p>
+          <p class="tags">Scriptable • Shortcuts</p>
+          <a class="link" href="tools/index.html">Open tools page</a>
         </article>
 
         <article class="card">
           <h3>My Scripts</h3>
-          <p>Scripts I use in my everyday life, install the app below.</p>
-          <p class="tags"><a href="https://apps.apple.com/app/scriptable/id1405459188" target="_blank">Scriptable • iOS</a></p>
-          <a class="link" href="/scriptable">Click Here!</a>
+          <p>Scripts I use in daily life and widgets.</p>
+          <p class="tags">Scriptable</p>
+          <a class="link" href="tools/index.html#scripts">View scripts</a>
         </article>
 
         <article class="card">
           <h3>Minimal Portfolio</h3>
-          <p>What you’re looking at — simple, fast, and easy to deploy to Netlify.</p>
+          <p>What you’re looking at — simple, fast, and easy to deploy.</p>
           <p class="tags">Web • HTML/CSS</p>
-          <a class="link" href="#">View source</a>
+          <a class="link" id="portfolio-link" href="https://github.com/WalterNCookie/walterCK/" target="_blank" rel="noopener noreferrer">View on GitHub Pages →</a>
         </article>
       </div>
     </section>
 
     <section id="contact" class="container contact">
       <h2>Contact</h2>
-      <p>Want to collab, ask about a shortcut, or send me cookie recipes? Hit me:</p>
+      <p>Want to collab, ask about a shortcut, or send cookie recipes? Hit me:</p>
       <p>Email: <a href="mailto:wmaclean2012@gmail.com">wmaclean2012@gmail.com</a> - I probably won't respond (sorry)</p>
       <p>Number: <a href="tel:+61493827550">+61 493 827 550</a></p>
       <p>Discord: <a href="https://discord.com/users/952110713697108028">WalterNCookie</a></p>
@@ -83,7 +92,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <small>© Walter — built for fun. Hosted on Netlify.</small>
+      <small>© WalterCK — built for fun. Hosted on Netlify.</small>
     </div>
   </footer>
 

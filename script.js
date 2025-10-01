@@ -1,29 +1,40 @@
-// tiny interactivity: theme toggle + mobile nav
-const themeToggle = document.getElementById('theme-toggle');
+// script.js — theme toggle + mobile nav (robust)
 const root = document.documentElement;
 const hamburger = document.getElementById('hamburger');
 const nav = document.getElementById('nav');
+const themeToggle = document.getElementById('theme-toggle');
 
 function setTheme(t){
   if(t === 'dark') {
     root.setAttribute('data-theme','dark');
-    localStorage.theme = 'dark';
-    themeToggle.textContent = 'Light';
+    try { localStorage.theme = 'dark'; } catch(e){}
+    if (themeToggle) themeToggle.textContent = 'Light';
   } else {
     root.removeAttribute('data-theme');
-    localStorage.theme = 'light';
-    themeToggle.textContent = 'Dark';
+    try { localStorage.theme = 'light'; } catch(e){}
+    if (themeToggle) themeToggle.textContent = 'Dark';
   }
 }
 
-themeToggle.addEventListener('click', ()=>{
-  const current = localStorage.theme === 'dark' ? 'dark' : 'light';
-  setTheme(current === 'dark' ? 'light' : 'dark');
-});
+// initialize theme safely
+try {
+  const saved = (typeof localStorage !== 'undefined' && localStorage.theme) ? localStorage.theme : null;
+  if (saved === 'dark') setTheme('dark');
+  else setTheme('light');
+} catch (e) {
+  // fallback
+  setTheme('light');
+}
 
-if(localStorage.theme === 'dark') setTheme('dark');
+if (themeToggle) {
+  themeToggle.addEventListener('click', ()=>{
+    const current = (typeof localStorage !== 'undefined' && localStorage.theme === 'dark') ? 'dark' : 'light';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+}
 
-hamburger.addEventListener('click', ()=> nav.classList.toggle('show'));
-
-// close nav on link click (mobile)
-nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> nav.classList.remove('show')));
+// mobile nav
+if (hamburger && nav) {
+  hamburger.addEventListener('click', ()=> nav.classList.toggle('show'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=> nav.classList.remove('show')));
+}
