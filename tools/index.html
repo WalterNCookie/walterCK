@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Helpful Tools — WalterCK</title>
+  <title>My Tools — WalterCK</title>
   <meta name="description" content="Combined Shortcuts & Scriptable scripts — always up-to-date.">
   <link rel="stylesheet" href="../styles.css" />
 </head>
@@ -29,7 +29,7 @@
     <section class="tools-hero">
       <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
         <div>
-          <h1>Helpful Tools</h1>
+          <h1>My Tools</h1>
           <p class="small">Shortcuts and Scriptable scripts — synced from iCloud/Gists and displayed here. Filter by type, search, and copy links.</p>
         </div>
 
@@ -38,26 +38,41 @@
         </div>
       </div>
 
-      <div class="controls" style="margin-top:12px;">
-        <div class="search" role="search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
-          <input id="q" placeholder="Search title, desc or tag" />
-        </div>
+<div class="controls" style="margin-top:12px;">
+  <div class="search" role="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <input id="q" placeholder="Search title, desc or tag" />
+  </div>
 
-        <select id="sort" class="control-select">
-          <option value="alpha">Title (A → Z)</option>
-          <option value="alpha-desc">Title (Z → A)</option>
-          <option value="type-first">Type first</option>
-        </select>
+  <!-- hidden select for old JS -->
+  <select id="sort" class="hidden">
+    <option value="alpha">Title (A → Z)</option>
+    <option value="alpha-desc">Title (Z → A)</option>
+    <option value="type-first">Type First</option>
+  </select>
 
-        <button id="toggleView" class="btn ghost">Toggle View</button>
-      </div>
+  <!-- custom dropdown -->
+  <div id="sort-dropdown" class="custom-select">
+    <button class="custom-select-button">Title (A → Z) ▾</button>
+    <div class="custom-select-options hidden">
+      <div class="custom-select-option" data-value="alpha">Title (A → Z)</div>
+      <div class="custom-select-option" data-value="alpha-desc">Title (Z → A)</div>
+      <div class="custom-select-option" data-value="type-first">Type First</div>
+    </div>
+  </div>
+</div>
+
+
+
 
       <div class="chips" id="chips"></div>
     </section>
 
     <div id="grid" class="cards-grid" aria-live="polite"></div>
-    <div id="empty" class="small" style="margin-top:18px; display:none;">No items. Check your JSON or exporter.</div>
+    <div id="empty" class="small" style="margin-top:40px; display:none;">No items match your search.</div>
   </main>
 
   <footer class="site-footer">
@@ -73,7 +88,6 @@
     const chips = document.getElementById('chips');
     const q = document.getElementById('q');
     const sort = document.getElementById('sort');
-    const toggleView = document.getElementById('toggleView');
     const empty = document.getElementById('empty');
 
     let items = [];
@@ -82,7 +96,7 @@
 
     // ******** FETCH: try the canonical tools path first (what exporter writes) ********
 async function fetchData(){
-  const r = await fetch('/tools/tools.json', {cache:'no-store'});
+  const r = await fetch('tools.json', {cache:'no-store'});
   if (!r.ok) throw new Error('tools.json not found');
   return await r.json();
 }
@@ -91,31 +105,27 @@ async function fetchData(){
     function normalizeTagRaw(t){
       if(!t) return null;
       const s = String(t).toLowerCase();
-      if (s.includes('scriptable') || s.includes('script') || s.includes('jellycuts')) return 'Scriptable';
-      if (s.includes('shortcut') || s.includes('shortcuts') || s.includes('/shortcuts/')) return 'Shortcuts';
+      if (s.includes('scriptable')) return 'Scriptable';
+      if (s.includes('shortcut')) return 'Shortcut';
       return null;
     }
 
-    function detectType(item){
-      if (item.tags) {
-        const n = normalizeTagRaw(item.tags);
-        if (n) return n;
-      }
-      if (item.link && typeof item.link === 'string' && item.link.includes('/shortcuts/')) return 'Shortcuts';
-      return 'Scriptable';
-    }
-
     function normalizeItems(raw){
-      return (raw||[]).map(it=>{
-        const t = detectType(it);
-        return {
-          title: it.title || (it.path ? (it.path.split('/').pop().replace(/\.js$/i,'')) : 'Untitled'),
-          desc: it.desc || '',
-          tags: t,
-          link: it.link || ''
-        };
-      });
-    }
+  return (raw||[]).map(it=>{
+    const detected = [];
+    const t = String(it.tags || '').toLowerCase();
+
+    if (t.includes('scriptable')) detected.push('Scriptable');
+    if (t.includes('shortcut')) detected.push('Shortcuts');
+
+    return {
+      title: it.title || (it.path ? it.path.split('/').pop().replace(/\.js$/i,'') : 'Untitled'),
+      desc: it.desc || '',
+      tags: detected,   // array with 0, 1, or 2 tags
+      link: it.link || ''
+    };
+  });
+}
 
     function escapeHtml(s){ if(!s && s !== 0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;"); }
 
@@ -125,26 +135,69 @@ async function fetchData(){
       return `<div class="icon" style="${color}">${initial}</div>`;
     }
 
-    function renderCard(item){
-      const tagsHtml = `<div class="tag-pill">${escapeHtml(item.tags)}</div>`;
-      const desc = escapeHtml(item.desc || '');
-      const link = escapeHtml(item.link || '#');
+    function renderCard(item) {
+  // --- Build tags ---
+  let tagsHtml = '';
+  if(item.icon) {
+  iconHtml = `<div class="icon"><img src="${item.icon}" alt="${escapeHtml(item.title)}"></div>`;
+} else {
+  iconHtml = makeIcon(item.title, Array.isArray(item.tags) ? item.tags[0] : item.tags);
+}
 
-      return `<article class="tool-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc)}" data-tags="${escapeHtml(item.tags)}">
-        <div class="card-top">
-          ${makeIcon(item.title,item.tags)}
-          <div style="min-width:0;flex:1;">
-            <h3 style="margin:0 0 6px 0;">${escapeHtml(item.title)}</h3>
-            <p class="card-desc">${desc}</p>
-            <div class="card-tags">${tagsHtml}</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a class="btn small primary" href="${link}" target="_blank" rel="noopener noreferrer">Open</a>
-          <button class="btn small ghost copy-btn" data-link="${link}">Copy link</button>
-        </div>
-      </article>`;
-    }
+  }
+
+  // --- Determine icon ---
+  let iconHtml = '';
+if(item.icon) {
+  iconHtml = `<div class="icon"><img src="${item.icon}" alt="${escapeHtml(item.title)}"></div>`;
+} else {
+  iconHtml = makeIcon(item.title, Array.isArray(item.tags) ? item.tags[0] : item.tags);
+}
+
+
+  // --- Escape description and link ---
+  const desc = escapeHtml(item.desc || '');
+  const link = escapeHtml(item.link || '#');
+
+  // --- Build full card HTML ---
+  return `<article class="tool-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc)}" data-tags="${escapeHtml(item.tags)}">
+    <div class="card-top">
+      ${iconHtml}
+      <div style="min-width:0;flex:1;">
+        <h3 style="margin:0 0 6px 0;">${escapeHtml(item.title)}</h3>
+        <p class="card-desc">${desc}</p>
+        <div class="card-tags">${tagsHtml}</div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <a class="btn small primary" href="${link}" target="_blank" rel="noopener noreferrer">Open</a>
+      <button class="btn small ghost copy-btn" data-link="${link}">Copy link</button>
+    </div>
+  </article>`;
+}
+
+  const desc = escapeHtml(item.desc || '');
+  const link = escapeHtml(item.link || '#');
+
+  // pass first tag (string) to makeIcon for coloring; fallback to ''
+  const iconType = (item.tags && item.tags[0]) ? item.tags[0] : '';
+
+  return `<article class="tool-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc)}" data-tags="${escapeHtml((item.tags||[]).join(','))}">
+    <div class="card-top">
+      ${makeIcon(item.title, iconType)}
+      <div style="min-width:0;flex:1;">
+        <h3 style="margin:0 0 6px 0;">${escapeHtml(item.title)}</h3>
+        <p class="card-desc">${desc}</p>
+        <div class="card-tags">${tagsHtml}</div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <a class="btn small primary" href="${link}" target="_blank" rel="noopener noreferrer">Open</a>
+      <button class="btn small ghost copy-btn" data-link="${link}">Copy link</button>
+    </div>
+  </article>`;
+}
+
 
     function attachCopyButtons(){
       document.querySelectorAll('.copy-btn').forEach(b=>{
@@ -183,52 +236,86 @@ async function fetchData(){
     }
 
     function gatherTags(list){
-      const s = new Set();
-      list.forEach(it => s.add(it.tags || 'Scriptable'));
-      return Array.from(s).sort();
-    }
+  const s = new Set();
+  list.forEach(it => (it.tags || []).forEach(tag => s.add(tag)));
+  return Array.from(s).sort();
+}
+
 
     function buildChips(allTags){
-      chips.innerHTML = '';
-      const btnAll = document.createElement('button');
-      btnAll.className = 'chip' + (activeTag === null ? ' active' : '');
-      btnAll.textContent = 'All';
-      btnAll.addEventListener('click', ()=>{ activeTag = null; applyFilters(); updateChips(); });
-      chips.appendChild(btnAll);
+  chips.innerHTML = '';
 
-      allTags.forEach(t=>{
-        const b = document.createElement('button');
-        b.className = 'chip' + (activeTag === t ? ' active' : '');
-        b.textContent = t;
-        b.addEventListener('click', ()=> {
-          activeTag = (activeTag === t) ? null : t;
-          applyFilters();
-          updateChips();
-        });
-        chips.appendChild(b);
-      });
+  const btnAll = document.createElement('button');
+  btnAll.className = 'chip' + (activeTag === null ? ' active' : '');
+  btnAll.textContent = 'All';
+  btnAll.addEventListener('click', ()=>{ activeTag = null; applyFilters(); updateChips(); });
+  chips.appendChild(btnAll);
+
+  // "Both" button
+  const btnBoth = document.createElement('button');
+  btnBoth.className = 'chip' + (activeTag === 'Both' ? ' active' : '');
+  btnBoth.textContent = 'Both';
+  btnBoth.addEventListener('click', ()=> {
+    activeTag = (activeTag === 'Both') ? null : 'Both';
+    applyFilters();
+    updateChips();
+  });
+  chips.appendChild(btnBoth);
+
+  allTags.forEach(t=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (activeTag === t ? ' active' : '');
+    b.textContent = t;
+    b.addEventListener('click', ()=> {
+      activeTag = (activeTag === t) ? null : t;
+      applyFilters();
+      updateChips();
+    });
+    chips.appendChild(b);
+  });
+}
+
+function updateChips(){
+  document.querySelectorAll('.chip').forEach(el => {
+    el.classList.remove('active');
+
+    if (
+      (activeTag === null && el.textContent === 'All') || 
+      (activeTag !== null && el.textContent === activeTag)
+    ) {
+      el.classList.add('active');
     }
-    function updateChips(){
-      document.querySelectorAll('.chip').forEach(el=>{
-        el.classList.remove('active');
-        if ((activeTag === null && el.textContent === 'All') || (activeTag !== null && el.textContent === activeTag)) el.classList.add('active');
-      });
-    }
+  });
+}
+
 
     function applyFilters(){
-      const qv = (q.value || '').trim().toLowerCase();
-      let filtered = items.slice();
+  const qv = (q.value || '').trim().toLowerCase();
+  let filtered = items.slice();
+  if (activeTag) {
+  if (activeTag === 'Both') {
+    filtered = filtered.filter(it => (it.tags || []).includes('Scriptable') && (it.tags || []).includes('Shortcuts'));
+  } else {
+    filtered = filtered.filter(it => (it.tags || []).some(tag => tag.toLowerCase() === activeTag.toLowerCase()));
+  }
+}
 
-      if (activeTag) filtered = filtered.filter(it => (it.tags||'').toLowerCase() === activeTag.toLowerCase());
-      if (qv) filtered = filtered.filter(it => ((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.tags||'')).toLowerCase().includes(qv));
+  if (qv) {
+    filtered = filtered.filter(it => (
+      ((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.tags||[]).join(' '))
+        .toLowerCase()
+        .includes(qv)
+    ));
+  }
 
-      // sort
-      if (sort.value === 'alpha') filtered.sort((a,b)=>a.title.localeCompare(b.title));
-      else if (sort.value === 'alpha-desc') filtered.sort((a,b)=>b.title.localeCompare(a.title));
-      else if (sort.value === 'type-first') filtered.sort((a,b)=> a.tags.localeCompare(b.tags) || a.title.localeCompare(b.title));
+  // sorting
+  if (sort.value === 'alpha') filtered.sort((a,b)=>a.title.localeCompare(b.title));
+  else if (sort.value === 'alpha-desc') filtered.sort((a,b)=>b.title.localeCompare(a.title));
+  else if (sort.value === 'type-first') filtered.sort((a,b)=> a.tags.join(',').localeCompare(b.tags.join(',')) || a.title.localeCompare(b.title));
 
-      renderList(filtered);
-    }
+  renderList(filtered);
+}
+
 
     async function loadAll(){
       try {
@@ -249,7 +336,6 @@ async function fetchData(){
     let debounce;
     q.addEventListener('input', ()=>{ clearTimeout(debounce); debounce = setTimeout(applyFilters, 200);});
     sort.addEventListener('change', applyFilters);
-    toggleView.addEventListener('click', ()=>{ viewCompact = !viewCompact; document.body.classList.toggle('compact', viewCompact); });
 
     // initial load
     loadAll();

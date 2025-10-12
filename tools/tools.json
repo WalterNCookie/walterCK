@@ -2,145 +2,266 @@
   {
     "title": "Wordle (wip)",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
-  {
+ {
     "title": "reaction time HS resetter",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Wally's Cookie Clicker",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Air Quality Data (wip)",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Space Invaders (wip)",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Reaction Timer",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Lie Detector",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Encrypter",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Live Clock",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Learning",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "8-Ball (sm)",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Mood Tracker (sm) - retired",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "ClipboardOS",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Encrypting Nonsense",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Decrypter",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Tic Tac Toe",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "ExportScriptableJSON",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Internet speed",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
-    "link": ""
+    "tags": "Scriptable",
+    "link": "",
+    "icon": "internet-speed.png"
   },
   {
     "title": "iFake",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "RoutineOS",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Grapher",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Mini Challenge (sm)",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
   {
     "title": "Time Tracker",
     "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
+    "tags": "Scriptable",
     "link": ""
   },
-  {
-    "title": "Untitled Script 2",
-    "desc": "Variables used by Scriptable.",
-    "tags": "Scriptable • iOS",
-    "link": ""
+ {
+    "title": "Bop It",
+    "desc": "Variables created by shortcut",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/6f72c2e89c904159b63c03df77bc5384"
+  },
+ {
+    "title": "Choose-Your-Own-Adventure",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/55e5c966d7264df59e772dcab73eea64"
+  },
+ {
+    "title": "WiFi Sharer",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/59042a028f094542a280bfcc94ea2b6b"
+  },
+ {
+    "title": "Song Identifier",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/e70f38db145442d1bcf94e9a86ddd818"
+  },
+ {
+    "title": "Shortcut Searcher - Balanced",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/48d6a91730db4f97ba92056d5bc2e91e"
+  },
+ {
+    "title": "Shortcut Searcher - Rapid",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/d577d0eb6e1c4faa842aff7a5bc133ca"
+  },
+ {
+    "title": "Shortcut Searcher - Deep",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/99dfb98ffc7641979ce6ba283823760f"
+  },
+ {
+    "title": "Time Zone Converter",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/76c1da96324944ff851674e01092b836"
+  },
+ {
+    "title": "Shortcut Radar - AI",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/34cf0ff9b6e44de9b882a0c72b533c44"
+  },
+ {
+    "title": "Morse Coder",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/2da0de5b6c494a9ab15c2a784b203d84"
+  },
+ {
+    "title": "8 Ball of Wonders",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/2cb52f7580094b078450a43047649d95"
+  },
+ {
+    "title": "Astrology Wallpapers",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/d860d6d557934df1a9330705f7d26107"
+  },
+ {
+    "title": "Currency Converter",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/a60bf7b12c934748b68e59979937d3ae"
+  },
+ {
+    "title": "Translator",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/0aeacbf3f0f04499809589cbe9ac86a3"
+  },
+ {
+    "title": "Locator",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/f493a4de9d094de3845795fc9e97d99a"
+  },
+ {
+    "title": "Clipboard (advanced)",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/e0cba539e55144a783322be59ba07e19"
+  },
+ {
+    "title": "Volume Controller",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/46983186dd7d4034bb6af85bdd2b99a1"
+  },
+ {
+    "title": "NASA Wallpaper",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/e30fc1db2d3e4bc4b68d329d32d01c2e"
+  },
+ {
+    "title": "Authenticator",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/638a637c7b27410ab6b4741b821f3967"
+  },
+ {
+    "title": "Everything Timer",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/b5fadb6ee0d54518b89ca1d680f14ff8"
+  },
+ {
+    "title": "Shortcut Launcher",
+    "desc": "Variables created by shortcuts",
+    "tags": "Shortcuts",
+    "link": "https://www.icloud.com/shortcuts/4180ccb02e5a44f0a4412459a3e26de3"
   }
 ]

@@ -83,7 +83,7 @@ html,body { height:100%; margin:0; padding:0; }
   color: #02121d; box-shadow: 0 12px 30px rgba(107,140,255,0.12);
 }
 .btn.ghost {
-  background: transparent; border:1px solid var(--card-border); color:var(--muted);
+  background: transparent; margin-top: 10px; border:1px solid var(--card-border); color:var(--muted);
 }
 
 /* grid + cards */
@@ -96,7 +96,7 @@ html,body { height:100%; margin:0; padding:0; }
 .card h3 { margin:0 0 6px 0; font-size:1.02rem; }
 .card p { margin:0; color:var(--muted); font-size:0.95rem; }
 .tags { margin-top:10px; }
-.link { display:inline-block; margin-top:12px; color:var(--accent); text-decoration:none; font-weight:700; }
+.link { display:inline-block; margin-top:18px; color:var(--accent); text-decoration:none; font-weight:700; }
 
 /* meta list */
 .meta { display:flex; gap:12px; list-style:none; padding:0; margin:12px 0 0 0; color:var(--muted); }
@@ -113,20 +113,20 @@ html,body { height:100%; margin:0; padding:0; }
 
 /* file card */
 .cards-grid { display:grid; gap:14px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); margin-top:14px; }
-.tool-card { display:flex; flex-direction:column; gap:10px; padding:12px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid var(--card-border); }
+.tool-card {display: flex;flex-direction: column;gap: 10px;padding: 12px;border-radius: 12px;background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border: 1px solid var(--card-border);}
 .card-top { display:flex; gap:12px; align-items:flex-start; }
-.icon {
-  width:48px; height:48px; border-radius:10px; display:grid; place-items:center; font-weight:700;
-  background: linear-gradient(180deg, rgba(107,140,255,0.12), rgba(91,224,192,0.06));
-  color:white; flex:0 0 48px;
-}
+.icon { width:60px;height:60px;border-radius:14px;display:grid;place-items:center;flex:0 0 60px;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.2s ease; }
+.icon img { width:80%;height:80%;object-fit:contain; }
+.icon-letter {font-family: Inter, ui-sans-serif, system-ui, -apple-system;font-size: 28px;color: white;font-weight: 700;}
+.icon:hover {transform: translateY(-3px);box-shadow: 0 6px 16px rgba(0,0,0,0.3);}
 .card-desc { color:var(--muted); font-size:0.93rem; min-height:1.6rem; }
-.card-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
-.tag-pill { font-size:0.78rem; padding:6px 9px; border-radius:999px; background:rgba(255,255,255,0.02); color:var(--muted); border:1px solid rgba(255,255,255,0.01); }
+.card-tags {display: flex;gap: 8px;flex-wrap: wrap;margin-top: 6px;min-height: 28px;align-items: center;}
+.tag-pill {font-size: 0.78rem;padding: 6px 9px;border-radius: 999px;background: rgba(255,255,255,0.02);color: var(--muted);border: 1px solid rgba(255,255,255,0.01);}
+.empty-tag {display: inline-block;min-width: 50px;height: 28px;visibility: hidden;}
 
 /* actions */
-.card-actions { display:flex; gap:8px; margin-top:auto; }
-.card .btn.small { padding:8px 10px; font-size:0.92rem; border-radius:10px; }
+.card-actions {display: flex;gap: 10px;margin-top: auto;}
+.btn.small {padding: 8px 10px;font-size: 0.92rem;margin-top: 10px;border-radius: 10px;}
 
 /* responsive tweaks */
 @media (max-width:880px){
@@ -136,6 +136,135 @@ html,body { height:100%; margin:0; padding:0; }
 @media (max-width:640px){
   .search input { width:140px; }
   .cards-grid { grid-template-columns: 1fr; }
+}
+.control-select-wrapper {
+  position: relative; 
+  display: inline-block;
+}
+
+.control-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: linear-gradient(180deg, rgba(107,140,255,0.08), rgba(91,224,192,0.05));
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 10px 38px 10px 14px; 
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition), transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  min-width: 180px;
+}
+
+.control-select:hover {
+  background: linear-gradient(180deg, rgba(107,140,255,0.18), rgba(91,224,192,0.08));
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(107,140,255,0.12);
+}
+
+.control-select:focus {
+  outline: 3px solid rgba(107,140,255,0.25);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(107,140,255,0.18);
+  background: linear-gradient(180deg, rgba(107,140,255,0.22), rgba(91,224,192,0.1));
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  min-width: 180px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.custom-select-button {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(107,140,255,0.08), rgba(91,224,192,0.05));
+  color: var(--text);
+  padding: 10px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition), transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+.custom-select-button:hover {
+  background: linear-gradient(180deg, rgba(107,140,255,0.12), rgba(91,224,192,0.06));
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(107,140,255,0.12);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-800);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  margin-top: 4px;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.custom-select-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.custom-select-option:hover {
+  background: linear-gradient(180deg, rgba(107,140,255,0.15), rgba(91,224,192,0.08));
+}
+.hidden { display: none; }
+
+/* custom arrow */
+.control-select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* rotate arrow on focus */
+.control-select:focus + .control-select-wrapper::after {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--accent);
+}
+
+/* animate arrow on hover */
+.control-select-wrapper:hover::after {
+  transform: translateY(-52%) rotate(5deg);
+  color: var(--accent-2);
+}
+
+/* custom arrow using pseudo-element */
+.control-select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+/* rotate arrow on focus */
+.control-select:focus + .control-select-wrapper::after {
+  transform: translateY(-50%) rotate(180deg);
 }
 
 /* small helpers */
