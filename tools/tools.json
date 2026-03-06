@@ -1,62 +1,1088 @@
 [
 {
   "tags" : "Shortcuts",
+  "title" : "Copy to Clipboard",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/1c65f64e3d4e4b57839868e147c7280f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Get Contents of URL",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/6ce7d150f9bb4b02a2e3b67f89dab35f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Run Script",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/eca3534235604607aaa4632aa0131920"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Scout",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/652bc851e07a4685a0983c86d3dc09b7"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Scout (Legacy)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/91eae0867f2b4c51b9854d057cdc9491"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Task Runner",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/733d652298d9494f9a4c81c8b113f049"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "The Oracle",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5b37d735f69e402d91fa8165eedf35f4"
+},
+{
+  "tags" : "Shortcuts",
   "title" : "System Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/8b9de72d506c4f4ebaba6648e0ddcdb5"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/6b927710877b46e081e5a84508302f62"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Internet Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/e27a7267d7ee432d9d8436762189d5f9"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7be87f6b247c4f90b50176f89c984b3e"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Online Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/fc555c888c424023b0026a4b7b833117"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/51b57d23ca7d485eb86e71736c7135c1"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Data Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/f13741556ff84466a88e313209a1300a"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/94779f336cbc47389b64323e34e4b1e4"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Battery Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/73d89b3989314c04b60a33ffb97c0d9b"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/19ba6f50b44c42c0a04e3bb522690f7c"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Weather Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/89824fde235540fd9b6f00ba856db9e3"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d09cc9e663f1453285bc59c5ba8cc9c3"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Location Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/045eb354421f4dadb674c9f2cf7ce9a6"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/361d0b2c0eb746b88db1cbed5c066ffb"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Mood Tracker",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/688c66fef59d4461b7be9c27ac0dee74"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3ad1a1e43c4d4c9f8d2f2fe21b8773df"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Status Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/f305e85263fd443da5a8a5705712398a"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/13fffc70a151488dba66c6682257f4ef"
 },
 {
   "tags" : "Shortcuts",
   "title" : "Logs Scan",
   "desc" : "",
-  "link" : "https:\/\/www.icloud.com\/shortcuts\/6c80cfdb028b46fd9660d1464835bb6f"
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/475dc2f02d4349ceb013ae3e0c41f627"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "My Current",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/419d967c0e574ceb9b67b72ec0a32a5f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "The Current Market",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e002eb2ed99b4f3abacd4bdd42645f24"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "The Current Node",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/151a50b9159d4ffa92597921fe97a8a2"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "The Current Planner",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/db93e7dd5e7441948599c71ca6ce0db9"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "The Current Operative",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5358538a20db4fc2b9aa3ccd6f547848"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "SchoolOS",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5594e68d04054191ab2b5b3c282e4705"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "IdeaOS",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/251f875570c743a4af053e86296e4bd3"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Distraction Blocker",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/f665112e2725480597d1fcb849544943"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Holiday",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/efe6ee0b314b4e9ba70d34f6ee473840"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Custom Alarm",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/f1cfdcf5f4d1443c8c281f4eb1c9948b"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Debugger",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/db30a87c0d944c968dd84466dbac15ee"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "QuickSign",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a370b45ad12f4e589f467dc1272702e6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Make Your Phone Cold",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/188a9a32f96646a58ff4187f58f9e0f8"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Rhymer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d8365cd517754984a854af539ce5e826"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Timetablerifier",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5ff453581be3410a8ff5438c6f513c99"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Dominant Colour",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/72e79efe57d14bddbf5b4d778d65e232"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Hotspot",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/954b07d6d11d464c882bedf533c02937"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Live Clock",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/81fc748fa66e48b2901c506b94655057"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Sounder",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e918d5bc9a2a4ec4a89b850ec020e86e"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Study Protocol",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/676787f0fa864aaeab9da63791f46ab2"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Calculator",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d706eb85949c4f8e9ed117e82a036fde"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Prime Number",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/6764fbc632324ff9b1f45ceec1981283"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Reward Farm",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/0840dae119fd427e91a946cd41806dc6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Internal Flash",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/874cfdcd702c497a980fecf1df55fb9e"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Water Eject",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/b90f82a4b2cc41f192c213a821e436f7"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "WiFi Sharer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/0665c649e87649aa835d1f66d371e2db"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Jellycuts Helper",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7d9ee497073f44b89b1c8a7a954247a2"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Cyber Sleep",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3ff737c4f16f46868a2efeadf67ed8b7"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Everything Timer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/46898ef5036b488f80a91c6d2e25928e"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Goal",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/94c1228c5a1a41fb8e05fefdfcb3940b"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Fake Taker",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/bb8e21f37a61441ca5a31cd836921df1"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Playback Destination",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/ea05bd8893e6472696eeb8fcb07a086f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Spotify (main)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/da7353deea394c4192c06edb0610181f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Apple Frames",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/008be797692142e281a67e67213abd8d"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Song Identifier",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/0e20397186cf435e80f260baaeffee67"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "QR\/Barcode Scanner",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/50a9b16841cc470a98b6a02ca414492a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Wallpaper Setter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d97d40bc9499452588c64a01c912f0f5"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Message Logger",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/60044e3bc54240d5a4f0163c06e7069a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Video Recorder",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/79539a43dcef43a9a84d639376bb8bd3"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Audio Recorder",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/c133d7924890426b91c1f75a51fa2493"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Screenshot That",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/61d40609f346465c96a62cecafcedc86"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Remember This",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/4064d2a6550f4c6cafd00d9bf7744525"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "URLs",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a1bb2d8c52b845629509c977f68327b4"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Quietest Spotify Volume",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/73beee9e707b47f0be0a77a9a46aaca2"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Quick Note",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5e87dc5e012e44179e8d02fe8774a4e8"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Codifier",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/28c15526595741c9bd6e2696f2d7debf"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "ClipboardOS",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/1771e36232da408687309c9a6643ad10"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Replacer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7de132f3b3b9417880a07094df48dc95"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Memento v2",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5109f30f1fa74fe28733b7e58780141d"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Quick Search",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/4bf8e0858756480a9ef19429bab472ca"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Brightness Control",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/c7da6bf469d847af959b96f4df0d9180"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Volume Control",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/1b00939de26d4ab6bf1bfd4163e7b009"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Vex - Voice",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/56ed48f709d647eab9f3645843886c2c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Idle Battery Saver",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/1e0b40de8f714ef492429a7c2e8bb160"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "App Settings",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e064dd0878e44dccbc8cb9b2ef64a927"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Mute",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5b4d503b12794a10be5954dd3d8dabaa"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Orientation Lock Toggle",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/251a7d14c4724e82b2617bc252720144"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "TSI",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/b47d25baec8548069d6397a9653450a2"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Count",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/fa5d3995f43e47509f8514e83742ceef"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Converter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/8a8de022c8084c1b8e0e7a90ecda6f49"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Vid-Aud Converter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/c30735936c7b49d7be931ba8839972a4"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Quick Translater",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/50747a8302f04b39a3a36b3b86b49563"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Translator",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/72909f28fdfb4cc18d9b6137b9d91d32"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Morse Coder",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/b41ad0a09a2e49b985b30e9774842124"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Currency Converter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/abdc225a36ed454ba8c4dac0e4d4efc7"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Time Zone Converter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/8619e91c2bf94dca92a671eb2c07ddf6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Car Saver",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7b04141459c4407d97c362dbd29da9a7"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Car Locater",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/551d0a5740e44698983bccf9a48ff86d"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "HyperDrive",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/52e4b3505758466d867db462b5ebbb6a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Power Down",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d6155af5bd54421e9d6f8db08f3ef1cc"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Reboot",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/1bb8a4642b204f219e5ddf7709d582ed"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Encrypter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/19f9b74ed621426fa34d3b731135e8fa"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Decrypter",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3c9c6d22dc2d4af48ecec5f007a4efbe"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Authenticator",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/be44372f56384d749ac98e867f7e6514"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "PassMaker",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/52ceae1416a64b98afa901c9d8d42fbc"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shadow",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/b1230fdd906943dc8aa2f3c643e0abd9"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Unstickysituationer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/65cbd1a08c2c4723b3b6fc8f59d9abf0"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Intruder Alert",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/091a85df6dd64bad817a6c7dcd273200"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lost iPhone",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/91e7d07052104c739bffc5fd8442cd7c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lock Out",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/73e3e09449ad4544bce7bdc7e6ba6595"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lights On",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/2d933888a77f4de092c5f4d4d05693bf"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lights Off",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/918f9ce1f7444de5be0e3989fe3d9426"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lights Max",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/b4dc1fd2139d43df97db09b3767d98f2"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lights Min",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5a9c2dcbaeed4b609b18d30c181dc416"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Inferno",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/df67c71f9d374a0bbc40873a495a61e4"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Nebula",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e59bb600db6f4a44ace615686b901e21"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Viridian",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/25ba482e966d4503a72d18432d7e50c6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Cerulean",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/9a2756a52a4d422cbd688f73ca67865a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Phone On",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a3e524a919f84c8996515c00544e46df"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Phone Off",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e90e82db957d47daa9a34c96d07c478b"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Powerhouse On",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/6d022be258054fa993ea6aab04a85e13"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Powerhouse Off",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/337ea54816f6489bae0b158ba820adca"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Laptop On",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/51abccf0937d438281ef43af14b24b84"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Laptop Off",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/f106d225685643ea870898cde23888d6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Powerboard Bootup",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3712564313634529bed0cf966b51c9e8"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Powerboard Shutdown",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/c8c12bb8413b4988a41b35b8abbf349f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Camera On",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/4574951235de46799dbe3b7ca2b5504c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Camera Off",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/cd4d3856011a4a6fb034efe2d8583d01"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Aircon On",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7a476963197c43bbbae393eae88386e6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Aircon Off",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/793dc340594240d98222bd1cac327d71"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lights Toggle",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e6adf74ba9d643f598ced9f7b5fbee74"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Sync Health",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e4bd61592b734bcea67669efcd5d3f6d"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Colour Filters",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/0513e843ebbe455b9701a8b25e6e0e59"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Poker",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/81fca412c18f4096893ff0ea515219f4"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Chance",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/0674d10fa0a1410d9b94d61c2de8cf23"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Pickup Lines",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/435dad9363ab479f8ef4ef1ae44b6515"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Brain Training",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/9f2408524cd146e09e9c0a079f431565"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Blackjack",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d431892e6f4b4776bf954d93fdddab37"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Tic Tac Toe",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/9cfdc4dbe18b4b55901a45cffc269eab"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Wally’s Cookie Clicker",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/8b34c537ef72486f994be903be134064"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Random Cookie Fact",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/660a91a9fc1d4ff0a935118c8824e3c8"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Lie Detector",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3fa2ee32ac8a4db6b0b0463c9535f3aa"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Guess The Number",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/04769f6877a14c269338100dfedb3afe"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "8 Ball of Wonders",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/dc6f764158ab413db1b92dc6487f0f69"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "iFake",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/34b2c3b97e6b4268bd80406a604e3924"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Basic Ben",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/27ab70a7938a434db3eb2b60d7b843bd"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "CYOA Game",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/c59fa137e82c4565a51e75dfc41b9884"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Bop It!",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/12ba8d7b9db04bac9cbfa9985eae4b84"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Crazy",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e7fb6eeee2e84a179770074672e2e075"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Reaction Timer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e08d1eebacc440358fa0cd626a449549"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Echo (iMessage)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/6023868997774aafa0ad7876fbbc9e62"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Bop It",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5e64c11f70044cc6b5a05e13a33e9ec7"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Choose-Your-Own-Adventure",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7a11c8ab503c4bb4baa5e95a7a578eb6"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "WiFi Sharerr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/0cc92d546f614cdea4a3d625813c1f4a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Song Identifierr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/efcebf4aee034394b59ec3abcdf14658"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Searcher - Balanced",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/099fad7b84504f4b98628b1cf8b4b7bc"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Searcher - Rapid",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/750abd6b471b489b8c0be6f261e1d15f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Searcher - Deep",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/38bce15e610e48549a5a9ce4a509e62f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Radar - AI",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/73064922edd94a0980e68446e629a67c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Time Zone Converterr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3c13d6ed00564d288569c24f9103daa8"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Morse Coderr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/c23f84744625484f8b7ea3426f8a01d0"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "8 Ball of Wonderss",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/6e4a6c75e1544c32a2cbc1bbc6892c81"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Astrology Wallpapers",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7f32231bf0fc4314b4749cef6e55eb61"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Currency Converterr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/62586a3af2804290a94cd1088957e63a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Translatorr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/106f9ca8cea948f4b95e3db7e05a7b6c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Locatorr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/dc1b0eefd00843b79e313c1bf5e53364"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Clipboard (advanced)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/f078f70d54824837831513009bdc0244"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Volume Controller",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/644dc1b714674033bbfbbe0f6adc117c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "NASA Wallpaper",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/2a4733b50c4042b7b72b5085a2d63927"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Authenticatorr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/ca19d5f68b684748a35cec04fc154209"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Everything Timerr",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/9d1a0dfe33594a4abc38f26dd597b51d"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Launcher",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/da7372e7f3214eeb86cf42f7abe73ca0"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Shortcut Launcher (2.0)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/44b67473aab5471fbdfc4c82d00dc602"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "RoutineOS - Morning",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/3428c37b54c543fea34a2b6e8355a40b"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "RoutineOS - Night",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/28ce495ada55470f8ed122c9227dd6a8"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "RoutineOS - Reset",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/07cfc16156264fc7b2db0fd5a3a10f9f"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "RoutineOS - Advancer",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a44bd3fa3f494cdb9dfb8f1fdef85a9e"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "RoutineOS - Night (Forced)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a4e6a8f36d7f462fa8134ce4f671b493"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "QR-Codifier",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5e35668baf61479a9bf4fcb1faebfe5c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Home",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/5a940f54ff5f4241900bcac2f77baa99"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Away",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e3f787ee1a144416a3e232db14e7148c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "AI Processor",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a02da4c9631c4eb0a54653579bf58727"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Backuper",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/7a60bec29c4f405392f50eaa19c000c5"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "App Returner",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/a51da66bd77c4ddea87f614573c25a36"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Dead Phone Alert",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/03b8a21623b7418db76705bb53b3fc08"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "++ Security (lock)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/98d44bb2376a41f886edb9be51b6515e"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "+++ Security (Passcode)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/dd94e974b20e405a99f042375ed3c240"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "++++ Security (Authenticate)",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/e2a9bca772ae4f318a16910836411d3c"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Ground Zero",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/79262be75fb04bc5b8fab1e73b9b832a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Alarm scanner",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/95b4889498644f1cbe6f6d7b8016447a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Message Scanner",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d84da95f8a964370b823531a64a9096a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Battery Alert",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/796b93aa59024bce99a56c870818a47a"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Text",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/04fc9437c094433188b2a3403df56180"
+},
+{
+  "tags" : "Shortcuts",
+  "title" : "Text 1",
+  "desc" : "",
+  "link" : "https:\/\/www.icloud.com\/shortcuts\/d1811f1fe75c4a8a898b4da67c54d00f"
 }
 ]
