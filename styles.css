@@ -39,11 +39,10 @@ body {
   color: var(--text);
   background-color: var(--bg-900);
 
-  /* blotchy blue only, no green */
+  /* Blotchy blue only */
   background-image:
-    radial-gradient(circle at 50% 15%, var(--accent-glow) 0%, transparent 65%),
-    radial-gradient(circle at 90% 90%, rgba(107,140,255,0.08) 0%, transparent 50%);
-
+    radial-gradient(circle at 50% 40%, var(--accent-glow) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(107,140,255,0.08) 0%, transparent 45%);
   background-attachment: scroll;
   background-size: cover;
   background-position: center;
@@ -57,7 +56,7 @@ body {
   padding: 0 var(--container-padding);
 }
 
-/* ─── Profile Picture ──────────────────────────────────── */
+/* ─── Hero & Profile ───────────────────────────────────── */
 .profile-pfp {
   width: 160px;
   height: 160px;
@@ -83,7 +82,7 @@ body {
   gap: 12px;
   list-style: none;
   padding: 0;
-  margin: 24px 0;
+  margin: 24px 0 0 0;
 }
 
 .meta li {
@@ -96,21 +95,13 @@ body {
   font-weight: 600;
 }
 
-/* About left-aligned */
-.about {
-  padding: 56px 0;
+/* Force About aligned same as Projects/Contact */
+.about, .projects, .contact {
+  padding: 56px var(--container-padding);
   border-bottom: 1px solid var(--card-border);
   text-align: left;
-}
-
-.projects {
-  padding: 56px 0;
-  border-bottom: 1px solid var(--card-border);
-}
-
-.contact {
-  padding: 56px 0;
-  border-bottom: 1px solid var(--card-border);
+  margin: 0 auto;
+  max-width: 1100px;
 }
 
 /* ─── Section Headings ─────────────────────────────────--- */
@@ -225,11 +216,18 @@ h2 {
 }
 
 /* ─── Responsive ─────────────────────────────────-------- */
+@media (max-width: 900px) {
+  .about, .projects, .contact {
+    padding: 40px var(--container-padding);
+  }
+}
+
 @media (max-width: 600px) {
   body {
+    /* Mobile radial tweaks: top not bright */
     background-image:
-      radial-gradient(circle at 50% 12%, var(--accent-glow) 0%, transparent 60%),
-      radial-gradient(circle at 85% 85%, rgba(107,140,255,0.06) 0%, transparent 45%);
+      radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 70%),
+      radial-gradient(circle at 85% 85%, rgba(107,140,255,0.06) 0%, transparent 50%);
     background-attachment: scroll;
     background-size: cover;
     background-position: center;
