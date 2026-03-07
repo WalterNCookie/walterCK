@@ -11,7 +11,7 @@ while (true) {
   if (result === -1) {
     return;
 }
-  let res = ["Yes", "Of course", "YESSS", "Zac said Hell Yeah", "No way", "Better luck next time bud", "You're on thin ice pal", "Suck my D"]
+  let res = ["Yes", "Of course", "YESSS", "No way", "Better luck next time bud", "You're on thin ice pal"]
 
 let rand = Math.floor(Math.random() * res.length)
 answer = (res[rand])
