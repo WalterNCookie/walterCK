@@ -177,11 +177,34 @@
     }
 
     /* ─── Background Override ───────────────────────────── */
-    body {
-      background-color: #0d1117;
+    html, body {
+      background-color: #0a0d17;
       background-image:
-        radial-gradient(ellipse at 85% 0%, rgba(107, 140, 255, 0.18) 0%, transparent 55%);
-      background-attachment: fixed;
+        radial-gradient(circle at 50% 15%, var(--accent-glow) 0%, transparent 65%),
+        radial-gradient(circle at 90% 90%, rgba(107,140,255,0.08) 0%, transparent 50%);
+    }
+
+    /* ─── Themed Scrollbar ──────────────────────────────── */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0d17;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(107, 140, 255, 0.3);
+      border-radius: 99px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(107, 140, 255, 0.6);
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(107, 140, 255, 0.3) #0a0d17;
     }
   </style>
 </head>
@@ -190,7 +213,7 @@
 <main class="container">
   <section class="hero">
     <a href="/" class="back-btn">
-      <i data-lucide="arrow-left" size="18"></i> Back
+      Back
     </a>
 
     <h1>My Tools</h1>
