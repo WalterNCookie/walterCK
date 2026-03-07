@@ -1,346 +1,310 @@
-<!-- TOOLS -->
-
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>My Tools — WalterCK</title>
-  <meta name="description" content="Combined Shortcuts & Scriptable scripts — always up-to-date.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CK Tools</title>
+  <link rel="icon" href="/images/walterck.PNG" />
   <link rel="stylesheet" href="../styles.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* ─── Hero & Header ───────────────────────────────────── */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .back-btn {
+      position: fixed;
+     top: 20px;
+     left: 20px;
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     padding: 10px 16px;
+     border-radius: 12px;
+     background: rgba(255,255,255,0.05);
+      color: var(--text);
+     text-decoration: none;
+      font-weight: 600;
+     transition: all 0.2s;
+     z-index: 999;
+    }
+
+    .back-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 35px;
+      text-align: center;
+    }
+
+    /* ─── Search ─────────────────────────────────────────── */
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      max-width: 500px;
+      margin: 0 auto 40px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: var(--glass);
+      border: 1px solid var(--card-border);
+    }
+
+    .search input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    /* ─── Filters ───────────────────────────────────────── */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .filter-chip {
+      padding: 8px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-chip.active {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--bg-900);
+    }
+
+    /* ─── Grid & Cards ─────────────────────────────────── */
+    .category-section {
+      margin-bottom: 50px;
+    }
+
+    .category-title {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      border-left: none;
+      padding-left: 0;
+      opacity: 0.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      padding: 28px 24px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+      text-align: left;
+      border: none; /* remove blue border hover */
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-1);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    /* ─── Tool Action Buttons ───────────────────────────── */
+    .tool-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tool-actions button {
+      flex: 1;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .tool-actions button:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    #empty {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="../index.html">WalterCK</a>
-      <nav class="nav" id="nav">
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#contact">Contact</a>
-      </nav>
 
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
-      </div>
+<main class="container">
+  <section class="hero">
+    <a href="/" class="back-btn">
+      <i data-lucide="arrow-left" size="18"></i> Back
+    </a>
+
+    <h1>My Tools</h1>
+
+    <div class="search">
+      <i data-lucide="search" size="18"></i>
+      <input id="q" placeholder="Search title, tag, or category..." autocomplete="off">
     </div>
-  </header>
 
-  <main class="container">
-    <section class="tools-hero">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
-        <div>
-          <h1>My Tools</h1>
-          <p class="small">Shortcuts and Scriptable scripts — synced from iCloud/Gists and displayed here. Filter by type, search, and copy links.</p>
-        </div>
+    <div class="filters" id="filters"></div>
+  </section>
 
-        <div style="display:flex; gap:10px; align-items:center;">
-          <a class="btn primary" href="../index.html">Back to Home</a>
-        </div>
-      </div>
+  <div id="grid-container"></div>
+  <p id="empty" style="display:none;">No tools found.</p>
 
-<div class="controls" style="margin-top:12px;">
-  <div class="search" role="search">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    <input id="q" placeholder="Search title, desc or tag" />
-  </div>
+</main>
 
-  <!-- hidden select for old JS -->
-  <select id="sort" class="hidden">
-    <option value="alpha">Title (A → Z)</option>
-    <option value="alpha-desc">Title (Z → A)</option>
-    <option value="type-first">Type First</option>
-  </select>
+<script>
+const gridContainer   = document.getElementById('grid-container');
+const emptyState      = document.getElementById('empty');
+const searchInput     = document.getElementById('q');
+const filterContainer = document.getElementById('filters');
 
-  <!-- custom dropdown -->
-  <div id="sort-dropdown" class="custom-select">
-    <button class="custom-select-button">Title (A → Z) ▾</button>
-    <div class="custom-select-options hidden">
-      <div class="custom-select-option" data-value="alpha">Title (A → Z)</div>
-      <div class="custom-select-option" data-value="alpha-desc">Title (Z → A)</div>
-      <div class="custom-select-option" data-value="type-first">Type First</div>
-    </div>
-  </div>
-</div>
+let items        = [];
+let categoryMap  = {};
+let activeFilter = 'All';
 
+async function loadAll() {
+  try {
+    const res = await fetch('tools.json', { cache: 'no-store' });
+    const raw = await res.json();
 
+    const mapObj = raw.find(it => !it.title);
+    if(mapObj) categoryMap = mapObj;
 
+    items = raw.filter(it => it.title).map(it => ({
+      id: parseInt(it.id) || 999,
+      title: it.title,
+      tag: it.tags || '',
+      category: it.category || 'General',
+      icon: it.icon || 'box',
+      color: it.color || '#007AFF',
+      link: it.link || '#'
+    }));
 
-      <div class="chips" id="chips"></div>
-    </section>
-
-    <div id="grid" class="cards-grid" aria-live="polite"></div>
-    <div id="empty" class="small" style="margin-top:40px; display:none;">No items match your search.</div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <small>© WalterCK — built for fun. Hosted on Netlify.</small>
-    </div>
-  </footer>
-
-  <script src="../script.js"></script>
-  <script>
-  (function(){
-    const grid = document.getElementById('grid');
-    const chips = document.getElementById('chips');
-    const q = document.getElementById('q');
-    const sort = document.getElementById('sort');
-    const empty = document.getElementById('empty');
-
-    let items = [];
-    let viewCompact = false;
-    let activeTag = null;
-
-    // ******** FETCH: try the canonical tools path first (what exporter writes) ********
-async function fetchData(){
-  const r = await fetch('tools.json', {cache:'no-store'});
-  if (!r.ok) throw new Error('tools.json not found');
-  return await r.json();
-}
-
-
-    function normalizeTagRaw(t){
-      if(!t) return null;
-      const s = String(t).toLowerCase();
-      if (s.includes('scriptable')) return 'Scriptable';
-      if (s.includes('shortcut')) return 'Shortcut';
-      return null;
-    }
-
-    function normalizeItems(raw){
-  return (raw||[]).map(it=>{
-    const detected = [];
-    const t = String(it.tags || '').toLowerCase();
-
-    if (t.includes('scriptable')) detected.push('Scriptable');
-    if (t.includes('shortcut')) detected.push('Shortcuts');
-
-    return {
-      title: it.title || (it.path ? it.path.split('/').pop().replace(/\.js$/i,'') : 'Untitled'),
-      desc: it.desc || '',
-      tags: detected,   // array with 0, 1, or 2 tags
-      link: it.link || ''
-    };
-  });
-}
-
-    function escapeHtml(s){ if(!s && s !== 0) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;"); }
-
-    function makeIcon(title,type){
-      const initial = title && title[0] ? title[0].toUpperCase() : '?';
-      const color = (type === 'Shortcuts') ? 'background: linear-gradient(180deg, rgba(91,224,192,0.12), rgba(107,140,255,0.04));' : 'background: linear-gradient(180deg, rgba(107,140,255,0.12), rgba(91,224,192,0.04));';
-      return `<div class="icon" style="${color}">${initial}</div>`;
-    }
-
-    function renderCard(item) {
-  // --- Build tags ---
-  let tagsHtml = '';
-  if(item.icon) {
-  iconHtml = `<div class="icon"><img src="${item.icon}" alt="${escapeHtml(item.title)}"></div>`;
-} else {
-  iconHtml = makeIcon(item.title, Array.isArray(item.tags) ? item.tags[0] : item.tags);
-}
-
-  }
-
-  // --- Determine icon ---
-  let iconHtml = '';
-if(item.icon) {
-  iconHtml = `<div class="icon"><img src="${item.icon}" alt="${escapeHtml(item.title)}"></div>`;
-} else {
-  iconHtml = makeIcon(item.title, Array.isArray(item.tags) ? item.tags[0] : item.tags);
-}
-
-
-  // --- Escape description and link ---
-  const desc = escapeHtml(item.desc || '');
-  const link = escapeHtml(item.link || '#');
-
-  // --- Build full card HTML ---
-  return `<article class="tool-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc)}" data-tags="${escapeHtml(item.tags)}">
-    <div class="card-top">
-      ${iconHtml}
-      <div style="min-width:0;flex:1;">
-        <h3 style="margin:0 0 6px 0;">${escapeHtml(item.title)}</h3>
-        <p class="card-desc">${desc}</p>
-        <div class="card-tags">${tagsHtml}</div>
-      </div>
-    </div>
-    <div class="card-actions">
-      <a class="btn small primary" href="${link}" target="_blank" rel="noopener noreferrer">Open</a>
-      <button class="btn small ghost copy-btn" data-link="${link}">Copy link</button>
-    </div>
-  </article>`;
-}
-
-  const desc = escapeHtml(item.desc || '');
-  const link = escapeHtml(item.link || '#');
-
-  // pass first tag (string) to makeIcon for coloring; fallback to ''
-  const iconType = (item.tags && item.tags[0]) ? item.tags[0] : '';
-
-  return `<article class="tool-card" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc)}" data-tags="${escapeHtml((item.tags||[]).join(','))}">
-    <div class="card-top">
-      ${makeIcon(item.title, iconType)}
-      <div style="min-width:0;flex:1;">
-        <h3 style="margin:0 0 6px 0;">${escapeHtml(item.title)}</h3>
-        <p class="card-desc">${desc}</p>
-        <div class="card-tags">${tagsHtml}</div>
-      </div>
-    </div>
-    <div class="card-actions">
-      <a class="btn small primary" href="${link}" target="_blank" rel="noopener noreferrer">Open</a>
-      <button class="btn small ghost copy-btn" data-link="${link}">Copy link</button>
-    </div>
-  </article>`;
-}
-
-
-    function attachCopyButtons(){
-      document.querySelectorAll('.copy-btn').forEach(b=>{
-        b.removeEventListener('click', copyHandler);
-        b.addEventListener('click', copyHandler);
-      });
-    }
-    async function copyHandler(e){
-      const link = e.currentTarget.getAttribute('data-link') || '';
-      if (!link) { showToast('No link available'); return; }
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(link);
-        } else {
-          const ta = document.createElement('textarea'); ta.value = link; document.body.appendChild(ta); ta.select();
-          document.execCommand('copy'); ta.remove();
-        }
-        showToast('Link copied');
-      } catch (err){ showToast('Copy failed'); }
-    }
-
-    function showToast(msg){
-      let t = document.querySelector('.toast');
-      if (!t) { t = document.createElement('div'); t.className='toast'; document.body.appendChild(t); }
-      t.textContent = msg; t.classList.add('show'); clearTimeout(t._to);
-      t._to = setTimeout(()=> t.classList.remove('show'), 1600);
-    }
-
-    function renderList(list){
-      if (!list || list.length === 0) {
-        grid.innerHTML = ''; empty.style.display = 'block'; return;
-      }
-      empty.style.display = 'none';
-      grid.innerHTML = list.map(renderCard).join('');
-      attachCopyButtons();
-    }
-
-    function gatherTags(list){
-  const s = new Set();
-  list.forEach(it => (it.tags || []).forEach(tag => s.add(tag)));
-  return Array.from(s).sort();
-}
-
-
-    function buildChips(allTags){
-  chips.innerHTML = '';
-
-  const btnAll = document.createElement('button');
-  btnAll.className = 'chip' + (activeTag === null ? ' active' : '');
-  btnAll.textContent = 'All';
-  btnAll.addEventListener('click', ()=>{ activeTag = null; applyFilters(); updateChips(); });
-  chips.appendChild(btnAll);
-
-  // "Both" button
-  const btnBoth = document.createElement('button');
-  btnBoth.className = 'chip' + (activeTag === 'Both' ? ' active' : '');
-  btnBoth.textContent = 'Both';
-  btnBoth.addEventListener('click', ()=> {
-    activeTag = (activeTag === 'Both') ? null : 'Both';
+    renderFilters();
     applyFilters();
-    updateChips();
-  });
-  chips.appendChild(btnBoth);
+  } catch(err) { console.error(err); }
+}
 
-  allTags.forEach(t=>{
-    const b = document.createElement('button');
-    b.className = 'chip' + (activeTag === t ? ' active' : '');
-    b.textContent = t;
-    b.addEventListener('click', ()=> {
-      activeTag = (activeTag === t) ? null : t;
+function renderFilters() {
+  const categories = ['All', ...Object.keys(categoryMap).sort(
+    (a,b)=> (parseInt(categoryMap[a])||999) - (parseInt(categoryMap[b])||999)
+  )];
+
+  filterContainer.innerHTML = categories.map(cat => `
+    <button class="filter-chip ${activeFilter===cat?'active':''}" data-cat="${cat}">${cat}</button>
+  `).join('');
+
+  filterContainer.querySelectorAll('.filter-chip').forEach(btn => {
+    btn.addEventListener('click',()=>{
+      activeFilter = btn.dataset.cat;
+      renderFilters();
       applyFilters();
-      updateChips();
     });
-    chips.appendChild(b);
   });
 }
 
-function updateChips(){
-  document.querySelectorAll('.chip').forEach(el => {
-    el.classList.remove('active');
-
-    if (
-      (activeTag === null && el.textContent === 'All') || 
-      (activeTag !== null && el.textContent === activeTag)
-    ) {
-      el.classList.add('active');
-    }
-  });
+function renderCard(item) {
+  return `
+    <div class="card">
+      <div style="color:${item.color}; margin-bottom:12px;">
+        <i data-lucide="${item.icon}" size="28"></i>
+      </div>
+      <h3>${item.title}</h3>
+      <p class="tags">${item.tag}</p>
+      <div class="tool-actions">
+        <button onclick="window.open('${item.link}','_blank')">Open</button>
+        <button onclick="navigator.clipboard.writeText('${item.link}')">Copy</button>
+      </div>
+    </div>
+  `;
 }
 
-
-    function applyFilters(){
-  const qv = (q.value || '').trim().toLowerCase();
-  let filtered = items.slice();
-  if (activeTag) {
-  if (activeTag === 'Both') {
-    filtered = filtered.filter(it => (it.tags || []).includes('Scriptable') && (it.tags || []).includes('Shortcuts'));
-  } else {
-    filtered = filtered.filter(it => (it.tags || []).some(tag => tag.toLowerCase() === activeTag.toLowerCase()));
+function renderList(list) {
+  if(!list.length){
+    gridContainer.innerHTML='';
+    emptyState.style.display='block';
+    return;
   }
+  emptyState.style.display='none';
+
+  const groups = list.reduce((acc,it)=>{ (acc[it.category]??=[]).push(it); return acc; },{});
+  const sortedCats = Object.keys(groups).sort(
+    (a,b)=> (parseInt(categoryMap[a])||999) - (parseInt(categoryMap[b])||999)
+  );
+
+  gridContainer.innerHTML = sortedCats.map(cat => `
+    <div class="category-section">
+      <h2 class="category-title">${cat}</h2>
+      <div class="grid">${groups[cat].map(renderCard).join('')}</div>
+    </div>
+  `).join('');
+
+  lucide.createIcons();
 }
 
-  if (qv) {
-    filtered = filtered.filter(it => (
-      ((it.title||'') + ' ' + (it.desc||'') + ' ' + (it.tags||[]).join(' '))
-        .toLowerCase()
-        .includes(qv)
-    ));
-  }
-
-  // sorting
-  if (sort.value === 'alpha') filtered.sort((a,b)=>a.title.localeCompare(b.title));
-  else if (sort.value === 'alpha-desc') filtered.sort((a,b)=>b.title.localeCompare(a.title));
-  else if (sort.value === 'type-first') filtered.sort((a,b)=> a.tags.join(',').localeCompare(b.tags.join(',')) || a.title.localeCompare(b.title));
+function applyFilters(){
+  const val = searchInput.value.toLowerCase();
+  const filtered = items.filter(it=>{
+    const matchesSearch = it.title.toLowerCase().includes(val) ||
+                          it.category.toLowerCase().includes(val) ||
+                          it.tag.toLowerCase().includes(val);
+    const matchesCategory = activeFilter==='All' || it.category===activeFilter;
+    return matchesSearch && matchesCategory;
+  }).sort((a,b)=>a.id-b.id);
 
   renderList(filtered);
 }
 
-
-    async function loadAll(){
-      try {
-        const raw = await fetchData();
-        const normalized = normalizeItems(raw);
-        items = normalized;
-        const tags = gatherTags(items);
-        buildChips(tags);
-        applyFilters();
-      } catch (err){
-        grid.innerHTML = `<div style="color:var(--muted); padding:18px;">Failed to load data. Make sure exporter wrote a JSON file into the same repo (tools.json or scriptable/shortcuts json).<br><small>${escapeHtml(String(err))}</small></div>`;
-        empty.style.display='none';
-        console.error(err);
-      }
-    }
-
-    // ui hooks
-    let debounce;
-    q.addEventListener('input', ()=>{ clearTimeout(debounce); debounce = setTimeout(applyFilters, 200);});
-    sort.addEventListener('change', applyFilters);
-
-    // initial load
-    loadAll();
-
-  })();
-  </script>
+searchInput.addEventListener('input', applyFilters);
+loadAll();
+</script>
 </body>
 </html>
