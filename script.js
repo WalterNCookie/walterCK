@@ -1,12 +1,8 @@
-/* ==========================================================================
-   WALTER CK - GLOBAL SCRIPT
-   ========================================================================== */
-
 // Check if we are on the Tools page before running Tools logic
 const gridContainer = document.getElementById('grid-container');
 
 if (gridContainer) {
-  // ---------- TOOLS PAGE LOGIC ----------
+  // TOOLS PAGE LOGIC
   
   const emptyState = document.getElementById('empty');
   const searchInput = document.getElementById('q');
@@ -142,8 +138,6 @@ if (gridContainer) {
   loadAll();
 }
 
-// ---------- MOBILE NAV (Placeholder) ----------
-// If you ever re-add the hamburger menu to your HTML, this will handle it automatically.
 const hamburger = document.getElementById('hamburger');
 const nav = document.getElementById('nav');
 
