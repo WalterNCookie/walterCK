@@ -1,82 +1,163 @@
-<!-- MAIN -->
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WalterCK</title>
-  <link rel="stylesheet" href="styles.css" /> <link rel="icon" type="image/png" href="images/walterck.png" />
-  <meta name="description" content="WalterCK — projects, notes, and shortcuts." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="WalterCK - projects, notes, and shortcuts." />
+  <title>CK</title>
+
+  <link rel="icon" href="/images/walterck.PNG" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ─── Hero ──────────────────────────────────────────────── */
+
+    .hero {
+      padding: 56px 0; /* reduced spacing */
+      text-align: center;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin: 8px 0 0;
+    }
+
+    /* Keep glow/scale animation but NO colour change on hover */
+    .profile-pfp:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 60px rgba(107, 140, 255, 0.6);
+      border-color: var(--accent); /* stays blue, not teal */
+    }
+
+    /* ─── Sections ───────────────────────────────────────────── */
+
+    .about,
+    .projects,
+    .contact {
+      padding: 56px 0; /* tightened spacing */
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .contact {
+      text-align: left;
+    }
+
+    /* contact links plain white (no turquoise glow) */
+    /* contact links plain white (no turquoise glow) */
+    /* Make contact links obvious */
+    .contact a {
+      color: var(--accent); /* Teal glow */
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .contact a:hover {
+      color: var(--accent); /* Shifts to blue on hover */
+    }
+
+    /* About meta left aligned (below the about text) */
+    .about .meta {
+      justify-content: flex-start;
+      margin-top: 16px;
+    }
+
+    /* ─── Clickable Cards ───────────────────────────────────── */
+
+    a.card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .tags {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="#">WalterCK</a>
-      <nav class="nav" id="nav">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-  </header>
 
   <main>
+
+    <!-- Hero: no nav, just the pfp + title centered -->
     <section class="hero">
-  <div class="container hero-inner-vertical">
-    <div class="profile-pfp">
-      <img src="images/walterck.png" alt="Walter">
-    </div>
-    
-    <div class="hero-text">
-      <h1 class="neon-text">Walter's Site :)</h1>
-      <p class="id-badge">ID: 952110713697108028</p>
-      <p class="tagline">I'll dump anything I code or make here so stay tuned 🙂‍↕️</p>
-    </div>
-  </div>
-</section>
-
-    <section id="about" class="container about">
-      <h2>About</h2>
-      <p>This website's about coding, automation, music, tools, my cat, 3D printing, gadgets and cool stuff.</p>
-      <ul class="meta">	
-        <li>📍 Australia</li>
-        <li>🎂 Mar 1, 2012</li>
-        <li>📱 iPhone 12 Pro Max</li>
-      </ul>
-    </section>
-
-    <section id="projects" class="container projects">
-      <h2>Projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Digital Tools</h3>
-          <p>Shortcuts & Scripts (scriptable)</p>
-          <p class="tags">Scriptable • Shortcuts</p>
-          <a class="link" href="tools/index.html">Take me there</a>
-        </article>
-
-        <article class="card">
-          <h3>Minimal Portfolio</h3>
-          <p>What you’re looking at!</p>
-          <p class="tags">Web • HTML/CSS</p>
-          <a class="link" id="portfolio-link" href="https://github.com/WalterNCookie/walterCK/" target="_blank" rel="noopener noreferrer">View on GitHub Pages →</a>
-        </article>
+      <div class="container hero-inner">
+        <div class="profile-pfp">
+          <img src="images/walterck.png" alt="Walter" />
+        </div>
+        <h1>Walters Site</h1>
+        <p class="tagline">I'll dump anything I code or make here so stay tuned 🙂‍↕️</p>
       </div>
     </section>
 
-    <section id="contact" class="container contact">
-      <h2>Contact</h2>
-      <p>Discord: <a href="https://discord.com/users/952110713697108028">WalterNCookie</a></p>
-      <p>Email: <a href="mailto:wmaclean2012@gmail.com">wmaclean2012@gmail.com</a> - I won't respond</p>
+    <!-- About -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About</h2>
+        <p>This website's about coding, automation, music, tools, my cat, 3D printing, gadgets and cool stuff.</p>
+
+        <!-- meta moved left below the about writing -->
+        <ul class="meta">
+          <li>📍 Australia</li>
+          <li>🎂 Mar 1, 2012</li>
+          <li>📱 iPhone 12 Pro Max</li>
+        </ul>
+      </div>
     </section>
+
+    <!-- Projects: whole card is clickable, no button -->
+    <section id="projects" class="projects">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="grid">
+          <a class="card-link" href="tools">
+            <article class="card">
+              <h3>Digital Tools</h3>
+              <p>Shortcuts &amp; Scripts (Scriptable)</p>
+            </article>
+          </a>
+          <a class="card-link" href="https://github.com/WalterNCookie/walterCK/" target="_blank" rel="noopener noreferrer">
+            <article class="card">
+              <h3>Portfolio</h3>
+              <p>What you're looking at!</p>
+            </article>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact: left-aligned -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>Discord: <a href="https://discord.com/users/952110713697108028">WalterNCookie</a></p>
+        <p>Email: <a href="mailto:wmaclean2012@gmail.com">wmaclean2012@gmail.com</a> - I won't respond</p>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <small>© WalterCK — built for fun. Hosted on Netlify.</small>
-    </div>
-  </footer>
-
   <script src="script.js"></script>
+
 </body>
 </html>
