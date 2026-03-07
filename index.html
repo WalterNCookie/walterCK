@@ -49,10 +49,11 @@
     /* ─── Sections ───────────────────────────────────────────── */
 
     .about,
-    .projects,
-    .contact {
-      padding: 56px 0; /* tightened spacing */
-      border-bottom: 1px solid var(--card-border);
+    .projects .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
     }
 
     .contact {
