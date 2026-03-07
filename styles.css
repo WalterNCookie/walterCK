@@ -266,7 +266,57 @@ html,body { height:100%; margin:0; padding:0; }
 .control-select:focus + .control-select-wrapper::after {
   transform: translateY(-50%) rotate(180deg);
 }
+/* Centering the Hero Content */
+.hero-inner-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
 
+/* The PFP Styling */
+.profile-pfp {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(107, 140, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.profile-pfp:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(107, 140, 255, 0.6);
+}
+
+.profile-pfp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ID Badge Styling */
+.id-badge {
+  color: var(--accent-2);
+  font-size: 0.9rem;
+  font-family: ui-monospace, monospace;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+/* Neon Text Effect */
+.neon-text {
+  text-shadow: 0 0 10px rgba(107, 140, 255, 0.5);
+}
+
+/* Section Background (Floating Gradient) */
+.hero {
+  background: radial-gradient(circle at center, rgba(107,140,255,0.15) 0%, rgba(11,15,20,0) 70%);
+  border: none;
+  padding: 80px 0;
+}
 /* small helpers */
 .small { font-size:0.88rem; color:var(--muted); }
 .code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; font-size:0.9rem; }
