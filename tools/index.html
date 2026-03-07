@@ -4,315 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CK Tools</title>
-  <link rel="icon" href="/images/walterck.PNG" />
+  
+  <link rel="icon" href="../images/walterck.png" />
   <link rel="stylesheet" href="../styles.css" />
+  
   <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    /* ─── Hero & Header ───────────────────────────────────── */
-    .hero {
-      text-align: center;
-      margin-bottom: 40px;
-      position: relative;
-    }
-
-    .back-btn {
-      position: fixed;
-     top: 20px;
-     left: 20px;
-     display: flex;
-     align-items: center;
-     gap: 8px;
-     padding: 10px 16px;
-     border-radius: 12px;
-     background: rgba(255,255,255,0.05);
-      color: var(--text);
-     text-decoration: none;
-      font-weight: 600;
-     transition: all 0.2s;
-     z-index: 999;
-    }
-
-    .back-btn:hover {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 35px;
-      text-align: center;
-    }
-
-    /* ─── Search ─────────────────────────────────────────── */
-    .search {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      justify-content: center;
-      max-width: 500px;
-      margin: 0 auto 40px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      background: var(--glass);
-      border: 1px solid var(--card-border);
-    }
-
-    .search input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-size: 1rem;
-    }
-
-    /* ─── Filters ───────────────────────────────────────── */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-
-    .filter-chip {
-      padding: 8px 16px;
-      border-radius: 99px;
-      border: 1px solid var(--card-border);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .filter-chip.active {
-      background: var(--text);
-      border-color: var(--text);
-      color: var(--bg-900);
-    }
-
-    /* ─── Grid & Cards ─────────────────────────────────── */
-    .category-section {
-      margin-bottom: 50px;
-    }
-
-    .category-title {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text);
-      border-left: none;
-      padding-left: 0;
-      opacity: 0.8;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      padding: 28px 24px;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(12px);
-      transition: var(--transition);
-      text-align: left;
-      border: none;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-1);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      color: var(--accent);
-      font-size: 1.2rem;
-    }
-
-    .card p {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    /* ─── Tool Action Buttons ───────────────────────────── */
-    .tool-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .tool-actions button {
-      flex: 1;
-      padding: 6px 0;
-      font-size: 0.85rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      transition: all 0.2s;
-    }
-
-    .tool-actions button:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    #empty {
-      text-align: center;
-      margin-top: 40px;
-      color: var(--muted);
-    }
-
-    /* ─── Background Override ───────────────────────────── */
-    body {
-      background-color: #0d1117;
-      background-image:
-        radial-gradient(ellipse at 85% 0%, rgba(107, 140, 255, 0.18) 0%, transparent 55%);
-      background-attachment: fixed;
-    }
-  </style>
 </head>
-<body>
+<body class="tools-page">
 
-<main class="container">
-  <section class="hero">
-    <a href="/" class="back-btn">
-      <i data-lucide="arrow-left" size="18"></i> Back
-    </a>
+  <main class="container">
+    <section class="tools-hero">
+      <a href="../" class="back-btn">
+        <i data-lucide="arrow-left" size="18"></i> Back
+      </a>
 
-    <h1>My Tools</h1>
+      <h1>My Tools</h1>
 
-    <div class="search">
-      <i data-lucide="search" size="18"></i>
-      <input id="q" placeholder="Search title, tag, or category..." autocomplete="off">
-    </div>
-
-    <div class="filters" id="filters"></div>
-  </section>
-
-  <div id="grid-container"></div>
-  <p id="empty" style="display:none;">No tools found.</p>
-
-</main>
-
-<script>
-const gridContainer   = document.getElementById('grid-container');
-const emptyState      = document.getElementById('empty');
-const searchInput     = document.getElementById('q');
-const filterContainer = document.getElementById('filters');
-
-let items        = [];
-let categoryMap  = {};
-let activeFilter = 'All';
-
-async function loadAll() {
-  try {
-    const res = await fetch('tools.json', { cache: 'no-store' });
-    const raw = await res.json();
-
-    const mapObj = raw.find(it => !it.title);
-    if(mapObj) categoryMap = mapObj;
-
-    items = raw.filter(it => it.title).map(it => ({
-      id: parseInt(it.id) || 999,
-      title: it.title,
-      tag: it.tags || '',
-      category: it.category || 'General',
-      icon: it.icon || 'box',
-      color: it.color || '#007AFF',
-      link: it.link || '#'
-    }));
-
-    renderFilters();
-    applyFilters();
-  } catch(err) { console.error(err); }
-}
-
-function renderFilters() {
-  const categories = ['All', ...Object.keys(categoryMap).sort(
-    (a,b)=> (parseInt(categoryMap[a])||999) - (parseInt(categoryMap[b])||999)
-  )];
-
-  filterContainer.innerHTML = categories.map(cat => `
-    <button class="filter-chip ${activeFilter===cat?'active':''}" data-cat="${cat}">${cat}</button>
-  `).join('');
-
-  filterContainer.querySelectorAll('.filter-chip').forEach(btn => {
-    btn.addEventListener('click',()=>{
-      activeFilter = btn.dataset.cat;
-      renderFilters();
-      applyFilters();
-    });
-  });
-}
-
-function renderCard(item) {
-  return `
-    <div class="card">
-      <div style="color:${item.color}; margin-bottom:12px;">
-        <i data-lucide="${item.icon}" size="28"></i>
+      <div class="search">
+        <i data-lucide="search" size="18"></i>
+        <input id="q" placeholder="Search title, tag, or category..." autocomplete="off">
       </div>
-      <h3>${item.title}</h3>
-      <p class="tags">${item.tag}</p>
-      <div class="tool-actions">
-        <button onclick="window.open('${item.link}','_blank')">Open</button>
-        <button onclick="navigator.clipboard.writeText('${item.link}')">Copy</button>
-      </div>
-    </div>
-  `;
-}
 
-function renderList(list) {
-  if(!list.length){
-    gridContainer.innerHTML='';
-    emptyState.style.display='block';
-    return;
-  }
-  emptyState.style.display='none';
+      <div class="filters" id="filters"></div>
+    </section>
 
-  const groups = list.reduce((acc,it)=>{ (acc[it.category]??=[]).push(it); return acc; },{});
-  const sortedCats = Object.keys(groups).sort(
-    (a,b)=> (parseInt(categoryMap[a])||999) - (parseInt(categoryMap[b])||999)
-  );
+    <div id="grid-container"></div>
+    <p id="empty" style="display:none;">No tools found.</p>
 
-  gridContainer.innerHTML = sortedCats.map(cat => `
-    <div class="category-section">
-      <h2 class="category-title">${cat}</h2>
-      <div class="grid">${groups[cat].map(renderCard).join('')}</div>
-    </div>
-  `).join('');
+  </main>
 
-  lucide.createIcons();
-}
-
-function applyFilters(){
-  const val = searchInput.value.toLowerCase();
-  const filtered = items.filter(it=>{
-    const matchesSearch = it.title.toLowerCase().includes(val) ||
-                          it.category.toLowerCase().includes(val) ||
-                          it.tag.toLowerCase().includes(val);
-    const matchesCategory = activeFilter==='All' || it.category===activeFilter;
-    return matchesSearch && matchesCategory;
-  }).sort((a,b)=>a.id-b.id);
-
-  renderList(filtered);
-}
-
-searchInput.addEventListener('input', applyFilters);
-loadAll();
-</script>
+  <script src="../script.js"></script>
 </body>
 </html>
