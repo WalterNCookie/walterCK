@@ -1,4 +1,4 @@
-// script.js
+// script.js ----------------------------------------------------
 
 const gridContainer = document.getElementById('grid-container');
 
@@ -96,6 +96,22 @@ if (gridContainer) {
     highlightScripts();
   }
 
+  function copyLink(btn, url) {
+    navigator.clipboard.writeText(url).then(() => {
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      btn.textContent = 'Failed';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+
+  window.copyLink = copyLink;
+
   function renderCard(item) {
     return `
       <div class="card">
@@ -106,7 +122,7 @@ if (gridContainer) {
         <p class="tags">${item.tag}</p>
         <div class="tool-actions">
           <button onclick="window.open('${item.link}','_blank')">Open</button>
-          <button onclick="navigator.clipboard.writeText('${item.link}')">Copy</button>
+          <button onclick="copyLink(this, '${item.link}')">Copy</button>
         </div>
       </div>
     `;
