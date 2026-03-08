@@ -225,10 +225,9 @@ a.card-link {
   padding-top: 40px;
 }
 
-/* FIX: push h1 down so back button doesn't overlap */
 .tools-hero h1 {
   font-size: 3.5rem;
-  margin-top: 48px;
+  margin-top: 16px;
   margin-bottom: 35px;
 }
 
