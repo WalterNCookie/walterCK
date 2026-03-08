@@ -221,12 +221,12 @@ a.card-link {
 .tools-hero {
   text-align: center;
   margin-bottom: 40px;
-  padding-top: 40px;
+  padding-top: 0;
 }
 
 .tools-hero h1 {
   font-size: 3.5rem;
-  margin-top: 16px;
+  margin-top: 24px;
   margin-bottom: 35px;
 }
 
