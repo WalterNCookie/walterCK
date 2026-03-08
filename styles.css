@@ -35,8 +35,7 @@ html, body {
   color: var(--text);
   background-color: var(--bg-900);
   background-image:
-    radial-gradient(circle at 50% 15%, var(--accent-glow) 0%, transparent 65%),
-    radial-gradient(circle at 100% 100%, rgba(91, 230, 192, 0.08) 0%, transparent 40%);
+    radial-gradient(circle at 50% 15%, var(--accent-glow) 0%, transparent 65%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
