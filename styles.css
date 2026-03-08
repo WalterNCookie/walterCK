@@ -343,34 +343,7 @@ a.card-link {
   margin-top: 40px;
   color: var(--muted);
 }
-/* ==== Script category highlight (paste at end of styles.css) ==== */
 
-/* Make hero title shimmer when scripts exist */
-.tools-hero.script-found h1 {
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 45%, #ffffff 55%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  position: relative;
-  animation: hero-sheen 3.2s linear infinite;
-  text-shadow: 0 6px 30px rgba(107,140,255,0.12), 0 0 30px rgba(91,230,192,0.06);
-}
-
-@keyframes hero-sheen {
-  0% { background-position: -200% 0; }
-  60% { background-position: 200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Glow around filters container when scripts exist */
-.filters.script-found {
-  box-shadow: 0 8px 40px rgba(91,230,192,0.06), 0 0 18px rgba(107,140,255,0.06) inset;
-  border-radius: 16px;
-  padding: 8px;
-  transition: box-shadow 300ms;
-}
-
-/* Style for the Script filter-chip */
 /* ==== Script category highlight ==== */
 
 /* Hero title shimmer */
