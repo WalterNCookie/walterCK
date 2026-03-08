@@ -371,66 +371,69 @@ a.card-link {
 }
 
 /* Style for the Script filter-chip */
+/* ==== Script category highlight ==== */
+
+/* Hero title shimmer */
+.tools-hero.script-found h1 {
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent-2) 40%,
+    #ffffff 50%,
+    var(--accent-2) 60%,
+    var(--accent) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: script-hero-shine 4s linear infinite;
+  text-shadow: 0 8px 40px rgba(91,230,192,0.2);
+}
+
+@keyframes script-hero-shine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* Filters container glow */
+.filters.script-found {
+  box-shadow:
+    0 0 30px rgba(91,230,192,0.12),
+    inset 0 0 20px rgba(107,140,255,0.08);
+  border-radius: 16px;
+  padding: 8px;
+}
+
+/* Script filter chip */
 .filter-chip.script-highlight {
-  background: linear-gradient(135deg, rgba(91,230,192,0.08), rgba(107,140,255,0.06));
-  border: 1px solid rgba(91,230,192,0.25);
-  color: #eafaf6;
-  position: relative;
-  overflow: hidden;
-  transform-origin: center;
-  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(91,230,192,0.18),
+    rgba(107,140,255,0.18)
+  );
+  border: 1px solid rgba(91,230,192,0.35);
+  color: #eafffb;
+  box-shadow:
+    0 0 10px rgba(91,230,192,0.2),
+    inset 0 0 10px rgba(255,255,255,0.05);
 }
 
-/* Animated sheen bar on the chip */
-.filter-chip.script-highlight::after {
-  content: "";
-  position: absolute;
-  left: -60%;
-  top: -40%;
-  width: 60%;
-  height: 180%;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
-  transform: rotate(-18deg);
-  filter: blur(6px);
-  opacity: 0.85;
-  animation: chip-sheen 2.4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes chip-sheen {
-  0% { left: -60%; }
-  50% { left: 120%; }
-  100% { left: 120%; }
-}
-
-/* Optional pulse to give chips presence */
+/* Slight pulse */
 .filter-chip.script-highlight.pulse {
-  animation: script-chip-pulse 1800ms ease-in-out infinite;
+  animation: script-chip-pulse 2s ease-in-out infinite;
 }
 
 @keyframes script-chip-pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+  50% { transform: scale(1.04); }
   100% { transform: scale(1); }
 }
 
-/* Make category header stand out */
+/* Script category title */
 .category-title.script-highlight {
   color: var(--accent-2);
-  text-shadow: 0 8px 30px rgba(91,230,192,0.08);
-  border-left: 4px solid rgba(91,230,192,0.18);
+  border-left: 4px solid var(--accent-2);
   padding-left: 12px;
-  transition: all 220ms;
-}
-
-/* Focus style for accessibility */
-.filter-chip.script-highlight:focus {
-  outline: 3px solid rgba(91,230,192,0.18);
-  outline-offset: 2px;
-}
-
-/* Mobile: reduce visual noise */
-@media (max-width: 420px) {
-  .tools-hero.script-found h1 { font-size: 2.4rem; }
-  .filter-chip.script-highlight::after { display: none; }
+  text-shadow: 0 6px 30px rgba(91,230,192,0.15);
 }
