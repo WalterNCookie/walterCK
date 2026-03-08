@@ -1,4 +1,4 @@
-/* GLOBAL STYLES
+/* GLOBAL STYLES */
 
 /* ─── Variables / Tokens ─── */
 :root {
@@ -71,7 +71,7 @@ h1 {
 h2 {
   margin-bottom: 24px;
   color: var(--text);
-  font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem); 
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem);
   letter-spacing: -0.02em;
 }
 
@@ -90,7 +90,7 @@ h2 {
 }
 
 .hero-main h1 {
-  font-size: clamp(2.2rem, 6vw + 1rem, 4rem); 
+  font-size: clamp(2.2rem, 6vw + 1rem, 4rem);
 }
 
 .tagline {
@@ -114,7 +114,7 @@ h2 {
 .profile-pfp:hover {
   transform: scale(1.05);
   box-shadow: 0 0 60px rgba(107, 140, 255, 0.6);
-  border-color: var(--accent); 
+  border-color: var(--accent);
 }
 
 .profile-pfp img {
@@ -225,14 +225,16 @@ a.card-link {
   padding-top: 40px;
 }
 
+/* FIX: push h1 down so back button doesn't overlap */
 .tools-hero h1 {
   font-size: 3.5rem;
+  margin-top: 48px;
   margin-bottom: 35px;
 }
 
 .back-btn {
   position: absolute;
-  top: 24px; /* Shifted down from 0 */
+  top: 24px;
   left: 0;
   display: flex;
   align-items: center;
@@ -378,7 +380,7 @@ a.card-link {
   padding: 8px;
 }
 
-/* Script filter chip */
+/* Script filter chip — default state */
 .filter-chip.script-highlight {
   background: linear-gradient(
     135deg,
@@ -392,8 +394,26 @@ a.card-link {
     inset 0 0 10px rgba(255,255,255,0.05);
 }
 
-/* Slight pulse */
-.filter-chip.script-highlight.pulse {
+/* Script filter chip — selected/active state */
+.filter-chip.script-highlight.active {
+  background: linear-gradient(
+    135deg,
+    rgba(91,230,192,0.55),
+    rgba(107,140,255,0.55)
+  );
+  border: 1px solid rgba(91,230,192,0.9);
+  color: #ffffff;
+  box-shadow:
+    0 0 18px rgba(91,230,192,0.5),
+    0 0 40px rgba(107,140,255,0.25),
+    inset 0 0 14px rgba(255,255,255,0.1);
+  text-shadow: 0 0 10px rgba(91,230,192,0.6);
+  /* keep the pulse going when selected */
+  animation: script-chip-pulse 2s ease-in-out infinite;
+}
+
+/* Slight pulse on unselected script chip */
+.filter-chip.script-highlight.pulse:not(.active) {
   animation: script-chip-pulse 2s ease-in-out infinite;
 }
 
