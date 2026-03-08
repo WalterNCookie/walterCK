@@ -253,6 +253,8 @@ a.card-link {
   margin: 0 auto 40px;
   box-sizing: border-box;
   padding: 0 4px;
+  position: relative;
+  z-index: 1;
 }
 
 .back-btn {
