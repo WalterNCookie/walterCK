@@ -340,6 +340,13 @@ a.card-link {
   color: #fff;
 }
 
+.tool-actions button.copied {
+  background: rgba(91, 230, 192, 0.2);
+  color: var(--accent-2);
+  border: 1px solid rgba(91, 230, 192, 0.4);
+  cursor: default;
+}
+
 #empty {
   text-align: center;
   margin-top: 40px;
