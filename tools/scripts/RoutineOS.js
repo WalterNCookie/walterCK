@@ -2,16 +2,15 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-brown; icon-glyph: tasks;
 const APP_NAME = Script.name();
-//  local storage to
-const fm = FileManager.local();
+// Switched to iCloud for cross-device syncing
+const fm = FileManager.iCloud();
 const STATE_FILE = fm.joinPath(fm.documentsDirectory(), "routine_state.json");
 
 // Theme
 const ACCENT = new Color("#E6A24A");
-// (kept for reference; not used directly for backgrounds)
 const BG1 = new Color("#0A0607");
 const BG2 = new Color("#14080A");
-const CARD = new Color("#000"); // kept for reference; card now uses gradient
+const CARD = new Color("#000"); 
 const MUTED = new Color("#9BA3A8");
 
 // Fonts
@@ -29,10 +28,10 @@ function makeVerticalGradient(topColor, bottomColor) {
   return g;
 }
 
-// Default colors (kept for reference/back-compat)
-const TOP = new Color("#000000");          // top is always black
-const BOTTOM = new Color("#480a60");       // previous purple fallback
-const WIDGET_GRADIENT = makeVerticalGradient(TOP, BOTTOM); // fallback
+// Default colors 
+const TOP = new Color("#000000");          
+const BOTTOM = new Color("#480a60");       
+const WIDGET_GRADIENT = makeVerticalGradient(TOP, BOTTOM); 
 
 // Parse a hex string into a Color, with robust fallback
 function colorFromHex(hex, fallback) {
@@ -46,7 +45,7 @@ function colorFromHex(hex, fallback) {
   return fallback;
 }
 
-// Resolve gradient for a given step: top = black, bottom = per-step or default purple
+// Resolve gradient for a given step
 function gradientForStep(step) {
   const top = new Color("#000000");
   const bottomHex = (step && (step.bg || step.bottom || step.gradientBottom || step.hex || step.color)) || null;
@@ -58,14 +57,14 @@ function gradientForStep(step) {
 const ROUTINES = {
   school: [
     { title: "Wake Up", time: "6:00", subtitle: "Water/Music", emoji: "🌅", bg: "1A1A2E" },
-    { title: "Clean Room", time: "6:05", subtitle: "Start fresh", emoji: "🧹", bg: "2E3B73" },
+    { title: "Clean Room", time: "6:05", subtitle: "Momentum", emoji: "🧹", bg: "2E3B73" },
     { title: "Get Dressed & Pack Bag", time: "6:20", subtitle: "Formal?", emoji: "🎒", bg: "8C5A00" },
     { title: "Breakfast", time: "6:30", subtitle: "Quick egg", emoji: "🍳", bg: "FFB400" },
     { title: "Brush Teeth", time: "6:45", subtitle: "Fresh", emoji: "🦷", bg: "00A6FB" },
-    { title: "Feed Annie", time: "6:50", subtitle: "Cat check", emoji: "🐈", bg: "7C3A2D" },
-    { title: "Make Lunch", time: "6:55", subtitle: "Future you", emoji: "🥪", bg: "6B2D5C" },
+    { title: "Feed Annie", time: "6:50", subtitle: "And her water bowl", emoji: "🐈", bg: "7C3A2D" },
+    { title: "Make Lunch", time: "6:55", subtitle: "Future you?", emoji: "🥪", bg: "6B2D5C" },
     { title: "Travel to School", time: "7:00", subtitle: "Get moving", emoji: "🚌", bg: "8B0000" },
-    { title: "School", time: "8:45", subtitle: "Stack", emoji: "📚", bg: "4A9A80" },
+    { title: "School", time: "8:45", subtitle: "Stack knowledge", emoji: "📚", bg: "4A9A80" },
     { title: "Travel Home", time: "2:45", subtitle: "Chill mode", emoji: "🚍", bg: "6B3E2E" },
     { title: "Afternoon Snack", time: "4:15", subtitle: "Boost energy", emoji: "🍫", bg: "F28C28" },
     { title: "Get Dressed", time: "4:20", subtitle: "Comfy clothes", emoji: "🧢", bg: "1976D2" },
@@ -74,7 +73,7 @@ const ROUTINES = {
     { title: "Shower & Brush Teeth", time: "6:30", subtitle: "Cold?", emoji: "🚿", bg: "7B1FA2" },
     { title: "Solid", time: "7:00", subtitle: "End day strong", emoji: "🏋️‍♂️", bg: "8A1538" },
     { title: "Productive", time: "7:10", subtitle: "Finish tasks", emoji: "💻", bg: "35495E" },
-    { title: "Sleep", time: "10:00", subtitle: "Dream Consciously", emoji: "💤", bg: "0B132B" }
+    { title: "Sleep", time: "10:00", subtitle: "Dream consciously", emoji: "💤", bg: "0B132B" }
   ],
 
   break: [
@@ -92,12 +91,11 @@ const ROUTINES = {
     { title: "Shower & Brush Teeth", time: "6:30", subtitle: "Reset", emoji: "🚿", bg: "7B1FA2" },
     { title: "Solid", time: "7:00", subtitle: "End day strong", emoji: "🏋️‍♂️", bg: "8A1538" },
     { title: "Productive", time: "7:10", subtitle: "Finish tasks", emoji: "💻", bg: "35495E" },
-    { title: "Sleep", time: "10:00", subtitle: "Dream Consciously", emoji: "💤", bg: "0B132B" }
+    { title: "Sleep", time: "10:00", subtitle: "Dream consciously", emoji: "💤", bg: "0B132B" }
   ]
 };
 
 const DEFAULT_STATE = { mode: "school", index: 0, lastResetISO: new Date().toISOString(), lastTap: 0, lastActionId: "" };
-// Unique token 
 const RUN_ID = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 // helpers
@@ -164,7 +162,6 @@ function saveStateSync(state) {
   try {
     const payload = JSON.stringify(state, null, 2);
     fm.writeString(tmp, payload);
-    // verify tmp
     const verify = fm.readString(tmp);
     JSON.parse(verify);
     try { if (fm.fileExists(STATE_FILE)) fm.remove(STATE_FILE); } catch(_) {}
@@ -288,8 +285,6 @@ function createWidgetFromState(state) {
 
     const w = new ListWidget();
     w.setPadding(18, 18, 18, 18);
-
-    // Per-step background gradient 
     w.backgroundGradient = gradientForStep(step);
 
     // header
@@ -328,7 +323,7 @@ function createWidgetFromState(state) {
 
     // card — transparent
     const card = w.addStack();
-    card.backgroundColor = new Color("#000000", 0); // transparent
+    card.backgroundColor = new Color("#000000", 0); 
     card.cornerRadius = 14;
     card.setPadding(2, 50, 12, 12);
     card.layoutHorizontally();
@@ -376,7 +371,6 @@ function createWidgetFromState(state) {
     sub.shadowOffset = new Point(0, 1);
 
     card.addSpacer();
-
     w.addSpacer(0);
 
     // footer
@@ -401,7 +395,7 @@ function createWidgetFromState(state) {
     return w;
   } catch (e) {
     const w = new ListWidget();
-    w.backgroundGradient = WIDGET_GRADIENT; // fallback default purple
+    w.backgroundGradient = WIDGET_GRADIENT;
     const t = w.addText("Routine load error");
     t.textColor = Color.white(); 
     t.font = Font.semiboldSystemFont(12);
@@ -432,7 +426,7 @@ async function presentMenuAndAct() {
   alert.addCancelAction("Cancel");
   const choice = await alert.presentSheet();
 
-  if (choice === 0) { // Advance step (interactive)
+  if (choice === 0) { // Advance step 
     const res = await safeAdvance(RUN_ID);
     const done = new Alert();
     if (res.skipped) {
@@ -448,7 +442,7 @@ async function presentMenuAndAct() {
     return;
   }
 
-  if (choice === 1) { // Preview widget (interactive)
+  if (choice === 1) { // Preview widget
     const state = await ensureStateFile();
     const w = createWidgetFromState(state);
     await w.presentMedium();
@@ -493,7 +487,6 @@ async function presentMenuAndAct() {
     return;
   }
 
-  // cancel -> nothing
   Script.complete();
 }
 
@@ -509,7 +502,6 @@ function buildTimeDictionary(mode) {
 
     let [h, m] = step.time.split(":").map(Number);
 
-    // Infer PM if the time wraps backward (smaller hour than previous)
     if (prevHour !== null && h < prevHour) {
       passedNoon = true;
     }
@@ -517,34 +509,32 @@ function buildTimeDictionary(mode) {
 
     const suffix = passedNoon ? "pm" : "am";
 
-    // Format 12-hour time string
     let hour12 = h;
     if (hour12 === 0) hour12 = 12;
     else if (hour12 > 12) hour12 = hour12 - 12;
 
     const timeStr = `${hour12}:${m.toString().padStart(2, "0")} ${suffix}`;
 
-    dict[timeStr] = i + 1; // Key = inferred time with AM/PM, Value = step number
+    dict[timeStr] = i + 1; 
   }
 
   return dict;
 }
 
-// --------- entrypoint (single-path) ---------
+// --------- entrypoint ---------
 (async () => {
   const rawParam = getParam();
-if (rawParam && rawParam.toLowerCase() === "dictionary") {
-  const state = readStateOrDefault();
-  const mode = state.mode === "break" ? "break" : "school";
-  const dict = buildTimeDictionary(mode);
+  if (rawParam && rawParam.toLowerCase() === "dictionary") {
+    const state = readStateOrDefault();
+    const mode = state.mode === "break" ? "break" : "school";
+    const dict = buildTimeDictionary(mode);
 
-  Script.setShortcutOutput(dict);
-  Script.complete();
-  return;
-}
+    Script.setShortcutOutput(dict);
+    Script.complete();
+    return;
+  }
   const lowParam = rawParam ? rawParam.toLowerCase() : "";
 
-  // Set step manually from a parameter like setStep5
   if (lowParam.startsWith("setstep")) {
     const numStr = lowParam.replace("setstep", "").trim();
     const stepNum = parseInt(numStr, 10);
@@ -555,84 +545,58 @@ if (rawParam && rawParam.toLowerCase() === "dictionary") {
     return;
   }
 
-  // 1) WIDGET RENDER: if the runtime is widget, ALWAYS render and exit.
-if (config.runsInWidget) {
-  try {
-    const state = loadStateForWidget();
-    const widget = createWidgetFromState(state);
+  if (config.runsInWidget) {
+    try {
+      const state = loadStateForWidget();
+      const widget = createWidgetFromState(state);
+      
+      // Cleaned URL scheme - directly advances
+      widget.url = `scriptable:///run/${encodeURIComponent(APP_NAME)}?parameter=advanceAndShortcut`;
 
-    // --- NEW: decide whether to append -inferno or -nebula based on transitions ---
-    const mode = state && state.mode ? state.mode : "school";
-    const list = ROUTINES[mode] || ROUTINES.school;
-    const curIdx = clampIndex((state && typeof state.index === "number" ? state.index : 0), mode);
-    const nextIdx = clampIndex(curIdx + 1, mode);
-
-    const curTitle = (list[curIdx] && list[curIdx].title ? String(list[curIdx].title) : "").toLowerCase();
-    const nextTitle = (list[nextIdx] && list[nextIdx].title ? String(list[nextIdx].title) : "").toLowerCase();
-
-    let suffix = "";
-    if (nextTitle.includes("pushup")) {
-      suffix = "-inferno";
-    } else if (curTitle.includes("pushup")) {
-      suffix = "-nebula";
+      Script.setWidget(widget);
+    } catch (e) {
+      const fallback = new ListWidget();
+      fallback.backgroundGradient = WIDGET_GRADIENT;
+      const t = fallback.addText("Routine load error");
+      t.textColor = Color.white();
+      t.font = Font.semiboldSystemFont(12);
+      fallback.addSpacer(6);
+      fallback.addText(String(e).slice(0, 100)).textColor = MUTED;
+      Script.setWidget(fallback);
     }
-    // -------------------------------------------------------------------------
-
-    widget.url = `scriptable:///run/${encodeURIComponent(APP_NAME)}?parameter=advanceAndShortcut${suffix}`;
-
-    Script.setWidget(widget);
-  } catch (e) {
-    const fallback = new ListWidget();
-    fallback.backgroundGradient = WIDGET_GRADIENT;
-    const t = fallback.addText("Routine load error");
-    t.textColor = Color.white();
-    t.font = Font.semiboldSystemFont(12);
-    fallback.addSpacer(6);
-    fallback.addText(String(e).slice(0, 100)).textColor = MUTED;
-    Script.setWidget(fallback);
+    Script.complete();
+    return;
   }
-  Script.complete();
-  return;
-}
 
-  // 2) APP MODE WITH PARAMS — handle param-based actions (silent) and exit immediately.
+  if (lowParam.startsWith("advanceandshortcut")) {
+    try { await safeAdvance(RUN_ID); } catch(e) {}
+    App.close(); 
+    return;
+  }
 
-  // Advance step, then run Shortcut
-// Advance step, then just close app (no shortcut)
-if (lowParam.startsWith("advanceandshortcut")) {
-  try { await safeAdvance(RUN_ID); } catch(e) {}
-  App.close(); // replaced shortcut call
-  return;
-}
-
-// Advance step (silent)
-if (lowParam === "advance" || lowParam === "next" || lowParam === "silent") {
-  try { await safeAdvance(RUN_ID); } catch(e) {}
-  Script.complete();
-  return;
-}
-
-// Some systems pass empty in queryParameters result = advance (silent)
-try {
-  if (typeof args !== "undefined" && args.queryParameters && args.queryParameters.nonce && !lowParam) {
+  if (lowParam === "advance" || lowParam === "next" || lowParam === "silent") {
     try { await safeAdvance(RUN_ID); } catch(e) {}
     Script.complete();
     return;
   }
-} catch (e) {}
 
-// Reset (silent)
-if (matchesResetParam(lowParam)) {
-  let modeHint = null;
-  if (containsWord(lowParam, "break")) modeHint = "break";
-  else if (containsWord(lowParam, "school")) modeHint = "school";
-  try { await safeReset(modeHint, RUN_ID); } catch(e) {}
+  try {
+    if (typeof args !== "undefined" && args.queryParameters && args.queryParameters.nonce && !lowParam) {
+      try { await safeAdvance(RUN_ID); } catch(e) {}
+      Script.complete();
+      return;
+    }
+  } catch (e) {}
+
+  if (matchesResetParam(lowParam)) {
+    let modeHint = null;
+    if (containsWord(lowParam, "break")) modeHint = "break";
+    else if (containsWord(lowParam, "school")) modeHint = "school";
+    try { await safeReset(modeHint, RUN_ID); } catch(e) {}
+    Script.complete();
+    return;
+  }
+
+  await presentMenuAndAct();
   Script.complete();
-  return;
-}
-
-// 3) APP MODE NO PARAMS — show interactive menu (only path left)
-// 3) APP MODE NO PARAMS — show interactive menu (only path left)
-await presentMenuAndAct();
-Script.complete();
 })();
