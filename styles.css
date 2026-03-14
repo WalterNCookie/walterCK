@@ -47,6 +47,25 @@ body.tools-page {
   background-image: none !important;
 }
 
+/* ─── Scrollbar ─── */
+
+/* Hide on main page */
+html:not(:has(body.tools-page))::-webkit-scrollbar { display: none; }
+html:not(:has(body.tools-page)) {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Custom scrollbar on tools page */
+html:has(body.tools-page)::-webkit-scrollbar { width: 5px; }
+html:has(body.tools-page)::-webkit-scrollbar-track { background: transparent; }
+html:has(body.tools-page)::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 99px;
+  transition: background 0.2s;
+}
+html:has(body.tools-page)::-webkit-scrollbar-thumb:hover { background: var(--accent-2); }
+
 /* ─── Layout ─── */
 .container {
   width: 100%;
@@ -230,8 +249,6 @@ a.card-link {
   letter-spacing: -0.01em;
   margin-top: 24px;
   margin-bottom: 56px;
-  position: relative;
-  z-index: 10;
 }
 
 @media (max-width: 600px) {
@@ -253,8 +270,6 @@ a.card-link {
   margin: 0 auto 40px;
   box-sizing: border-box;
   padding: 0 4px;
-  position: relative;
-  z-index: 1;
 }
 
 .back-btn {
@@ -439,7 +454,6 @@ a.card-link {
     0 0 40px rgba(107,140,255,0.25),
     inset 0 0 14px rgba(255,255,255,0.1);
   text-shadow: 0 0 10px rgba(91,230,192,0.6);
-  /* keep the pulse going when selected */
   animation: script-chip-pulse 2s ease-in-out infinite;
 }
 
@@ -460,4 +474,34 @@ a.card-link {
   border-left: 4px solid var(--accent-2);
   padding-left: 12px;
   text-shadow: 0 6px 30px rgba(91,230,192,0.15);
+}
+
+/* ─── Scrollbars ─── */
+
+/* Hide default scrollbar on main page */
+body:not(.tools-page) {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+body:not(.tools-page)::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar on tools page */
+body.tools-page {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg-800);
+}
+body.tools-page::-webkit-scrollbar {
+  width: 5px;
+}
+body.tools-page::-webkit-scrollbar-track {
+  background: var(--bg-800);
+}
+body.tools-page::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 99px;
+}
+body.tools-page::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-2);
 }
