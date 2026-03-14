@@ -18,12 +18,15 @@
   --shadow-1: 0 12px 40px rgba(0, 0, 0, 0.6);
   --container-padding: 24px;
   --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  font-family: Inter, system-ui, -apple-system, sans-serif;
   color-scheme: dark;
 }
 
-/* ─── Reset & Base ─── */
+/* font */
+  * {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -47,9 +50,9 @@ body.tools-page {
   background-image: none !important;
 }
 
-/* ─── Scrollbar ─── */
+/* Scrollbar */
 
-/* Hide everywhere by default */
+/* Hide */
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -71,7 +74,7 @@ html:has(body.tools-page)::-webkit-scrollbar-thumb:hover { background: rgba(91, 
 
 
 
-/* ─── Layout ─── */
+/* Layout */
 .container {
   width: 100%;
   max-width: 1100px;
@@ -84,7 +87,7 @@ html:has(body.tools-page)::-webkit-scrollbar-thumb:hover { background: rgba(91, 
   border-bottom: 1px solid var(--card-border);
 }
 
-/* ─── Typography ─── */
+/* Typography */
 h1 {
   margin: 0;
   font-weight: 800;
@@ -99,7 +102,7 @@ h2 {
   letter-spacing: -0.02em;
 }
 
-/* ─── Main Page Specifics ─── */
+/* Main Page Specifics */
 .hero-main {
   padding: 56px 0;
   text-align: center;
@@ -190,7 +193,7 @@ h2 {
   color: var(--accent);
 }
 
-/* ─── Cards Grid (Shared) ─── */
+/* Cards Grid (Shared) */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
@@ -241,7 +244,7 @@ a.card-link {
   color: var(--muted);
 }
 
-/* ─── Locked / Coming Soon Card ─── */
+/* Locked Card */
 .card--locked {
   cursor: not-allowed;
   opacity: 0.5;
@@ -255,7 +258,7 @@ a.card-link {
   box-shadow: none;
 }
 
-/* ─── Tools Page Specifics ─── */
+/* Tools Page Specifics */
 .tools-hero {
   text-align: center;
   margin-bottom: 40px;
@@ -280,7 +283,7 @@ a.card-link {
   }
 }
 
-/* ─── Search row: back btn + search bar ─── */
+/* Search row: back btn + search bar */
 .search-row {
   display: flex;
   align-items: center;
@@ -413,7 +416,7 @@ a.card-link {
   color: var(--muted);
 }
 
-/* ==== Script category highlight ==== */
+/* Script category highlight */
 
 /* Hero title shimmer */
 .tools-hero.script-found h1 {
@@ -447,7 +450,7 @@ a.card-link {
   padding: 8px;
 }
 
-/* Script filter chip — default state */
+/* Script filter chip - default state */
 .filter-chip.script-highlight {
   background: linear-gradient(
     135deg,
@@ -461,7 +464,7 @@ a.card-link {
     inset 0 0 10px rgba(255,255,255,0.05);
 }
 
-/* Script filter chip — selected/active state */
+/* Script filter chip - selected/active state */
 .filter-chip.script-highlight.active {
   background: linear-gradient(
     135deg,
@@ -497,7 +500,7 @@ a.card-link {
   text-shadow: 0 6px 30px rgba(91,230,192,0.15);
 }
 
-/* ─── Scrollbars ─── */
+/* Scrollbars */
 
 /* Hide default scrollbar on main page */
 body:not(.tools-page) {
