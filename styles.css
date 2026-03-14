@@ -61,7 +61,7 @@ html:has(body.tools-page) {
   scrollbar-width: thin;
   scrollbar-color: rgba(107, 140, 255, 0.45) transparent;
 }
-html:has(body.tools-page)::-webkit-scrollbar { display: block; width: 7px; }
+html:has(body.tools-page)::-webkit-scrollbar { display: block; width: 21px; }
 html:has(body.tools-page)::-webkit-scrollbar-track { background: transparent; }
 html:has(body.tools-page)::-webkit-scrollbar-thumb {
   background: rgba(107, 140, 255, 0.45);
