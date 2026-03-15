@@ -95,6 +95,10 @@ h1 {
   line-height: 1.1;
 }
 
+h1.strong {
+  font-weight: 1100;
+}
+
 h2 {
   margin-bottom: 24px;
   color: var(--text);
