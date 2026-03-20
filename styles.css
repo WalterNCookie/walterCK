@@ -451,7 +451,7 @@ a.card-link {
     0 0 30px rgba(91,230,192,0.12),
     inset 0 0 20px rgba(107,140,255,0.08);
   border-radius: 16px;
-  padding: 10px;
+  padding: 14px;
 }
 
 /* Script filter chip - default state */
