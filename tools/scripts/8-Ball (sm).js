@@ -19,7 +19,7 @@ answer = (res[rand])
 let anshow = new Alert();
 anshow.title = "✨🔮 Magic 8 Ball ✨🔮"
 anshow.message = "\n" + answer
-anshow.addAction("Again")
+anshow.addAction("Finish")
 anshow.addCancelAction("Done")
 
 let again = await anshow.present();
