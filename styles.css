@@ -59,7 +59,7 @@ html {
 }
 html::-webkit-scrollbar { display: none; }
 
-/* Re-enable only on tools page with custom style */
+/* Re-enable only on toolkits page with custom style */
 html:has(body.toolkit-page) {
   scrollbar-width: thin;
   scrollbar-color: rgba(107, 140, 255, 0.45) transparent;
@@ -262,15 +262,15 @@ a.card-link {
   box-shadow: none;
 }
 
-/* Tools Page Specifics */
-.tools-hero {
+/* Toolkits Page Specifics */
+.toolkit-hero {
   text-align: center;
   margin-bottom: 40px;
   padding-top: 0;
   position: relative;
 }
 
-.tools-hero h1 {
+.toolkit-hero h1 {
   font-size: 3.5rem;
   letter-spacing: -0.01em;
   margin-top: 56px;
@@ -279,7 +279,7 @@ a.card-link {
 }
 
 @media (max-width: 600px) {
-  .tools-hero h1 {
+  .toolkit-hero h1 {
     font-size: 2.4rem;
     margin-top: 40px;
     margin-bottom: 28px;
@@ -384,13 +384,13 @@ a.card-link {
   text-align: left;
 }
 
-.tool-actions {
+.toolkit-actions {
   display: flex;
   gap: 8px;
   margin-top: 15px;
 }
 
-.tool-actions button {
+.toolkit-actions button {
   flex: 1;
   padding: 8px 0;
   font-size: 0.85rem;
@@ -402,12 +402,12 @@ a.card-link {
   transition: all 0.2s;
 }
 
-.tool-actions button:hover {
+.toolkit-actions button:hover {
   background: var(--accent);
   color: #fff;
 }
 
-.tool-actions button.copied {
+.toolkit-actions button.copied {
   background: rgba(91, 230, 192, 0.2);
   color: var(--accent-2);
   border: 1px solid rgba(91, 230, 192, 0.4);
@@ -423,7 +423,7 @@ a.card-link {
 /* Script category highlight */
 
 /* Hero title shimmer */
-.tools-hero.script-found h1 {
+.toolkits-hero.script-found h1 {
   background: linear-gradient(
     90deg,
     var(--accent) 0%,
