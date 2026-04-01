@@ -44,8 +44,8 @@ html, body {
 }
 
 /* Tools Page Background Override */
-html:has(body.tools-page),
-body.tools-page {
+html:has(body.toolkit-page),
+body.toolkit-page {
   background: #0a0d17 !important;
   background-image: none !important;
 }
@@ -60,17 +60,17 @@ html {
 html::-webkit-scrollbar { display: none; }
 
 /* Re-enable only on tools page with custom style */
-html:has(body.tools-page) {
+html:has(body.toolkit-page) {
   scrollbar-width: thin;
   scrollbar-color: rgba(107, 140, 255, 0.45) transparent;
 }
-html:has(body.tools-page)::-webkit-scrollbar { display: block; width: 7px; }
-html:has(body.tools-page)::-webkit-scrollbar-track { background: transparent; }
-html:has(body.tools-page)::-webkit-scrollbar-thumb {
+html:has(body.toolkit-page)::-webkit-scrollbar { display: block; width: 7px; }
+html:has(body.toolkit-page)::-webkit-scrollbar-track { background: transparent; }
+html:has(body.toolkit-page)::-webkit-scrollbar-thumb {
   background: rgba(107, 140, 255, 0.45);
   border-radius: 99px;
 }
-html:has(body.tools-page)::-webkit-scrollbar-thumb:hover { background: rgba(91, 230, 192, 0.6); }
+html:has(body.toolkit-page)::-webkit-scrollbar-thumb:hover { background: rgba(91, 230, 192, 0.6); }
 
 
 
@@ -507,29 +507,29 @@ a.card-link {
 /* Scrollbars */
 
 /* Hide default scrollbar on main page */
-body:not(.tools-page) {
+body:not(.toolkit-page) {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-body:not(.tools-page)::-webkit-scrollbar {
+body:not(.toolkit-page)::-webkit-scrollbar {
   display: none;
 }
 
 /* Custom scrollbar on tools page */
-body.tools-page {
+body.toolkit-page {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) var(--bg-800);
 }
-body.tools-page::-webkit-scrollbar {
+body.toolkit-page::-webkit-scrollbar {
   width: 5px;
 }
-body.tools-page::-webkit-scrollbar-track {
+body.toolkit-page::-webkit-scrollbar-track {
   background: var(--bg-800);
 }
-body.tools-page::-webkit-scrollbar-thumb {
+body.toolkit-page::-webkit-scrollbar-thumb {
   background: var(--accent);
   border-radius: 99px;
 }
-body.tools-page::-webkit-scrollbar-thumb:hover {
+body.toolkit-page::-webkit-scrollbar-thumb:hover {
   background: var(--accent-2);
 }
