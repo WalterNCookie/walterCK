@@ -1,0 +1,235 @@
+{
+  "first_mine": {
+    "title": "THE GOLD RUSH",
+    "info": "In the 1850s the discovery of Australia's gold, firstly in Ophir NSW, to Ballarat and Bendigo Creek in Victoria, sent people from all over the world to explore and seek riches. From Asia to Europe people raced, transforming the Australian colonies as we know them today.",
+    "image": "images/first_mine.jpg",
+    "source": "National Museum Australia. (2024). Gold Rushes",
+    "link": "https://www.nma.gov.au/defining-moments/resources/gold-rushes"
+  },
+  "buy_license": {
+    "title": "THE COMPULSORY LICENSE",
+    "info": "'The police charged with enforcing the license system were notorious for corruption and for their brutal methods.' They were £1.5, or ~$150 in today's money, and had to be renewed every month otherwise you could be fined or arrested.",
+    "image": "images/gold_license.jpg",
+    "source": "Britannica. Australian gold rushes",
+    "link": "https://www.britannica.com/event/Australian-gold-rushes"
+  },
+  "jail": {
+    "title": "THE JAILS",
+    "info": "If diggers were caught without a license, they were chained together, or tied down till they were collected, led to the government camp. They were then forced to pay a £5 fine, ~$1,400 AUD, otherwise they were taken to jail. The aftermath of the Eureka Stockade led to many diggers cramped into jail cells. The above image was a portable jail cell, commonly used at the time.",
+    "image": "images/jail.png",
+    "source": "Law and Order on the Goldfields",
+    "link": "https://www.teachersuperstore.com.au/assets/wp-content/uploads/2012/08/The-Australian-Gold-Rushes-Law-and-Order-on-the-Goldfields-Sample-Pages.pdf"
+  },
+  "buy_pan": {
+    "title": "TIN PAN",
+    "info": "Panning was the simplest form of mining. Diggers swirled gravel in water, hoping heavy gold would settle at the bottom.",
+    "image": "images/tin_pan.jpg",
+    "source": "Gold diggers. (2022). Resources Victoria.",
+    "link": "https://resources.vic.gov.au/geology-and-data/minerals/metals/gold/gold-mining-in-victoria/gold-diggers"
+  },
+  "buy_pickaxe": {
+    "title": "PICKAXE",
+    "info": "As gold on the ground was mined, miners got creative, digging deeper, hundreds of feet deep. These were dangerous, but rewarding.",
+    "image": "images/pickaxe.jpg",
+    "source": "Tool - Gold-miner's Pick, Ballarat c 1920",
+    "link": "https://victoriancollections.net.au/items/4fc0e50d2162ef0fec33dbe7"
+  },
+  "buy_cradle": {
+    "title": "THE ROCKING CRADLE",
+    "info": "A cradle allows you to process ten times as much dirt than a tin pan by washing the soil through riffles.",
+    "image": "images/cradle.jpg",
+    "source": "Miner's Cradle - Wood & Metal, Ballarat, circa 1880s",
+    "link": "https://collections.museumsvictoria.com.au/items/250427"
+  },
+  "buy_puddling": {
+    "title": "PUDDLING MACHINES",
+    "info": "Puddling used horses to break down clay and such, which allows for industrial-scale✨ gold separation.",
+    "image": "images/puddling-machine.jpg",
+    "source": "Puddling machines of the Victorian Goldfields",
+    "link": "https://www.goldfieldsguide.com.au/blog/15/puddling-machines-of-the-victorian-goldfields"
+  },
+  "rebellion": {
+    "title": "THE SOUTHERN CROSS OATH",
+    "info": "Led by Peter Lalor, the miners swore to stand 'truly' by each other and fight to defend their rights under the Southern Cross flag!",
+    "image": "images/rebellion.jpg",
+    "source": "Carboni, R. (n.d.). The Eureka Stockade. Https://Www.gutenberg.org/Files/3546/3546.Txt. https://www.gutenberg.org/cache/epub/3546/pg3546-images.html",
+    "link": "https://www.gutenberg.org/cache/epub/3546/pg3546-images.html"
+  },
+  "set_free": {
+    "title": "FREED! CHARGES DROPPED",
+    "info": "December 3rd, 1854. Thirteen miners were charged and stood trial in Melbourne. However, the citizens opposed the arresting, and 'one by one', all of them were freed, unconvicted, through the compassionate jury, opposed to the government's actions in Ballarat.",
+    "image": "images/peter_lalor.jpg",
+    "source": "National Museum of Australia. (2013). Eureka Stockade.",
+    "link": "https://www.nma.gov.au/defining-moments/resources/eureka-stockade"
+  },
+  "welcome_stranger": {
+    "title": "THE WELCOME STRANGER",
+    "info": "The Welcome Stranger, a 72kg gold nugget uncovered in 1869 has been the largest in Australian history. It was worth ~£10,000 or $4,000,000 today.",
+    "image": "images/welcome_stranger.jpg",
+    "source": "Gold Nugget \"Welcome Stranger\" (1869). (n.d.). Museums Victoria Collections. https://collections.museumsvictoria.com.au/articles/3019",
+    "link": "https://collections.museumsvictoria.com.au/articles/3019"
+  },
+  "police_raid": {
+    "title": "THE LICENSE HUNTS",
+    "info": "Police conducted aggressive hunts for licenses, often leading to violent confrontations and imprisonments.",
+    "image": "images/police_raid.jpg",
+    "source": "wilcox, A. (n.d.). The Gold Licence- \"Gold Rush: 20 Objects, 20 Stories.\" Old Treasury Building. https://www.oldtreasurybuilding.org.au/past-exhibitions/gold-rush/gold-licence/",
+    "link": "https://www.oldtreasurybuilding.org.au/past-exhibitions/gold-rush/gold-licence/"
+  },
+  "police_patrol": {
+    "title": "CHINESE IMMIGRATION ACTS",
+    "info": "In 1855, the Chinese Immigration Act was passed. One Chinese passenger for every 10 tons of cargo and a £10 poll tax, which policemen (you) collect while overseeing political conflicts.",
+    "image": "images/CIA.jpg",
+    "source": "Museum of Australian Democracy. (2019).",
+    "link": "https://www.foundingdocs.gov.au/item-sdid-18.html"
+  },
+  "pol_tax": {
+    "title": "THE MINER'S RIGHT",
+    "info": "A direct response to the Eureka Stockade was the abolition of the (hated) monthly, mining license in 1855 which was replaced with an ANNUAL Miner's Right. One shilling and a right to vote, completely transforming the colonies politics.",
+    "image": "images/miners_right.jpg",
+    "source": "Miner's Right - Issued to Mrs Mary Fry, Ten Mile, Beechworth Mining District, Victoria, 13 Dec 1898. (2026). Museums Victoria Collections. https://collections.museumsvictoria.com.au/items/1697053",
+    "link": "https://collections.museumsvictoria.com.au/items/1697053"
+  },
+  "pol_bill": {
+    "title": "THE SECRET BALLOT ACT 1856",
+    "info": "Victoria passed the Electoral Act of 1856, introducing the secret ballot to parliamentary elections, a world first. The Act also removed the property requirement for voting in the Legislative Assembly, giving working men (including former diggers) genuine political power. These reforms were directly inspired by the democratic demands of the Eureka rebels and are considered a founding moment of Australian democracy.",
+    "image": "images/parliament.webp",
+    "source": "National Museum of Australia. (2019). Secret ballot introduced | National Museum of Australia. Nma.gov.au. https://www.nma.gov.au/defining-moments/resources/secret-ballot-introduced",
+    "link": "https://www.nma.gov.au/defining-moments/resources/secret-ballot-introduced"
+  },
+  "trade_goods": {
+    "title": "MERCHANT TRADE",
+    "info": "You're useful! The merchants are supplying the goldfields with all the essentials. Raising your prices endlessly never seems to cease the demand. Selling, at times, is more profitable than your mining.",
+    "image": "images/store.jpg",
+    "source": "Cultural Heritage Unit, D. of H. (n.d.). Stores and Storekeepers - Concept - Electronic Encyclopedia of Gold in Australia. Www.egold.net.au. https://www.egold.net.au/biogs/EG00111b.htm",
+    "link": "https://www.egold.net.au/biogs/EG00111b.htm"
+  },
+  "expand_market": {
+    "title": "MARKET EXPANSION",
+    "info": "The Ballarat goldfields are developing, from camps to towns, from ruins to riches, from dirt to gold. Successful merchants (you 🙂‍↕️) are expanding their stores rapidly and massively.",
+    "image": "images/canvas_town.jpg",
+    "source": "Ryan, S. (2024). State Library Victoria A marvellous mercantile map of Melbourne. Vic.gov.au. https://blogs.slv.vic.gov.au/such-was-life/mercantile-map-of-melbourne/",
+    "link": "https://blogs.slv.vic.gov.au/such-was-life/mercantile-map-of-melbourne/"
+  },
+  "oath": {
+    "source": "National Museum of Australia. (2013). Eureka Stockade.",
+    "link": "https://www.nma.gov.au/defining-moments/resources/eureka-stockade"
+  },
+  "rand_disease": {
+    "title": "SICKNESS OUTBREAK",
+    "info": "Your pick's filthy, your hands are filthy and everyone around you is. Horrible sanitation has led to painful stomach cramps, fever, nausea and severe diarrhea. What sickness had these symptons on the goldfields?",
+    "image": "images/disease.webp",
+    "source": "Health on the goldfields: Surviving the Ballarat gold rush. (2025). Sovereign Hill. https://www.sovereignhill.com.au/stories/health-on-the-goldfields-surviving-the-gold-rush",
+    "link": "https://www.sovereignhill.com.au/stories/health-on-the-goldfields-surviving-the-gold-rush/",
+    "event_type": "random",
+    "target_career": "digger",
+    "choices": [
+      { "btn_text": "SCURVY", "effect": { "type": "wealth_pct", "value": 0.8 }, "color": "#ff4444", "outcome_text": "You got sicker and had to pay the doctor 20% of your wealth to recover.", "outcome_type": "bad" },
+      { "btn_text": "DYSENTERY", "effect": { "type": "wealth_pct", "value": 1.2 }, "color": "#ff8800", "outcome_text": "You were able to get medicine, even sell some, and get back to mining. You gained 20% wealth.", "outcome_type": "good" }
+    ]
+  },
+  "rand_conflict": {
+    "title": "CAMP BRAWL",
+    "info": "NOO! The alcohol you were living off was found, taken and seized by the (stupid) police. You have to travel to the shops to purchase actual food now 🙄. What popular alcholic drink was brewed on the goldfields?",
+    "image": "images/sly_grog.jpg",
+    "source": "National Museum Australia. (2024). Gold Rushes | National Museum of Australia. Nma.gov.au. https://www.nma.gov.au/defining-moments/resources/gold-rushes",
+    "link": "https://www.nma.gov.au/defining-moments/resources/gold-rushes",
+    "event_type": "random",
+    "target_career": "digger",
+    "choices": [
+      { "btn_text": "SLY GROG", "effect": { "type": "wealth_flat", "value": -720 }, "color": "#ff4444", "outcome_text": "You were able to fool and hide it from the police with some cunning bribery. You had to give up £3, but saved a gruelling walk.", "outcome_type": "neutral" },
+      { "btn_text": "RUM", "effect": { "type": "timer_add", "value": -10 }, "color": "#ff8800", "outcome_text": "You wasted 10 seconds on your license timer walking to the shops.", "outcome_type": "bad" }
+    ]
+  },
+  "rand_tax": {
+    "title": "HARSHER LICENSE INSPECTIONS",
+    "info": "Governor Sir Charles Hotham commanded police to intensify license hunts. You and fellow miners are slowly becoming more furious...? How often did he increase license checks to in 1854?",
+    "image": "images/sir_charles_hotham.jpg",
+    "source": "Knox, B. A. (2006). Sir Charles Hotham (1806–1855). Australian Dictionary of Biography; National Centre of Biography, Australian National University. https://adb.anu.edu.au/biography/hotham-sir-charles-3803",
+    "link": "https://adb.anu.edu.au/biography/hotham-sir-charles-3803",
+    "event_type": "random",
+    "target_career": "digger",
+    "choices": [
+      { "btn_text": "TWICE A WEEK", "effect": { "type": "timer_add", "value": 10 }, "color": "#ff4444", "outcome_text": "With knowledge of the license check occurances, you avoided them for an extra 10 seconds.", "outcome_type": "good" },
+      { "btn_text": "THREE TIMES A WEEK", "effect": { "type": "timer_add", "value": -5 }, "color": "#ff8800", "outcome_text": "The police rock up to your camp, unexpected and suddenly. You lost 5 seconds on your license timer.", "outcome_type": "bad" }
+    ]
+  },
+  "rand_pol_scandal": {
+    "title": "SCANDAL EXPOSED",
+    "info": "Bugger! The secret ballot has stopped your enormous alcohol, voting scheme, swaying voters before their choice. No hourly, public updates, means less riots and drunken crowd. When was the secret ballot signed?",
+    "image": "images/voting.jpg",
+    "source": "National Museum of Australia. (2019). Secret ballot introduced | National Museum of Australia. Nma.gov.au. https://www.nma.gov.au/defining-moments/resources/secret-ballot-introduced",
+    "link": "https://www.nma.gov.au/defining-moments/resources/secret-ballot-introduced",
+    "event_type": "random",
+    "target_career": "politician",
+    "choices": [
+      { "btn_text": "1856", "effect": { "type": "connections_pct", "value": 1.05 }, "color": "#ff4444", "outcome_text": "You know what year it is, great! You switched to bribing people for votes, giving you a 5% boost in connections.", "outcome_type": "good" },
+      { "btn_text": "1855", "effect": { "type": "wealth_pct", "value": 0.9 }, "color": "#555555", "outcome_text": "You're clueless to what year you're even living in. No one respects you, costing you 10% of your total wealth as the talk spreads!", "outcome_type": "bad" }
+    ]
+  },
+  "rand_pol_lobby": {
+    "title": "SUCCESSFUL LOBBYING",
+    "info": "Yayy, last night's speech was amazing! You swayed the legislative council to your side. What year did the colony transition to a bicameral parliament (two parts)?",
+    "image": "images/parliament.webp",
+    "source": "The Legislative Council | Parliament of Victoria. (n.d.). Www.parliament.vic.gov.au. https://www.parliament.vic.gov.au/about/history-and-heritage/people-who-shaped-parliament/legislative-council-1851-1856/",
+    "link": "https://www.parliament.vic.gov.au/about/history-and-heritage/people-who-shaped-parliament/legislative-council-1851-1856/",
+    "event_type": "random",
+    "target_career": "politician",
+    "choices": [
+      { "btn_text": "1857", "effect": { "type": "connections_pct", "value": 1.05 }, "color": "#00cc66", "outcome_text": "You know your way around! You start an infrastructure project, increasing connections by 5%.", "outcome_type": "good" },
+      { "btn_text": "1856", "effect": { "type": "connections_pct", "value": 0.9 }, "color": "#ffaa00", "outcome_text": "You're lost in the council. You forget where to go and lose 10% of connections!", "outcome_type": "bad" }
+    ]
+  },
+  "rand_mer_robbery": {
+    "title": "STORE ROBBED",
+    "info": "Tsk, the bushranger, Black Douglas and his gang robbed your store last night, and they stole ya finest goods! What was his real name?",
+    "image": "images/bushranger.jpg",
+    "source": "The dark side of the Victorian Goldfields. (n.d.). Www.goldfieldsguide.com.au. https://www.goldfieldsguide.com.au/blog/56/the-dark-side-of-the-victorian-goldfields",
+    "link": "https://www.goldfieldsguide.com.au/blog/56/the-dark-side-of-the-victorian-goldfields",
+    "event_type": "random",
+    "target_career": "merchant",
+    "choices": [
+      { "btn_text": "CHARLES RUSSELL", "effect": { "type": "wealth_pct", "value": 1.10 }, "color": "#ff4444", "outcome_text": "You reported him to the police and they got you back 10% of your wealth!", "outcome_type": "good" },
+      { "btn_text": "NED KELLY RUSSELL", "effect": { "type": "wealth_flat", "value": -12000 }, "color": "#ff8800", "outcome_text": "No, Ned Kelly was not the criminal and you failed to get your goods back!", "outcome_type": "bad" }
+    ]
+  },
+  "rand_mer_boom": {
+    "title": "LOCAL GOLD STRIKE",
+    "info": "Woah, 1855, the Heron Nugget, a 31.4 kg gold nugget was found, bringing hundreds of opportunistic diggers to your store! How was it named?",
+    "image": "images/hereon_nugget.jpg",
+    "source": "Monster gold nugget discovered near Fryerstown.",
+    "link": "https://castlemainemail.com.au/latest-news/2025/10/03/monster-gold-nugget-discovered-near-fryerstown/",
+    "event_type": "random",
+    "target_career": "merchant",
+    "choices": [
+      { "btn_text": "AFTER THE PLACE", "effect": { "type": "wealth_pct", "value": 1 }, "color": "#00cc66", "outcome_text": "No, there was no Heron place so your customers got confused... nothing happened.", "outcome_type": "neutral" },
+      { "btn_text": "AFTER THE PERSON", "effect": { "type": "wealth_pct", "value": 1.15 }, "color": "#00aaff", "outcome_text": "Commissioner Heron, yes. Knowing the event, you correctly supplied your customers, gaining 15% wealth!", "outcome_type": "good" }
+    ]
+  },
+  "rand_plc_riot": {
+    "title": "PUNISHMENT?",
+    "info": "You tripped over, into a mine, and were surrounded by miners. Miners hungry for a police beating. Yeah.. you were thrashed badly.",
+    "image": "images/stockade_battle.jpg",
+    "source": "",
+    "link": "",
+    "event_type": "random",
+    "target_career": "police",
+    "choices": [
+      { "btn_text": "SURRENDER FUNDS", "effect": { "type": "wealth_flat", "value": -2400 }, "color": "#ff4444", "outcome_text": "You surrendered £10 to the miner mob :( At least you kept your teeth.", "outcome_type": "neutral" },
+      { "btn_text": "FIGHT BACK", "effect": { "type": "wealth_pct", "value": 0.75 }, "color": "#ff8800", "outcome_text": "You fought back but were beaten badly, losing 25% of your wealth in the hospital trip!", "outcome_type": "bad" }
+    ]
+  },
+  "rand_plc_bribe": {
+    "title": "ACCEPTED BRIBE",
+    "info": "A wealthy miner slipped you a different kind of check while you're out on patrol. Was this common?",
+    "image": "images/police_raid.jpg",
+    "source": "National Museum of Australia. (2013). Eureka Stockade.",
+    "link": "https://www.nma.gov.au/defining-moments/resources/eureka-stockade",
+    "event_type": "random",
+    "target_career": "police",
+    "choices": [
+      { "btn_text": "NO, MINERS COULDN'T AFFORD IT.", "effect": { "type": "wealth_pct", "value": 0.90 }, "color": "#00cc66", "outcome_text": "True, but corruption, targeting and license payments still led to bribery. You lost 10% of your wealth.", "outcome_type": "bad" },
+      { "btn_text": "YES, ANYTHING TO AVOID THE LICENSE!", "effect": { "type": "wealth_pct", "value": 1.30 }, "color": "#ffaa00", "outcome_text": "Police were paid badly, the license was expensive and a quick look-away goes a long way. You gained 30% in wealth!", "outcome_type": "good" }
+    ]
+  }
+}
