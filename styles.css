@@ -7,7 +7,6 @@
   --text: #e6eef6;
   --muted: #94a3b8;
   --accent: #6b8cff;
-  --accent-2: #5d5be6;
   --accent-glow: rgba(107, 140, 255, 0.25);
 
   --glass: rgba(255, 255, 255, 0.04);
@@ -279,9 +278,9 @@ a.card-link {
   background: linear-gradient(
     90deg,
     var(--accent) 0%,
-    var(--accent-2) 40%,
+    var(--accent) 40%,
     #ffffff 50%,
-    var(--accent-2) 60%,
+    var(--accent) 60%,
     var(--accent) 100%
   );
   background-size: 200% 100%;
@@ -319,7 +318,7 @@ a.card-link {
 }
 
 .toolkit-desc a:hover {
-  color: var(--accent-2);
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -446,7 +445,7 @@ a.card-link {
 
 .toolkit-actions button.copied {
   background: rgba(79, 70, 254, 0.2);
-  color: var(--accent-2);
+  color: var(--accent);
   cursor: default;
 }
 
@@ -504,8 +503,8 @@ a.card-link {
 
 /* Script category title */
 .category-title.script-highlight {
-  color: var(--accent-2);
-  border-left: 4px solid var(--accent-2);
+  color: var(--accent);
+  border-left: 4px solid var(--accent);
   padding-left: 12px;
   text-shadow: 0 6px 30px rgba(91,230,192,0.15);
 }
@@ -537,5 +536,5 @@ body.toolkit-page::-webkit-scrollbar-thumb {
   border-radius: 99px;
 }
 body.toolkit-page::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-2);
+  background: var(--accent);
 }
