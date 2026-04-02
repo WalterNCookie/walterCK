@@ -18,7 +18,7 @@ if (gridContainer) {
   }
 
   function highlightScripts() {
-    const hero = document.querySelector('.tools-hero');
+    const hero = document.querySelector('.toolkit-hero');
     const filters = document.getElementById('filters');
     let found = false;
 
@@ -120,7 +120,7 @@ if (gridContainer) {
         </div>
         <h3>${item.title}</h3>
         <p class="tags">${item.tag}</p>
-        <div class="tool-actions">
+        <div class="toolkit-actions">
           <button onclick="window.open('${item.link}','_blank')">Open</button>
           <button onclick="copyLink(this, '${item.link}')">Copy</button>
         </div>
