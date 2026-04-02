@@ -433,7 +433,6 @@ a.card-link {
 .toolkit-actions button.copied {
   background: rgba(79, 70, 254, 0.2);
   color: var(--accent-2);
-  border: 1px solid rgba(91, 230, 192, 0.4);
   cursor: default;
 }
 
