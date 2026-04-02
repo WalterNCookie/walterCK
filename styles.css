@@ -276,6 +276,20 @@ a.card-link {
   margin-top: 56px;
   margin-bottom: 56px;
   line-height: 1.3;
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent-2) 40%,
+    #ffffff 50%,
+    var(--accent-2) 60%,
+    var(--accent) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: script-hero-shine 4s linear infinite;
+  text-shadow: none;
 }
 
 @media (max-width: 600px) {
@@ -444,24 +458,6 @@ a.card-link {
 
 /* Script category highlight */
 
-/* Hero title shimmer */
-.toolkit-hero.script-found h1 {
-  background: linear-gradient(
-    90deg,
-    var(--accent) 0%,
-    var(--accent-2) 40%,
-    #ffffff 50%,
-    var(--accent-2) 60%,
-    var(--accent) 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: script-hero-shine 4s linear infinite;
-  text-shadow: 0 8px 40px rgba(91,230,192,0.2);
-}
-
 @keyframes script-hero-shine {
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
@@ -504,18 +500,6 @@ a.card-link {
     0 0 40px rgba(107,140,255,0.25),
     inset 0 0 14px rgba(255,255,255,0.1);
   text-shadow: 0 0 10px rgba(91,230,192,0.6);
-  animation: script-chip-pulse 2s ease-in-out infinite;
-}
-
-/* Slight pulse on unselected script chip */
-.filter-chip.script-highlight.pulse:not(.active) {
-  animation: script-chip-pulse 2s ease-in-out infinite;
-}
-
-@keyframes script-chip-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.04); }
-  100% { transform: scale(1); }
 }
 
 /* Script category title */
