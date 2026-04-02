@@ -1,1 +1,23 @@
-{"name":"WalterCK","short_name":"WalterCK","icons":[{"src":"/images/favicons/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/images/favicons/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#05070a","background_color":"#05070a","display":"standalone"}
+{
+  "name": "WalterCK — Projects, Tools & Shortcuts",
+  "short_name": "WalterCK",
+  "description": "Projects, shortcuts, scripts and experiments.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05070a",
+  "theme_color": "#05070a",
+  "icons": [
+    {
+      "src": "images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
