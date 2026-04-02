@@ -7,7 +7,7 @@
   --text: #e6eef6;
   --muted: #94a3b8;
   --accent: #6b8cff;
-  --accent-2: #151b94;
+  --accent-2: #5d5be6;
   --accent-glow: rgba(107, 140, 255, 0.25);
 
   --glass: rgba(255, 255, 255, 0.04);
@@ -431,7 +431,7 @@ a.card-link {
 }
 
 .toolkit-actions button.copied {
-  background: rgba(91, 230, 192, 0.2);
+  background: rgba(79, 70, 254, 0.2);
   color: var(--accent-2);
   border: 1px solid rgba(91, 230, 192, 0.4);
   cursor: default;
