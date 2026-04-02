@@ -692,3 +692,43 @@ button:disabled {
     border-color: #ff4444;
 }
 #reset-data-btn:active { transform: scale(0.95); }
+
+/* ── Back to Site Button ── */
+#back-to-site-btn {
+    position: fixed;
+    top: calc(15px + env(safe-area-inset-top, 0px));
+    left: calc(15px + env(safe-area-inset-left, 0px));
+    z-index: 50000; /* High enough to be clicked over the intro overlay */
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid #ffd700;
+    border-radius: 6px;
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 8px 12px;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+    line-height: 1;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    touch-action: manipulation;
+}
+
+#back-to-site-btn:active { 
+    transform: scale(0.95); 
+}
+
+@media (hover: hover) {
+    #back-to-site-btn:hover { 
+        background: #ffd700; 
+        color: #1a1a1a; 
+    }
+}
+
+/* ── Responsive tweak for smaller screens ── */
+@media (max-width: 480px) {
+    #back-to-site-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
