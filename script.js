@@ -33,18 +33,16 @@ if (gridContainer) {
 
     document.querySelectorAll('.filter-chip').forEach(el => {
       if (isScriptLabel(el.textContent) || isScriptLabel(el.dataset.cat)) {
-        el.classList.add('script-highlight', 'pulse');
+        el.classList.add('script-highlight');
         found = true;
       } else {
-        el.classList.remove('script-highlight', 'pulse');
+        el.classList.remove('script-highlight');
       }
     });
 
     if (found) {
-      hero && hero.classList.add('script-found');
       filters && filters.classList.add('script-found');
     } else {
-      hero && hero.classList.remove('script-found');
       filters && filters.classList.remove('script-found');
     }
 
