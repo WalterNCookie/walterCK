@@ -7,7 +7,7 @@
   --text: #e6eef6;
   --muted: #94a3b8;
   --accent: #6b8cff;
-  --accent-2: #5be6c0;
+  --accent-2: ##151b94;
   --accent-glow: rgba(107, 140, 255, 0.25);
 
   --glass: rgba(255, 255, 255, 0.04);
@@ -292,7 +292,7 @@ a.card-link {
   color: var(--muted);
   font-size: clamp(1rem, 2vw + 0.5rem, 1.15rem); 
   line-height: 1.6;
-  max-width: 800px;
+  max-width: 1200px;
   margin: -24px auto 40px auto; /* Negative top margin (-24px) backtracks the title margin */
 }
 
