@@ -423,7 +423,7 @@ a.card-link {
 /* Script category highlight */
 
 /* Hero title shimmer */
-.toolkits-hero.script-found h1 {
+.toolkit-hero.script-found h1 {
   background: linear-gradient(
     90deg,
     var(--accent) 0%,
@@ -515,7 +515,7 @@ body:not(.toolkit-page)::-webkit-scrollbar {
   display: none;
 }
 
-/* Custom scrollbar on tools page */
+/* Custom scrollbar on toolkit page */
 body.toolkit-page {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) var(--bg-800);
