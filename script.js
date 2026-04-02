@@ -98,7 +98,7 @@ if (gridContainer) {
 
   function copyLink(btn, url) {
     navigator.clipboard.writeText(url).then(() => {
-      btn.textContent = '✓ Copied';
+      btn.textContent = 'Copied';
       btn.classList.add('copied');
       setTimeout(() => {
         btn.textContent = 'Copy';
