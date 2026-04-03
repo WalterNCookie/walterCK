@@ -23,91 +23,29 @@
 
   <style>
     /* ─── Intro Animation ─── */
-
     #site-intro {
       position: fixed;
       inset: 0;
       z-index: 9998;
       pointer-events: none;
+      overflow: hidden;
+    }
+
+    .intro-strip {
+      position: absolute;
+      left: 0;
+      width: 100%;
       background: #05070a;
-      clip-path: inset(0 0 0 0%);
-      animation: introWipe 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      animation-delay: 0.2s;
+      will-change: transform;
     }
 
-    @keyframes introWipe {
-      from { clip-path: inset(0 0 0 0%); }
-      to   { clip-path: inset(0 0 0 100%); }
+    @keyframes stripWipe {
+      from { transform: translateX(0%); }
+      to   { transform: translateX(110%); }
     }
 
-    #intro-line {
-      position: fixed;
-      top: 0;
-      left: -4px;
-      width: 4px;
-      height: 100vh;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(107, 140, 255, 0.2) 8%,
-        #6b8cff 28%,
-        #c8d4ff 45%,
-        #ffffff 50%,
-        #c8d4ff 55%,
-        #6b8cff 72%,
-        rgba(107, 140, 255, 0.2) 92%,
-        transparent 100%
-      );
-      box-shadow:
-        -12px 0 30px rgba(107, 140, 255, 0.25),
-        -4px  0 10px rgba(107, 140, 255, 0.5),
-         4px  0 10px rgba(107, 140, 255, 0.5),
-         12px 0 30px rgba(107, 140, 255, 0.25),
-         0    0 60px rgba(107, 140, 255, 0.35);
-      animation: lineSweep 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      animation-delay: 0.2s;
-    }
-
-    @keyframes lineSweep {
-      0%   { left: -4px;    opacity: 1; }
-      96%  { opacity: 1; }
-      100% { left: 100vw;   opacity: 0; }
-    }
-
-    /* Profile glow pop — triggered by JS adding .intro-glow */
-    .profile-pfp.intro-glow {
-      animation: pfpGlowPop 1s cubic-bezier(0.34, 1.4, 0.64, 1) forwards !important;
-    }
-
-    @keyframes pfpGlowPop {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 40px rgba(107, 140, 255, 0.4);
-      }
-      40% {
-        transform: scale(1.13);
-        box-shadow:
-          0 0 0 6px  rgba(107, 140, 255, 0.18),
-          0 0 0 14px rgba(107, 140, 255, 0.08),
-          0 0 50px   rgba(107, 140, 255, 1),
-          0 0 100px  rgba(107, 140, 255, 0.75),
-          0 0 180px  rgba(107, 140, 255, 0.35),
-          0 0 0 3px  rgba(255, 255, 255, 0.35);
-        border-color: #ffffff;
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 40px rgba(107, 140, 255, 0.4);
-        border-color: var(--accent);
-      }
-    }
-
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      #site-intro, #intro-line { animation: none !important; opacity: 0 !important; }
+      .intro-strip { animation: none !important; opacity: 0 !important; }
     }
   </style>
 
@@ -125,9 +63,7 @@
 </head>
 <body>
 
-  <!-- Intro animation overlay -->
   <div id="site-intro"></div>
-  <div id="intro-line"></div>
 
   <main>
     <section class="hero-main">
@@ -212,17 +148,34 @@
   <script src="script.js"></script>
 
   <script>
-    // Fire profile glow right as the sweep finishes (0.2s delay + 1.5s sweep + 0.1s buffer)
-    setTimeout(() => {
-      const pfp = document.querySelector('.profile-pfp');
-      if (pfp) pfp.classList.add('intro-glow');
-    }, 1850);
+    (function () {
+      const intro    = document.getElementById('site-intro');
+      const STRIPS   = 22;
+      const DURATION = 1.0;   // seconds per strip
+      const MIN_DELAY = 0.05;
+      const MAX_DELAY = 0.50;
 
-    // Remove overlay elements from DOM once animation is fully done
-    setTimeout(() => {
-      document.getElementById('site-intro')?.remove();
-      document.getElementById('intro-line')?.remove();
-    }, 2400);
+      for (let i = 0; i < STRIPS; i++) {
+        const strip = document.createElement('div');
+        strip.className = 'intro-strip';
+
+        const delay = MIN_DELAY + Math.random() * (MAX_DELAY - MIN_DELAY);
+        const pct   = 100 / STRIPS;
+
+        // Slight height overshoot kills sub-pixel gaps between strips
+        strip.style.cssText = `
+          top: calc(${i * pct}% - 0.5px);
+          height: calc(${pct}% + 1px);
+          animation: stripWipe ${DURATION}s cubic-bezier(0.16, 1, 0.3, 1) forwards ${delay.toFixed(3)}s;
+        `;
+
+        intro.appendChild(strip);
+      }
+
+      // Pull the overlay out of the DOM once the last strip is done
+      const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
+      setTimeout(() => intro.remove(), totalDone);
+    })();
   </script>
 
 </body>
