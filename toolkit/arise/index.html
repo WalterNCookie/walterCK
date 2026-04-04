@@ -2,27 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <!--
-  ╔═══════════════════════════════════════════════════════════════╗
-  ║  FEATURED PAGE TEMPLATE — walterck.com/toolkit/{slug}/       ║
-  ║  Copy this file into a new folder and customise the          ║
-  ║  ★ CUSTOMISE sections below to create a new featured page.   ║
-  ╚═══════════════════════════════════════════════════════════════╝
-  QUICK CHECKLIST:
-    [ ] :root variables  (color, glow)
-    [ ] <title>
-    [ ] fp-topnav  breadcrumb + Get link
-    [ ] hero       icon, title, subtitle, CTA link, tags
-    [ ] about      paragraph(s)
-    [ ] features   cards × N
-    [ ] screenshots  images (or leave placeholders)
-    [ ] requirements list
-    [ ] bottom CTA headline + link
-  -->
-
-  <!-- ★ CUSTOMISE: Browser tab title -->
   <title>Arise | CK Toolkit</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <link rel="icon" href="/images/walterck.png">
@@ -31,571 +11,218 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* ════════════════════════════════════════════════════════════
-       ★ CUSTOMISE — Change these three variables for each tool.
-       ════════════════════════════════════════════════════════════ */
+    /*
+    ══════════════════════════════════════════════════════
+    FEATURED PAGE COLOUR CUSTOMISATION
+    Change only these variables to retheme the whole page.
+    --fp-bg-a / --fp-bg-b control the full-page background
+    gradient colours (see body::before in styles.css).
+    ══════════════════════════════════════════════════════
+    */
     :root {
-      --fp-color:     #FF4500;             /* main accent               */
-      --fp-mid:       #FF7A00;             /* lighter shade for shimmer */
-      --fp-gold:      #FFD000;             /* brightest point in fire   */
-      --fp-dim:       rgba(255,69,0,0.13);
-      --fp-glow:      rgba(255,69,0,0.32);
-      --fp-glow-soft: rgba(255,120,0,0.18);
-    }
-
-    /* ── reset & base ── */
-    *, *::before, *::after { box-sizing: border-box; }
-
-    /* ── sticky top nav ── */
-    .fp-topnav {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 24px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .fp-nav-back {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--glass);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .fp-nav-back:hover { background: var(--fp-color); border-color: var(--fp-color); }
-
-    .fp-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.78rem;
-      color: var(--muted);
-      overflow: hidden;
-      flex: 1;
-      white-space: nowrap;
-    }
-    .fp-breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .fp-breadcrumb a:hover { color: var(--text); }
-    .fp-breadcrumb .fp-bc-current { color: var(--fp-color); font-weight: 600; }
-
-    .fp-nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 20px;
-      background: var(--fp-color);
-      color: #fff;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 700;
-      white-space: nowrap;
-      transition: all 0.2s;
-      box-shadow: 0 0 20px var(--fp-glow-soft);
-      flex-shrink: 0;
-    }
-    .fp-nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    /* ── hero ── */
-    .fp-hero {
-      position: relative;
-      padding: 88px 24px 72px;
-      text-align: center;
-      border-bottom: 1px solid var(--card-border);
-      overflow: hidden;
-    }
-    .fp-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    /* decorative mesh circles */
-    .fp-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 15% 80%, rgba(255,69,0,0.06) 0%, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(255,200,0,0.04) 0%, transparent 35%);
-      pointer-events: none;
-    }
-
-    .fp-hero-icon-wrap {
-      position: relative;
-      display: inline-flex;
-      margin-bottom: 30px;
-    }
-    .fp-hero-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100px;
-      height: 100px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, rgba(255,69,0,0.2), rgba(255,160,0,0.15));
-      border: 1.5px solid rgba(255,100,0,0.55);
-      color: var(--fp-color);
-      position: relative;
-      z-index: 1;
-      animation: fp-icon-breathe 3.5s ease-in-out infinite;
-    }
-    @keyframes fp-icon-breathe {
-      0%,100% { box-shadow: 0 0 30px var(--fp-glow), 0 0 60px rgba(255,69,0,0.12); }
-      50%      { box-shadow: 0 0 50px var(--fp-glow), 0 0 100px rgba(255,69,0,0.2); }
-    }
-    .fp-hero-ring {
-      position: absolute;
-      inset: -14px;
-      border-radius: 44px;
-      border: 1px solid rgba(255, 100, 0, 0.18);
-      animation: fp-ring-expand 3.5s ease-in-out infinite;
-    }
-    @keyframes fp-ring-expand {
-      0%,100% { transform: scale(1); opacity: 0.6; }
-      50%      { transform: scale(1.06); opacity: 0.25; }
-    }
-
-    .fp-hero h1 {
-      font-size: clamp(2.6rem, 6vw + 1rem, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      margin: 0 0 6px;
-      line-height: 1.05;
-      background: linear-gradient(
-        135deg,
-        #ffffff 0%,
-        #ffddcc 40%,
-        var(--fp-color) 80%
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .fp-new-pill {
-      display: inline-block;
-      padding: 4px 11px;
-      background: var(--fp-color);
-      color: #fff;
-      border-radius: 99px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      vertical-align: middle;
-      margin-left: 10px;
-      position: relative;
-      top: -4px;
-    }
-
-    .fp-hero-subtitle {
-      font-size: clamp(0.95rem, 2vw + 0.35rem, 1.2rem);
-      color: var(--muted);
-      max-width: 520px;
-      margin: 14px auto 38px;
-      line-height: 1.6;
-    }
-
-    .fp-cta-row {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .fp-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 15px 34px;
-      background: var(--fp-color);
-      color: #fff;
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      transition: all 0.25s;
-      box-shadow: 0 4px 28px var(--fp-glow);
-    }
-    .fp-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 38px var(--fp-glow); opacity: 0.9; }
-
-    .fp-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 15px 28px;
-      background: var(--glass);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.25s;
-    }
-    .fp-btn-secondary:hover { border-color: var(--fp-color); background: var(--fp-dim); transform: translateY(-3px); }
-
-    .fp-tags {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-    .fp-tag {
-      padding: 5px 14px;
-      background: var(--glass);
-      border: 1px solid var(--card-border);
-      border-radius: 99px;
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    /* ── section wrapper ── */
-    .fp-section {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 60px 28px;
-      border-bottom: 1px solid var(--card-border);
-    }
-    .fp-section h2 {
-      font-size: 1.55rem;
-      font-weight: 700;
-      margin: 0 0 6px;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-    .fp-section-sub {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin: 0 0 28px;
-    }
-    .fp-section p {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 1rem;
-      margin: 0 0 14px;
-    }
-    .fp-section p:last-child { margin-bottom: 0; }
-
-    /* ── features grid ── */
-    .fp-features {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .fp-feat {
-      padding: 24px 22px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      transition: all 0.3s;
-    }
-    .fp-feat:hover {
-      border-color: var(--fp-color);
-      background: var(--fp-dim);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 36px var(--fp-glow-soft);
-    }
-    .fp-feat-icon {
-      color: var(--fp-color);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-    }
-    .fp-feat h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin: 0 0 8px;
-      color: var(--text);
-    }
-    .fp-feat p {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    /* ── screenshots ── */
-    .fp-gallery {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      padding: 4px 0 12px;
-      margin-top: 28px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,100,0,0.4) transparent;
-    }
-    .fp-gallery::-webkit-scrollbar { height: 4px; }
-    .fp-gallery::-webkit-scrollbar-thumb { background: rgba(255,100,0,0.4); border-radius: 99px; }
-
-    .fp-shot {
-      flex-shrink: 0;
-      width: 220px;
-      height: 420px;
-      background: rgba(255,255,255,0.025);
-      border: 1px solid var(--card-border);
-      border-radius: 22px;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-    .fp-shot:hover { border-color: var(--fp-color); box-shadow: 0 8px 32px var(--fp-glow-soft); }
-    .fp-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .fp-shot-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 10px; color: var(--muted); font-size: 0.8rem;
-    }
-
-    /* ── requirements ── */
-    .fp-reqs {
-      list-style: none; padding: 0; margin: 20px 0 0;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .fp-reqs li {
-      display: flex; align-items: center; gap: 14px;
-      color: var(--muted); font-size: 0.92rem;
-    }
-    .fp-req-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--fp-color); flex-shrink: 0;
-      box-shadow: 0 0 8px var(--fp-glow-soft);
-    }
-
-    /* ── bottom CTA ── */
-    .fp-bottom {
-      text-align: center;
-      padding: 88px 28px;
-      background: radial-gradient(ellipse at 50% 0%, var(--fp-glow-soft) 0%, transparent 60%);
-    }
-    .fp-bottom h2 {
-      font-size: clamp(1.8rem, 4vw + 0.5rem, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin: 0 0 12px;
-    }
-    .fp-bottom p { color: var(--muted); margin-bottom: 36px; }
-
-    /* ── divider accent line ── */
-    .fp-divider {
-      width: 48px; height: 2px;
-      background: var(--fp-color);
-      border-radius: 2px;
-      margin: 0 0 20px;
-      box-shadow: 0 0 10px var(--fp-glow);
-    }
-
-    /* ── responsive ── */
-    @media (max-width: 640px) {
-      .fp-hero  { padding: 56px 20px 48px; }
-      .fp-section { padding: 44px 20px; }
-      .fp-topnav { padding: 12px 16px; }
-      .fp-hero-icon { width: 84px; height: 84px; border-radius: 24px; }
+      --fp-color:     #FF4500;
+      --fp-glow:      rgba(255, 69, 0, 0.32);
+      --fp-glow-soft: rgba(255, 120, 0, 0.18);
+      --fp-dim:       rgba(255, 69, 0, 0.13);
+      --fp-bg-a:      rgba(255, 69, 0, 0.08);   /* lower-left warm glow */
+      --fp-bg-b:      rgba(255, 200, 0, 0.05);  /* upper-right gold glow */
     }
   </style>
 </head>
-<body>
 
-  <!-- ── Sticky Nav ────────────────────────────────────────── -->
+<!--
+  body.featured-page  → activates the fp-* styles + full-page background gradient
+-->
+<body class="featured-page">
+
+  <!-- ── Sticky Nav ── -->
   <nav class="fp-topnav">
     <a href="/toolkit/" class="fp-nav-back" aria-label="Back to toolkit">
-      <i data-lucide="arrow-left" size="15"></i>
+      <i data-lucide="arrow-left"></i>
     </a>
-
-    <!-- ★ CUSTOMISE: update the last breadcrumb text / slug -->
     <div class="fp-breadcrumb">
-      <a href="/"></a>
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/toolkit/">Toolkit</a>
+      <span>/</span>
+      <span class="fp-bc-current">Arise</span>
     </div>
+    <!--
+      .fp-shortcut-link  →  href is auto-filled from toolkit.json by script.js.
+      Set href="#" as a safe fallback in case JS hasn't run yet.
+    -->
+    <a href="#" class="fp-nav-cta fp-shortcut-link" target="_blank" rel="noopener noreferrer">
+      <i data-lucide="download"></i>
+      Get Shortcut
+    </a>
   </nav>
 
   <main>
 
-    <!-- ══════════════════════════════════════════════════════════
-         HERO
-         ★ CUSTOMISE: icon, title, new-pill (remove if not new),
-                       subtitle, CTA links, tags
-         ══════════════════════════════════════════════════════════ -->
+    <!-- ══ HERO ══ -->
     <section class="fp-hero">
       <div class="fp-hero-icon-wrap">
         <div class="fp-hero-ring"></div>
-        <!-- ★ CUSTOMISE: lucide icon name — match your toolkit.json "icon" field -->
+        <!--
+          No size= attribute — icon sizing is handled by .fp-hero-icon svg in styles.css.
+        -->
         <div class="fp-hero-icon">
-          <i data-lucide="flame" size="150"></i>
+          <i data-lucide="flame"></i>
         </div>
       </div>
 
-      <!-- ★ CUSTOMISE: Tool name. Remove <span class="fp-new-pill"> if not new -->
       <h1>Arise <span class="fp-new-pill">New</span></h1>
 
-      <!-- ★ CUSTOMISE: Punchy one-liner. Keep it short and specific. -->
       <p class="fp-hero-subtitle">
-        Your morning/night schedular. It doesn't turn off till you're wake, but stays nice enough to track your sleep, dreams, calendar, wake up times and more!
+        Your morning &amp; night scheduler. It doesn't let you off until you're awake — but stays
+        graceful enough to track your sleep, dreams, calendar, and wake-up times.
       </p>
 
       <div class="fp-cta-row">
-        <!-- ★ CUSTOMISE: href → shortcut / download link -->
-        <a href="https://www.icloud.com/shortcuts/b342966ca01c4fb58784880dd1acb27f"
-           class="fp-btn-primary" target="_blank" rel="noopener noreferrer">
-          <i data-lucide="download" size="18"></i>
+        <a href="#" class="fp-btn-primary fp-shortcut-link" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="download"></i>
           Get Shortcut
         </a>
         <a href="/toolkit/" class="fp-btn-secondary">
-          <i data-lucide="layout-grid" size="18"></i>
+          <i data-lucide="layout-grid"></i>
           Browse Toolkit
         </a>
       </div>
+
+      <div class="fp-tags">
+        <span class="fp-tag">Shortcuts</span>
+        <span class="fp-tag">Morning Routine</span>
+        <span class="fp-tag">Sleep Tracking</span>
+        <span class="fp-tag">iOS 16+</span>
+      </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════
-         ABOUT
-         ★ CUSTOMISE: write your description here (1–3 paragraphs)
-         ══════════════════════════════════════════════════════════ -->
+    <!-- ══ ABOUT ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>About</h2>
       <p class="fp-section-sub">What it is and why it exists</p>
-
-      <!-- ★ CUSTOMISE paragraphs below -->
       <p>
-        Arise is an entirely automated shortcut built around one core assumption. On the hardest days, you want the easiest comfort. A school morning has no upside, and to get out of bed takes away half your energy before the day has even begun.
+        Arise is an entirely automated shortcut built around one core assumption. On the hardest days,
+        you want the easiest comfort. A school morning has no upside, and getting out of bed takes half
+        your energy before the day has even begun.
       </p>
       <p>
-        Built on top of pre-designed systems, Arise is a tap and play, no-experience required shortcut, giving you the most capibilties to set your mornings before they happen. It gives a sense of order, and comforts in the peace of knowledge of your day, while tracking your sleep and dreams for improvement and trend identification.
+        Built on pre-designed systems, Arise is a tap-and-play, no-experience-required shortcut that
+        gives you the most capability to set your mornings before they happen. It provides a sense of
+        order and comfort through the knowledge of your day ahead, while tracking your sleep and dreams
+        for improvement and trend identification.
       </p>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════
-         FEATURES
-         ★ CUSTOMISE: edit/add/remove .fp-feat cards
-         Each card needs: icon (lucide name), h3, p
-         ══════════════════════════════════════════════════════════ -->
+    <!-- ══ FEATURES ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>Features</h2>
       <p class="fp-section-sub">What it does for you</p>
 
       <div class="fp-features">
-
-        <!-- ★ Feature — CUSTOMISE each block -->
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="settings-2" size="26"></i></div>
+          <div class="fp-feat-icon"><i data-lucide="settings-2"></i></div>
           <h3>Persistent</h3>
-          <p>4 modes. Every one does not let the alarm switch off until you are up and focused, forcing you to start your day.</p>
+          <p>4 modes. Every one refuses to let the alarm switch off until you are up and focused, forcing you to start your day.</p>
         </div>
 
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="cloud" size="26"></i></div>
+          <div class="fp-feat-icon"><i data-lucide="cloud"></i></div>
           <h3>Dynamic Alarm Times</h3>
-          <p>Your alarm is 6am one day, then 5am the next? You're sick and don't need a work alarm tomorrow? The shortcut manages it all, relax.</p>
+          <p>6am one day, 5am the next? Sick and don't need a work alarm? The shortcut manages it all — relax.</p>
         </div>
-        
+
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="sunrise" size="26"></i></div>
+          <div class="fp-feat-icon"><i data-lucide="sunrise"></i></div>
           <h3>Tracks Sleep</h3>
-          <p>Run the shortcut before bed with a click, and every day will have data, completely saved, on your sleep duration and patterns. No limits, complete privacy.</p>
+          <p>Run it before bed with one tap. Every day builds data on your sleep duration and patterns — private, no limits.</p>
         </div>
 
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="list-checks" size="26"></i></div>
+          <div class="fp-feat-icon"><i data-lucide="cloud-moon"></i></div>
           <h3>Tracks Dreams</h3>
-          <p>There's an option for tracking dreams, keeping you mindful, and for those wanting a goal to chase even in their sleep. Cleanly, and easily this is integrated into the morning overview/alarm.</p>
+          <p>Log dreams each morning, cleanly integrated into the overview. Stay mindful and spot patterns over time.</p>
         </div>
 
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="zap" size="26"></i></div>
+          <div class="fp-feat-icon"><i data-lucide="calendar-days"></i></div>
           <h3>Calendar</h3>
-          <p>Syncs with your calendar everyday to present you the events in your morning overview/alarm, immediently calming you, knowing the date, time and the day's outlook.</p>
+          <p>Syncs with your calendar daily, presenting your events in the morning alarm — you wake knowing exactly what lies ahead.</p>
         </div>
 
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="repeat-2" size="26"></i></div>
+          <div class="fp-feat-icon"><i data-lucide="repeat-2"></i></div>
           <h3>Builds the Habit</h3>
           <p>The consistency compounds. Run it every morning and the routine becomes second nature within a week.</p>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════
-         SCREENSHOTS / PREVIEW
-         ★ CUSTOMISE: replace placeholder divs with:
-             <img src="./screenshots/1.png" alt="Step 1 view">
-           inside each .fp-shot div.
-           Drop your PNG/WEBP screenshots in a ./screenshots/ folder.
-           Add or remove .fp-shot divs as needed.
-         ══════════════════════════════════════════════════════════ -->
+    <!-- ══ SCREENSHOTS ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>Preview</h2>
       <p class="fp-section-sub">Screenshots coming soon</p>
 
       <div class="fp-gallery">
-
-        <!-- ★ Replace .fp-shot-placeholder with <img> once you have screenshots -->
         <div class="fp-shot">
           <div class="fp-shot-placeholder">
-            <i data-lucide="smartphone" size="28" style="opacity:0.25"></i>
+            <i data-lucide="smartphone" style="opacity:0.25"></i>
             <span>Screenshot 1</span>
           </div>
         </div>
-
         <div class="fp-shot">
           <div class="fp-shot-placeholder">
-            <i data-lucide="smartphone" size="28" style="opacity:0.25"></i>
+            <i data-lucide="smartphone" style="opacity:0.25"></i>
             <span>Screenshot 2</span>
           </div>
         </div>
-
         <div class="fp-shot">
           <div class="fp-shot-placeholder">
-            <i data-lucide="smartphone" size="28" style="opacity:0.25"></i>
+            <i data-lucide="smartphone" style="opacity:0.25"></i>
             <span>Screenshot 3</span>
           </div>
         </div>
-
-        <!-- ★ Add more .fp-shot divs here -->
-
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════════════════
-         REQUIREMENTS
-         ★ CUSTOMISE: list what the user needs to run this tool
-         ══════════════════════════════════════════════════════════ -->
+    <!-- ══ REQUIREMENTS ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>Requirements</h2>
       <p class="fp-section-sub">What you'll need</p>
 
       <ul class="fp-reqs">
-        <!-- ★ CUSTOMISE: add/edit/remove requirements -->
         <li><span class="fp-req-dot"></span>iPhone running iOS 16 or later</li>
         <li><span class="fp-req-dot"></span>Apple Shortcuts app (pre-installed on iOS)</li>
         <li><span class="fp-req-dot"></span>Scriptable app — free on the App Store</li>
         <li><span class="fp-req-dot"></span>RoutineOS script installed in Scriptable</li>
       </ul>
     </section>
+
+    <!-- ══ BOTTOM CTA ══ -->
+    <div class="fp-bottom">
+      <h2>Ready to fix your mornings?</h2>
+      <p>One tap. No friction. Just a better start.</p>
+      <div class="fp-cta-row">
+        <a href="#" class="fp-btn-primary fp-shortcut-link" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="download"></i>
+          Get Arise
+        </a>
+        <a href="/toolkit/" class="fp-btn-secondary">
+          <i data-lucide="layout-grid"></i>
+          Browse Toolkit
+        </a>
+      </div>
+    </div>
+
   </main>
 
+  <script src="../../script.js"></script>
   <script>
-    // Initialise Lucide icons
+    // Initialise Lucide icons after DOM is ready
     if (typeof lucide !== 'undefined') lucide.createIcons();
   </script>
 </body>
