@@ -1,13 +1,63 @@
 // script.js ----------------------------------------------------
 
+// ── Slug helper (Featured pages + banner) ─────────────────────────────────
+function toSlug(title) {
+  return title
+    .replace(/➶/g, '')
+    .replace(/[→↗↑▶►]/g, '')
+    .replace(/\([^)]*\)/g, '')   // strip (sm), (wip), etc.
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// ── Copy link (global, used by both regular & featured cards) ──────────────
+function copyLink(btn, url) {
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    btn.textContent = 'Failed';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+window.copyLink = copyLink;
+
+// ── Featured sub-page existence check ─────────────────────────────────────
+const _fpCache = {};
+async function featuredPageExists(slug) {
+  if (slug in _fpCache) return _fpCache[slug];
+  try {
+    const r = await fetch(`/toolkit/${slug}/`, { method: 'HEAD' });
+    _fpCache[slug] = r.ok;
+  } catch { _fpCache[slug] = false; }
+  return _fpCache[slug];
+}
+
+window.openFeatured = async function(slug, fallbackLink) {
+  if (await featuredPageExists(slug)) {
+    window.location.href = `/toolkit/${slug}/`;
+  } else {
+    window.open(fallbackLink, '_blank');
+  }
+};
+
+window.copyFeaturedOrLink = async function(btn, slug, fallbackLink) {
+  const exists = await featuredPageExists(slug);
+  copyLink(btn, exists ? `https://walterck.com/toolkit/${slug}/` : fallbackLink);
+};
+
+// ── Toolkit Grid ───────────────────────────────────────────────────────────
 const gridContainer = document.getElementById('grid-container');
 
 if (gridContainer) {
-  const emptyState = document.getElementById('empty');
-  const searchInput = document.getElementById('q');
+  const emptyState      = document.getElementById('empty');
+  const searchInput     = document.getElementById('q');
   const filterContainer = document.getElementById('filters');
 
-  let items = [];
+  let items       = [];
   let categoryMap = {};
   let activeFilter = 'All';
 
@@ -22,28 +72,18 @@ if (gridContainer) {
     let found = false;
 
     document.querySelectorAll('.category-title').forEach(el => {
-      if (isScriptLabel(el.textContent)) {
-        el.classList.add('script-highlight');
-        found = true;
-      } else {
-        el.classList.remove('script-highlight');
-      }
+      if (isScriptLabel(el.textContent)) { el.classList.add('script-highlight'); found = true; }
+      else el.classList.remove('script-highlight');
     });
 
     document.querySelectorAll('.filter-chip').forEach(el => {
       if (isScriptLabel(el.textContent) || isScriptLabel(el.dataset.cat)) {
-        el.classList.add('script-highlight');
-        found = true;
-      } else {
-        el.classList.remove('script-highlight');
-      }
+        el.classList.add('script-highlight'); found = true;
+      } else { el.classList.remove('script-highlight'); }
     });
 
-    if (found) {
-      filters && filters.classList.add('script-found');
-    } else {
-      filters && filters.classList.remove('script-found');
-    }
+    if (found) filters && filters.classList.add('script-found');
+    else       filters && filters.classList.remove('script-found');
 
     return found;
   }
@@ -57,22 +97,22 @@ if (gridContainer) {
       if (mapObj) categoryMap = mapObj;
 
       items = raw.filter(it => it.title).map(it => ({
-        id: parseInt(it.id) || 999,
-        title: it.title,
-        tag: it.tags || '',
+        id:       parseInt(it.id) || 999,
+        title:    it.title,
+        tag:      it.tags  || '',
         category: it.category || 'General',
-        icon: it.icon || 'box',
-        color: it.color || '#007AFF',
-        link: it.link || '#'
+        icon:     it.icon  || 'box',
+        color:    it.color || '#007AFF',
+        link:     it.link  || '#',
+        slug:     it.slug  || null,     // optional override in JSON
+        isNew:    it.new   === true
       }));
 
       renderFilters();
       applyFilters();
-
-      // Reveal the custom scrollbar now that content is painted
       document.body.classList.add('loaded');
     } catch (err) {
-      console.error("Failed to load toolkit.json", err);
+      console.error('Failed to load toolkit.json', err);
       document.body.classList.add('loaded');
     }
   }
@@ -97,23 +137,18 @@ if (gridContainer) {
     highlightScripts();
   }
 
-  function copyLink(btn, url) {
-    navigator.clipboard.writeText(url).then(() => {
-      btn.textContent = 'Copied';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'Copy';
-        btn.classList.remove('copied');
-      }, 2000);
-    }).catch(() => {
-      btn.textContent = 'Failed';
-      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
-    });
-  }
-
-  window.copyLink = copyLink;
-
   function renderCard(item) {
+    const isFeatured = item.category === 'Featured';
+    // Use explicit slug from JSON, or auto-generate from title
+    const slug     = item.slug || toSlug(item.title);
+    const safeLink = item.link.replace(/'/g, '%27');
+
+    const actions = isFeatured
+      ? `<button onclick="openFeatured('${slug}','${safeLink}')">Open</button>
+         <button onclick="copyFeaturedOrLink(this,'${slug}','${safeLink}')">Copy</button>`
+      : `<button onclick="window.open('${item.link}','_blank')">Open</button>
+         <button onclick="copyLink(this,'${item.link}')">Copy</button>`;
+
     return `
       <div class="card">
         <div style="color:${item.color}; margin-bottom:12px;">
@@ -122,8 +157,7 @@ if (gridContainer) {
         <h3>${item.title}</h3>
         <p class="tags">${item.tag}</p>
         <div class="toolkit-actions">
-          <button onclick="window.open('${item.link}','_blank')">Open</button>
-          <button onclick="copyLink(this, '${item.link}')">Copy</button>
+          ${actions}
         </div>
       </div>
     `;
@@ -154,10 +188,7 @@ if (gridContainer) {
       </div>
     `).join('');
 
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
-
+    if (typeof lucide !== 'undefined') lucide.createIcons();
     highlightScripts();
   }
 
@@ -179,79 +210,60 @@ if (gridContainer) {
   loadAll();
 }
 
-// hamburger nav
-const hamburger = document.getElementById('hamburger');
-const nav = document.getElementById('nav');
+// ── Back button: flag toolkit → home navigation ────────────────────────────
+// When the back button on the toolkit page is clicked we set a flag so the
+// main-page intro animation is suppressed for that one navigation only.
+const backBtn = document.querySelector('.back-btn');
+if (backBtn) {
+  backBtn.addEventListener('click', () => {
+    sessionStorage.setItem('walterck_toolkit_back', '1');
+  });
+}
 
+// ── Hamburger nav ──────────────────────────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const nav       = document.getElementById('nav');
 if (hamburger && nav) {
   hamburger.addEventListener('click', () => nav.classList.toggle('show'));
   nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('show')));
 }
 
 
-// ── Helper: detect back/forward navigation ─────────────────────────────────
-function isBackForwardNav() {
-  try {
-    const entries = performance.getEntriesByType('navigation');
-    if (entries && entries.length > 0) return entries[0].type === 'back_forward';
-  } catch (e) {}
-  try {
-    return performance.navigation.type === 2;
-  } catch (e) {}
-  return false;
-}
-
-
-// ── Main Page Intro: Orb Sweep → Clip-path Reveal ────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════
+// ── Main Page Intro: Orb Sweep → Clip-path Reveal ─────────────────────────
+// Always plays — EXCEPT when the user pressed the toolkit page back button.
+// ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (!document.querySelector('.hero-main')) return;
   if (window.scrollY > 1) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // ── Guard 1: browser back/forward navigation API ───────────────────────────
-  if (isBackForwardNav()) return;
-
-  // ── Guard 2: sessionStorage — animation already played this tab session ────
-  const SS_KEY = 'walterck_intro_played';
-  if (sessionStorage.getItem(SS_KEY)) return;
-
-  // ── Guard 3: localStorage TTL — belt-and-suspenders for mobile browsers
-  //    where the performance API or sessionStorage can be unreliable on back
-  //    navigation. If the animation played within the last 2 minutes, skip it.
-  const LS_KEY = 'walterck_intro_at';
-  const TTL    = 120_000; // 2 minutes in ms
-  const lastAt = parseInt(localStorage.getItem(LS_KEY) || '0', 10);
-  if (Date.now() - lastAt < TTL) return;
-
-  // Mark as played before any async work so concurrent loads can't double-fire
-  sessionStorage.setItem(SS_KEY, '1');
-  localStorage.setItem(LS_KEY, String(Date.now()));
+  // ── Only guard: toolkit back button ───────────────────────────────────
+  const BACK_KEY = 'walterck_toolkit_back';
+  if (sessionStorage.getItem(BACK_KEY)) {
+    sessionStorage.removeItem(BACK_KEY);
+    window._walterck_intro_skipped = true;   // tell banner to appear sooner
+    return;
+  }
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  // Lock scroll only during the orb flight — released the moment reveal starts
+  // Lock scroll only during the orb flight
   document.body.style.overflow = 'hidden';
 
   const overlay = document.createElement('div');
-  overlay.id = 'intro-overlay';
-
-  const cvs   = document.createElement('canvas');
-  cvs.id      = 'intro-canvas';
-  cvs.width   = window.innerWidth;
-  cvs.height  = window.innerHeight;
-
-  const orb   = document.createElement('div');
-  orb.id      = 'intro-orb';
+  overlay.id    = 'intro-overlay';
+  const cvs     = document.createElement('canvas');
+  cvs.id        = 'intro-canvas';
+  cvs.width     = window.innerWidth;
+  cvs.height    = window.innerHeight;
+  const orb     = document.createElement('div');
+  orb.id        = 'intro-orb';
 
   document.body.append(overlay, cvs, orb);
-
   const ctx2d = cvs.getContext('2d');
 
-  // ── Wait for fonts before measuring layout ─────────────────────────────────
-  // Oxanium (loaded via Google Fonts) shifts layout metrics until it's active.
-  // Measuring getBoundingClientRect() before that makes the orb target the
-  // FOUT-shifted position instead of the true centre — causes the left-miss bug
-  // on first mobile boot.
+  // Wait for fonts before measuring layout (prevents FOUT-shifted positions)
   document.fonts.ready.then(() => {
     requestAnimationFrame(() => {
       const pfp = document.querySelector('.profile-pfp');
@@ -263,21 +275,20 @@ function isBackForwardNav() {
 
       const sx  = -18;
       const sy  = window.innerHeight * 0.5;
-
       const cpx = window.innerWidth  * 0.36;
       const cpy = ty - Math.min(105, window.innerHeight * 0.15);
 
       function quad(p0, p1, p2, t) {
-        return (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + t * t * p2;
+        return (1-t)*(1-t)*p0 + 2*(1-t)*t*p1 + t*t*p2;
       }
       function easeInOut(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
       }
-      function lerp(a, b, t) { return a + (b - a) * t; }
+      function lerp(a, b, t) { return a + (b-a)*t; }
 
-      const ORB_MS = isMobile ? 480 : 800;
-      let orbStart = null;
-      let prevX = sx, prevY = sy;
+      const ORB_MS   = isMobile ? 480 : 800;
+      let   orbStart = null;
+      let   prevX = sx, prevY = sy;
 
       orb.style.opacity = '1';
       orb.style.left    = sx + 'px';
@@ -287,11 +298,9 @@ function isBackForwardNav() {
         if (!orbStart) orbStart = ts;
         const raw = Math.min((ts - orbStart) / ORB_MS, 1);
         const e   = easeInOut(raw);
+        const x   = quad(sx, cpx, tx, e);
+        const y   = quad(sy, cpy, ty, e);
 
-        const x = quad(sx, cpx, tx, e);
-        const y = quad(sy, cpy, ty, e);
-
-        // Skip canvas trail on mobile — too expensive on lower-end hardware
         if (!isMobile) {
           ctx2d.beginPath();
           ctx2d.moveTo(prevX, prevY);
@@ -310,27 +319,20 @@ function isBackForwardNav() {
         orb.style.top       = y + 'px';
         orb.style.transform = `translate(-50%,-50%) scale(${scale})`;
 
-        if (raw < 1) {
-          requestAnimationFrame(tickOrb);
-        } else {
-          startReveal(tx, ty);
-        }
+        if (raw < 1) requestAnimationFrame(tickOrb);
+        else         startReveal(tx, ty);
       }
 
       requestAnimationFrame(tickOrb);
 
       function startReveal(cx, cy) {
-        // Unlock scroll immediately — clip-path handles the visual containment
-        // from here, no reason to block the user through the 2-5s reveal.
+        // Unlock scroll — clip-path handles containment from here
         document.body.style.overflow = '';
 
         const mainEl = document.querySelector('main');
-
-        // Promote to GPU compositor layer before animating clip-path
         mainEl.style.willChange = 'clip-path';
         mainEl.style.clipPath   = `circle(0px at ${cx}px ${cy}px)`;
 
-        // Impact flash: orb blooms then vanishes
         orb.style.transition = 'transform 0.13s ease-out, opacity 0.13s ease-out';
         orb.style.transform  = 'translate(-50%,-50%) scale(6)';
         orb.style.opacity    = '0';
@@ -349,7 +351,6 @@ function isBackForwardNav() {
             mainEl.style.transition = `clip-path ${revealDuration} ${revealEase}`;
             mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
 
-            // Only need to remove the clip-path styles after the transition ends
             const cleanupDelay = isMobile ? 2100 : 5200;
             setTimeout(cleanup, cleanupDelay);
           });
@@ -370,16 +371,16 @@ function isBackForwardNav() {
 })();
 
 
-// ── Global Strip Animation (All Pages EXCEPT Main Page) ──────────────────────
+// ══════════════════════════════════════════════════════════════════════════
+// ── Global Strip Animation (All Pages EXCEPT Main Page) ───────────────────
+// Scroll is NOT frozen — strips are decorative and users can scroll freely.
+// ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (document.querySelector('.hero-main')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Lock scroll for the duration of the strip animation
-  document.body.style.overflow = 'hidden';
-
   const intro = document.createElement('div');
-  intro.id = 'site-intro';
+  intro.id    = 'site-intro';
   document.body.appendChild(intro);
 
   const STRIPS    = 11;
@@ -388,7 +389,7 @@ function isBackForwardNav() {
   const MAX_DELAY = 0.9;
 
   for (let i = 0; i < STRIPS; i++) {
-    const strip = document.createElement('div');
+    const strip     = document.createElement('div');
     strip.className = 'intro-strip';
     const delay = MIN_DELAY + Math.random() * (MAX_DELAY - MIN_DELAY);
     const pct   = 100 / STRIPS;
@@ -401,8 +402,70 @@ function isBackForwardNav() {
   }
 
   const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
-  setTimeout(() => {
-    intro.remove();
-    document.body.style.overflow = '';
-  }, totalDone);
+  setTimeout(() => { intro.remove(); }, totalDone);
+})();
+
+
+// ══════════════════════════════════════════════════════════════════════════
+// ── Homepage "New" Banner ─────────────────────────────────────────────────
+// Reads toolkit.json on the homepage and shows a ticket-shaped banner for
+// any item that has "new": true in its JSON properties.
+// ══════════════════════════════════════════════════════════════════════════
+(function () {
+  if (!document.querySelector('.hero-main')) return;
+
+  fetch('/toolkit/toolkit.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(raw => {
+      const newItem = raw.find(it => it.title && it.new === true);
+      if (!newItem) return;
+
+      const banner    = document.createElement('div');
+      banner.id       = 'new-banner';
+      banner.tabIndex = 0;
+      banner.setAttribute('role', 'button');
+      banner.setAttribute('aria-label', `New shortcut: ${newItem.title}`);
+      banner.style.setProperty('--b-color', newItem.color || '#6b8cff');
+
+      const cleanTitle = newItem.title.replace(/[➶→↗▶►]/g, '').trim();
+      // Use explicit slug from JSON or auto-generate
+      const slug = newItem.slug || toSlug(newItem.title);
+
+      banner.innerHTML = `
+        <div class="banner-inner">
+          <div class="banner-stub">NEW</div>
+          <div class="banner-body">
+            <span class="banner-icon"><i data-lucide="${newItem.icon}" width="13" height="13"></i></span>
+            <span class="banner-title">${cleanTitle}</span>
+          </div>
+          <div class="banner-notch"></div>
+        </div>
+      `;
+
+      document.body.appendChild(banner);
+
+      // Render lucide icon inside the banner
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      // Appear after the intro animation has had a moment to establish.
+      // If intro was skipped (toolkit back nav), appear quickly.
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const delay    = window._walterck_intro_skipped
+        ? 500
+        : (isMobile ? 2400 : 5600);
+
+      setTimeout(() => banner.classList.add('visible'), delay);
+
+      // Navigate on click
+      const navigate = async () => {
+        const exists = await featuredPageExists(slug);
+        window.location.href = exists ? `/toolkit/${slug}/` : '/toolkit/';
+      };
+
+      banner.addEventListener('click', navigate);
+      banner.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(); }
+      });
+    })
+    .catch(() => {}); // silently fail — banner is decorative
 })();
