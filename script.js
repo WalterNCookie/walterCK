@@ -68,8 +68,13 @@ if (gridContainer) {
 
       renderFilters();
       applyFilters();
+
+      // Unlock scrollbar now that content is loaded
+      document.body.classList.add('loaded');
     } catch (err) {
       console.error("Failed to load toolkit.json", err);
+      // Still unlock so the page isn't unusable
+      document.body.classList.add('loaded');
     }
   }
 
@@ -185,71 +190,82 @@ if (hamburger && nav) {
 }
 
 
+// ── Helper: detect back/forward navigation ─────────────────────────────────
+function isBackForwardNav() {
+  try {
+    const entries = performance.getEntriesByType('navigation');
+    if (entries && entries.length > 0) return entries[0].type === 'back_forward';
+  } catch (e) {}
+  try {
+    // Legacy fallback
+    return performance.navigation.type === 2;
+  } catch (e) {}
+  return false;
+}
+
+
 // ── Main Page Intro: Orb Sweep → Clip-path Reveal ────────────────────────────
-// Only fires on the main page, at the top, and strictly on the first boot-up
 (function () {
   if (!document.querySelector('.hero-main')) return;
-  if (window.scrollY > 1)                   return;
+  if (window.scrollY > 1) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Ensure it only plays if this is the first boot-up of the session
-  if (sessionStorage.getItem('walterck_main_intro_played')) {
-    return;
-  }
+  // Never replay when navigating back (e.g. toolkit → back → main)
+  if (isBackForwardNav()) return;
+
+  if (sessionStorage.getItem('walterck_main_intro_played')) return;
   sessionStorage.setItem('walterck_main_intro_played', 'true');
 
-  /* ── Create DOM elements ── */
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  // Lock scroll for the duration of the animation
+  document.body.style.overflow = 'hidden';
+
   const overlay = document.createElement('div');
   overlay.id = 'intro-overlay';
 
-  const cvs   = document.createElement('canvas');
-  cvs.id      = 'intro-canvas';
-  cvs.width   = window.innerWidth;
-  cvs.height  = window.innerHeight;
+  const cvs = document.createElement('canvas');
+  cvs.id = 'intro-canvas';
+  cvs.width = window.innerWidth;
+  cvs.height = window.innerHeight;
 
-  const orb   = document.createElement('div');
-  orb.id      = 'intro-orb';
+  const orb = document.createElement('div');
+  orb.id = 'intro-orb';
 
   document.body.append(overlay, cvs, orb);
 
   const ctx2d = cvs.getContext('2d');
 
-  /* ── Wait one frame so layout is committed ── */
   requestAnimationFrame(() => {
     const pfp = document.querySelector('.profile-pfp');
     if (!pfp) { cleanup(); return; }
 
     const rect = pfp.getBoundingClientRect();
-    const tx   = rect.left + rect.width  / 2;   // profile-pic centre X
-    const ty   = rect.top  + rect.height / 2;   // profile-pic centre Y
+    const tx = rect.left + rect.width  / 2;
+    const ty = rect.top  + rect.height / 2;
 
-    /* Orb start: just off the left edge, ~halfway down */
     const sx  = -18;
     const sy  = window.innerHeight * 0.5;
 
-    /* Bezier control point: creates the upward swoop arc */
     const cpx = window.innerWidth  * 0.36;
     const cpy = ty - Math.min(105, window.innerHeight * 0.15);
 
-    /* ── Helpers ── */
     function quad(p0, p1, p2, t) {
-      return (1-t)*(1-t)*p0 + 2*(1-t)*t*p1 + t*t*p2;
+      return (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + t * t * p2;
     }
     function easeInOut(t) {
-      return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
     function lerp(a, b, t) { return a + (b - a) * t; }
 
-    /* ────────────────────────────────────────────────────────────────
-       PHASE 1 — Glowing orb sweeps from the left to the profile pic
-       ──────────────────────────────────────────────────────────────── */
-    const ORB_MS = 800;
-    let   orbStart = null;
-    let   prevX = sx, prevY = sy;
+    // Mobile: shorter orb travel time, skip expensive canvas trail
+    const ORB_MS = isMobile ? 500 : 800;
+    let orbStart = null;
+    let prevX = sx, prevY = sy;
 
     orb.style.opacity = '1';
-    orb.style.left    = sx + 'px';
-    orb.style.top     = sy + 'px';
+    orb.style.left = sx + 'px';
+    orb.style.top  = sy + 'px';
 
     function tickOrb(ts) {
       if (!orbStart) orbStart = ts;
@@ -259,19 +275,20 @@ if (hamburger && nav) {
       const x = quad(sx, cpx, tx, e);
       const y = quad(sy, cpy, ty, e);
 
-      /* Faint comet trail on the canvas */
-      ctx2d.beginPath();
-      ctx2d.moveTo(prevX, prevY);
-      ctx2d.lineTo(x, y);
-      ctx2d.lineWidth   = lerp(2.5, 0.4, e);
-      ctx2d.strokeStyle = `rgba(107,140,255,${lerp(0.45, 0.06, e)})`;
-      ctx2d.shadowColor = '#6b8cff';
-      ctx2d.shadowBlur  = 10;
-      ctx2d.stroke();
-      ctx2d.shadowBlur  = 0;
+      // Skip canvas trail on mobile — too expensive, causes jank
+      if (!isMobile) {
+        ctx2d.beginPath();
+        ctx2d.moveTo(prevX, prevY);
+        ctx2d.lineTo(x, y);
+        ctx2d.lineWidth   = lerp(2.5, 0.4, e);
+        ctx2d.strokeStyle = `rgba(107,140,255,${lerp(0.45, 0.06, e)})`;
+        ctx2d.shadowColor = '#6b8cff';
+        ctx2d.shadowBlur  = 10;
+        ctx2d.stroke();
+        ctx2d.shadowBlur  = 0;
+      }
       prevX = x; prevY = y;
 
-      /* Orb swells as it closes in on the centre */
       const scale = lerp(0.55, 2.6, e);
       orb.style.left      = x + 'px';
       orb.style.top       = y + 'px';
@@ -286,32 +303,35 @@ if (hamburger && nav) {
 
     requestAnimationFrame(tickOrb);
 
-    /* ────────────────────────────────────────────────────────────────
-       PHASE 2 — Page slowly spreads from the profile pic centre.
-       ──────────────────────────────────────────────────────────────── */
     function startReveal(cx, cy) {
       const mainEl = document.querySelector('main');
 
-      /* Pin the page content inside a zero-radius circle */
-      mainEl.style.clipPath = `circle(0px at ${cx}px ${cy}px)`;
+      // Promote to GPU layer before animating clip-path
+      mainEl.style.willChange = 'clip-path';
+      mainEl.style.clipPath   = `circle(0px at ${cx}px ${cy}px)`;
 
-      /* Impact flash: orb blooms out and disappears */
+      // Impact flash
       orb.style.transition = 'transform 0.13s ease-out, opacity 0.13s ease-out';
       orb.style.transform  = 'translate(-50%,-50%) scale(6)';
       orb.style.opacity    = '0';
 
-      /* Remove the solid overlay — body bg fills the gap seamlessly */
       requestAnimationFrame(() => {
         overlay.remove();
         cvs.style.transition = 'opacity 0.12s';
         cvs.style.opacity    = '0';
 
-        /* Apply a slower transition for the clip-path so the spread effect is visible */
+        // Mobile: faster, snappier reveal; desktop: slower cinematic spread
+        const revealDuration = isMobile ? '2.2s' : '5s';
+        const revealEase     = isMobile
+          ? 'cubic-bezier(0.16, 1, 0.3, 1)'
+          : 'cubic-bezier(0.22, 1, 0.36, 1)';
+
         requestAnimationFrame(() => {
-          mainEl.style.transition = 'clip-path 5s cubic-bezier(0.22, 1, 0.36, 1)';
+          mainEl.style.transition = `clip-path ${revealDuration} ${revealEase}`;
           mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
 
-          setTimeout(cleanup, 1600); // Increased timeout to match the slower animation
+          const cleanupDelay = isMobile ? 900 : 1600;
+          setTimeout(cleanup, cleanupDelay);
         });
       });
     }
@@ -321,25 +341,30 @@ if (hamburger && nav) {
       if (mainEl) {
         mainEl.style.transition = '';
         mainEl.style.clipPath   = '';
+        mainEl.style.willChange = '';
       }
       [overlay, cvs, orb].forEach(el => el?.remove());
+      // Restore scrolling
+      document.body.style.overflow = '';
     }
   });
 })();
 
+
 // ── Global Strip Animation (All Pages EXCEPT Main Page) ──────────────────────
-(function() {
-  // Ignore if on the main page (we have a dedicated animation for that)
+(function () {
   if (document.querySelector('.hero-main')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Create the container dynamically
+  // Lock scroll for the duration of the strip animation
+  document.body.style.overflow = 'hidden';
+
   const intro = document.createElement('div');
   intro.id = 'site-intro';
   document.body.appendChild(intro);
 
   const STRIPS    = 11;
-  const DURATION  = 1;      // seconds per strip
+  const DURATION  = 1;
   const MIN_DELAY = 0.3;
   const MAX_DELAY = 0.9;
 
@@ -356,7 +381,10 @@ if (hamburger && nav) {
     intro.appendChild(strip);
   }
 
-  // Pull the overlay out of the DOM once the last strip is done
   const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
-  setTimeout(() => intro.remove(), totalDone);
+  setTimeout(() => {
+    intro.remove();
+    // Restore scrolling once all strips are gone
+    document.body.style.overflow = '';
+  }, totalDone);
 })();
