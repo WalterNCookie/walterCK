@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
-  <!-- ★ CUSTOMISE: browser tab title -->
-  <title>Tool Name | CK Toolkit</title>
-
+  <title>Arise | CK Toolkit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <link rel="icon" href="/images/walterck.png">
@@ -15,65 +12,53 @@
 
   <style>
     /*
-    ══════════════════════════════════════════════════════════════
-    COLOUR CUSTOMISATION — only edit this block per page.
-
-    --fp-color      Main accent (buttons, icon, pill, divider, req dots)
-    --fp-glow       Stronger glow (button shadows, icon breathe)
-    --fp-glow-soft  Subtle glow — ALSO drives both full-page bg gradients
-    --fp-dim        Very faint fill for hover states
-
-    Tips:
-      • Keep --fp-glow-soft low opacity (0.08–0.15) so the bg stays dark.
-      • --fp-glow can be 0.25–0.40 for punchy button shadows.
-    ══════════════════════════════════════════════════════════════
+    ══════════════════════════════════════════════════════
+    FEATURED PAGE COLOUR CUSTOMISATION
+    Change only these variables to retheme the whole page.
+    --fp-glow-soft drives both the full-page bg gradients.
+    ══════════════════════════════════════════════════════
     */
     :root {
-      --fp-color:     #6b8cff;              /* ★ accent colour  */
-      --fp-glow:      rgba(107,140,255,0.32);
-      --fp-glow-soft: rgba(107,140,255,0.10);
-      --fp-dim:       rgba(107,140,255,0.13);
+      --fp-color:     #FF4500;
+      --fp-glow:      rgba(255, 69, 0, 0.32);
+      --fp-glow-soft: rgba(255, 100, 0, 0.12);
+      --fp-dim:       rgba(255, 69, 0, 0.13);
     }
   </style>
 </head>
 
+<!--
+  body.featured-page  → activates the fp-* styles + full-page background gradient
+-->
 <body class="featured-page">
 
-  <!-- Back button — fixed top-left, styled like the toolkit page -->
+  <!-- ── Back Button ── -->
   <a href="/toolkit/" class="fp-back-btn" aria-label="Back to toolkit">
     <i data-lucide="arrow-left" size="18"></i>
   </a>
 
   <main>
 
-    <!-- ══════════════════════════════════════════════════════════
-         HERO
-         ★ CUSTOMISE: lucide icon name, title, new-pill, subtitle,
-           CTA buttons (href="#" auto-filled from toolkit.json).
-           Remove <span class="fp-new-pill"> if not new.
-    ══════════════════════════════════════════════════════════ -->
+    <!-- ══ HERO ══ -->
     <section class="fp-hero">
       <div class="fp-hero-icon-wrap">
         <div class="fp-hero-ring"></div>
-        <!-- ★ Match icon name to toolkit.json "icon" field -->
+        <!--
+          No size= attribute — icon sizing is handled by .fp-hero-icon svg in styles.css.
+        -->
         <div class="fp-hero-icon">
-          <i data-lucide="box"></i>
+          <i data-lucide="flame"></i>
         </div>
       </div>
 
-      <!-- ★ Tool name. Remove fp-new-pill if not new. -->
-      <h1>Tool Name <span class="fp-new-pill">New</span></h1>
+      <h1>Arise <span class="fp-new-pill">New</span></h1>
 
-      <!-- ★ One punchy sentence — what it does and why it matters -->
       <p class="fp-hero-subtitle">
-        A short, specific tagline that tells someone exactly what this tool does.
+        Your morning &amp; night scheduler. It doesn't let you off until you're awake — but stays
+        graceful enough to track your sleep, dreams, calendar, and wake-up times.
       </p>
 
       <div class="fp-cta-row">
-        <!--
-          .fp-shortcut-link → href auto-filled from toolkit.json by script.js.
-          Leave href="#" as a safe fallback.
-        -->
         <a href="#" class="fp-btn-primary fp-shortcut-link" target="_blank" rel="noopener noreferrer">
           <i data-lucide="download"></i>
           Get Shortcut
@@ -83,76 +68,73 @@
           Browse Toolkit
         </a>
       </div>
+
     </section>
 
-
-    <!-- ══════════════════════════════════════════════════════════
-         ABOUT
-         ★ CUSTOMISE: 1–3 paragraphs describing what it is.
-    ══════════════════════════════════════════════════════════ -->
+    <!-- ══ ABOUT ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>About</h2>
       <p class="fp-section-sub">What it is and why it exists</p>
-
       <p>
-        First paragraph — context and problem it solves.
+        Arise is an entirely automated shortcut built around one core assumption. On the hardest days,
+        you want the easiest comfort. A school morning has no upside, and getting out of bed takes half
+        your energy before the day has even begun.
       </p>
       <p>
-        Second paragraph — how it works or what makes it different.
+        Built on pre-designed systems, Arise is a tap-and-play, no-experience-required shortcut that
+        gives you the most capability to set your mornings before they happen. It provides a sense of
+        order and comfort through the knowledge of your day ahead, while tracking your sleep and dreams
+        for improvement and trend identification.
       </p>
     </section>
 
-
-    <!-- ══════════════════════════════════════════════════════════
-         FEATURES
-         ★ CUSTOMISE: edit/add/remove .fp-feat cards.
-           Pick any lucide icon name for each.
-    ══════════════════════════════════════════════════════════ -->
+    <!-- ══ FEATURES ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>Features</h2>
       <p class="fp-section-sub">What it does for you</p>
 
       <div class="fp-features">
-
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="zap"></i></div>
-          <h3>Feature One</h3>
-          <p>Short description of what this feature does and why it's useful.</p>
+          <div class="fp-feat-icon"><i data-lucide="settings-2"></i></div>
+          <h3>Persistent</h3>
+          <p>4 modes. Every one refuses to let the alarm switch off until you are up and focused, forcing you to start your day.</p>
         </div>
 
         <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="shield"></i></div>
-          <h3>Feature Two</h3>
-          <p>Short description of what this feature does and why it's useful.</p>
+          <div class="fp-feat-icon"><i data-lucide="cloud"></i></div>
+          <h3>Dynamic Alarm Times</h3>
+          <p>6am one day, 5am the next? Sick and don't need a work alarm? The shortcut manages it all — relax.</p>
+        </div>
+
+        <div class="fp-feat">
+          <div class="fp-feat-icon"><i data-lucide="sunrise"></i></div>
+          <h3>Tracks Sleep</h3>
+          <p>Run it before bed with one tap. Every day builds data on your sleep duration and patterns — private, no limits.</p>
+        </div>
+
+        <div class="fp-feat">
+          <div class="fp-feat-icon"><i data-lucide="cloud-moon"></i></div>
+          <h3>Tracks Dreams</h3>
+          <p>Log dreams each morning, cleanly integrated into the overview. Stay mindful and spot patterns over time.</p>
+        </div>
+
+        <div class="fp-feat">
+          <div class="fp-feat-icon"><i data-lucide="calendar-days"></i></div>
+          <h3>Calendar</h3>
+          <p>Syncs with your calendar daily, presenting your events in the morning alarm — you wake knowing exactly what lies ahead.</p>
         </div>
 
         <div class="fp-feat">
           <div class="fp-feat-icon"><i data-lucide="repeat-2"></i></div>
-          <h3>Feature Three</h3>
-          <p>Short description of what this feature does and why it's useful.</p>
+          <h3>Builds the Habit</h3>
+          <p>The consistency compounds. Run it every morning and the routine becomes second nature within a week.</p>
         </div>
-
-        <div class="fp-feat">
-          <div class="fp-feat-icon"><i data-lucide="sparkles"></i></div>
-          <h3>Feature Four</h3>
-          <p>Short description of what this feature does and why it's useful.</p>
-        </div>
-
-        <!-- ★ Add or remove .fp-feat blocks as needed -->
-
       </div>
     </section>
 
-
-    <!-- ══════════════════════════════════════════════════════════
-         SCREENSHOTS / PREVIEW
-         ★ CUSTOMISE: replace each .fp-shot-placeholder with:
-             <img src="./screenshots/1.png" alt="…">
-           Drop PNGs in a ./screenshots/ subfolder.
-           Add or remove .fp-shot divs to match your count.
-    ══════════════════════════════════════════════════════════ -->
+    <!-- ══ SCREENSHOTS ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>Preview</h2>
@@ -180,11 +162,7 @@
       </div>
     </section>
 
-
-    <!-- ══════════════════════════════════════════════════════════
-         REQUIREMENTS
-         ★ CUSTOMISE: list what the user needs to run this tool.
-    ══════════════════════════════════════════════════════════ -->
+    <!-- ══ REQUIREMENTS ══ -->
     <section class="fp-section">
       <div class="fp-divider"></div>
       <h2>Requirements</h2>
@@ -193,7 +171,8 @@
       <ul class="fp-reqs">
         <li><span class="fp-req-dot"></span>iPhone running iOS 16 or later</li>
         <li><span class="fp-req-dot"></span>Apple Shortcuts app (pre-installed on iOS)</li>
-        <!-- ★ Add or remove requirements -->
+        <li><span class="fp-req-dot"></span>Scriptable app — free on the App Store</li>
+        <li><span class="fp-req-dot"></span>RoutineOS script installed in Scriptable</li>
       </ul>
     </section>
 
@@ -201,6 +180,7 @@
 
   <script src="../../script.js"></script>
   <script>
+    // Initialise Lucide icons after DOM is ready
     if (typeof lucide !== 'undefined') lucide.createIcons();
   </script>
 </body>
