@@ -1,4 +1,4 @@
-// script.js ----------------------------------------------------
+// GLOABL JS
 
 const gridContainer = document.getElementById('grid-container');
 
