@@ -69,11 +69,10 @@ if (gridContainer) {
       renderFilters();
       applyFilters();
 
-      // Unlock scrollbar now that content is loaded
+      // Reveal the custom scrollbar now that content is painted
       document.body.classList.add('loaded');
     } catch (err) {
       console.error("Failed to load toolkit.json", err);
-      // Still unlock so the page isn't unusable
       document.body.classList.add('loaded');
     }
   }
@@ -197,7 +196,6 @@ function isBackForwardNav() {
     if (entries && entries.length > 0) return entries[0].type === 'back_forward';
   } catch (e) {}
   try {
-    // Legacy fallback
     return performance.navigation.type === 2;
   } catch (e) {}
   return false;
@@ -210,143 +208,164 @@ function isBackForwardNav() {
   if (window.scrollY > 1) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Never replay when navigating back (e.g. toolkit → back → main)
+  // ── Guard 1: browser back/forward navigation API ───────────────────────────
   if (isBackForwardNav()) return;
 
-  if (sessionStorage.getItem('walterck_main_intro_played')) return;
-  sessionStorage.setItem('walterck_main_intro_played', 'true');
+  // ── Guard 2: sessionStorage — animation already played this tab session ────
+  const SS_KEY = 'walterck_intro_played';
+  if (sessionStorage.getItem(SS_KEY)) return;
+
+  // ── Guard 3: localStorage TTL — belt-and-suspenders for mobile browsers
+  //    where the performance API or sessionStorage can be unreliable on back
+  //    navigation. If the animation played within the last 2 minutes, skip it.
+  const LS_KEY = 'walterck_intro_at';
+  const TTL    = 120_000; // 2 minutes in ms
+  const lastAt = parseInt(localStorage.getItem(LS_KEY) || '0', 10);
+  if (Date.now() - lastAt < TTL) return;
+
+  // Mark as played before any async work so concurrent loads can't double-fire
+  sessionStorage.setItem(SS_KEY, '1');
+  localStorage.setItem(LS_KEY, String(Date.now()));
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  // Lock scroll for the duration of the animation
+  // Lock scroll only during the orb flight — released the moment reveal starts
   document.body.style.overflow = 'hidden';
 
   const overlay = document.createElement('div');
   overlay.id = 'intro-overlay';
 
-  const cvs = document.createElement('canvas');
-  cvs.id = 'intro-canvas';
-  cvs.width = window.innerWidth;
-  cvs.height = window.innerHeight;
+  const cvs   = document.createElement('canvas');
+  cvs.id      = 'intro-canvas';
+  cvs.width   = window.innerWidth;
+  cvs.height  = window.innerHeight;
 
-  const orb = document.createElement('div');
-  orb.id = 'intro-orb';
+  const orb   = document.createElement('div');
+  orb.id      = 'intro-orb';
 
   document.body.append(overlay, cvs, orb);
 
   const ctx2d = cvs.getContext('2d');
 
-  requestAnimationFrame(() => {
-    const pfp = document.querySelector('.profile-pfp');
-    if (!pfp) { cleanup(); return; }
+  // ── Wait for fonts before measuring layout ─────────────────────────────────
+  // Oxanium (loaded via Google Fonts) shifts layout metrics until it's active.
+  // Measuring getBoundingClientRect() before that makes the orb target the
+  // FOUT-shifted position instead of the true centre — causes the left-miss bug
+  // on first mobile boot.
+  document.fonts.ready.then(() => {
+    requestAnimationFrame(() => {
+      const pfp = document.querySelector('.profile-pfp');
+      if (!pfp) { cleanup(); return; }
 
-    const rect = pfp.getBoundingClientRect();
-    const tx = rect.left + rect.width  / 2;
-    const ty = rect.top  + rect.height / 2;
+      const rect = pfp.getBoundingClientRect();
+      const tx   = rect.left + rect.width  / 2;
+      const ty   = rect.top  + rect.height / 2;
 
-    const sx  = -18;
-    const sy  = window.innerHeight * 0.5;
+      const sx  = -18;
+      const sy  = window.innerHeight * 0.5;
 
-    const cpx = window.innerWidth  * 0.36;
-    const cpy = ty - Math.min(105, window.innerHeight * 0.15);
+      const cpx = window.innerWidth  * 0.36;
+      const cpy = ty - Math.min(105, window.innerHeight * 0.15);
 
-    function quad(p0, p1, p2, t) {
-      return (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + t * t * p2;
-    }
-    function easeInOut(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-    function lerp(a, b, t) { return a + (b - a) * t; }
-
-    // Mobile: shorter orb travel time, skip expensive canvas trail
-    const ORB_MS = isMobile ? 500 : 800;
-    let orbStart = null;
-    let prevX = sx, prevY = sy;
-
-    orb.style.opacity = '1';
-    orb.style.left = sx + 'px';
-    orb.style.top  = sy + 'px';
-
-    function tickOrb(ts) {
-      if (!orbStart) orbStart = ts;
-      const raw = Math.min((ts - orbStart) / ORB_MS, 1);
-      const e   = easeInOut(raw);
-
-      const x = quad(sx, cpx, tx, e);
-      const y = quad(sy, cpy, ty, e);
-
-      // Skip canvas trail on mobile — too expensive, causes jank
-      if (!isMobile) {
-        ctx2d.beginPath();
-        ctx2d.moveTo(prevX, prevY);
-        ctx2d.lineTo(x, y);
-        ctx2d.lineWidth   = lerp(2.5, 0.4, e);
-        ctx2d.strokeStyle = `rgba(107,140,255,${lerp(0.45, 0.06, e)})`;
-        ctx2d.shadowColor = '#6b8cff';
-        ctx2d.shadowBlur  = 10;
-        ctx2d.stroke();
-        ctx2d.shadowBlur  = 0;
+      function quad(p0, p1, p2, t) {
+        return (1 - t) * (1 - t) * p0 + 2 * (1 - t) * t * p1 + t * t * p2;
       }
-      prevX = x; prevY = y;
-
-      const scale = lerp(0.55, 2.6, e);
-      orb.style.left      = x + 'px';
-      orb.style.top       = y + 'px';
-      orb.style.transform = `translate(-50%,-50%) scale(${scale})`;
-
-      if (raw < 1) {
-        requestAnimationFrame(tickOrb);
-      } else {
-        startReveal(tx, ty);
+      function easeInOut(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       }
-    }
+      function lerp(a, b, t) { return a + (b - a) * t; }
 
-    requestAnimationFrame(tickOrb);
+      const ORB_MS = isMobile ? 480 : 800;
+      let orbStart = null;
+      let prevX = sx, prevY = sy;
 
-    function startReveal(cx, cy) {
-      const mainEl = document.querySelector('main');
+      orb.style.opacity = '1';
+      orb.style.left    = sx + 'px';
+      orb.style.top     = sy + 'px';
 
-      // Promote to GPU layer before animating clip-path
-      mainEl.style.willChange = 'clip-path';
-      mainEl.style.clipPath   = `circle(0px at ${cx}px ${cy}px)`;
+      function tickOrb(ts) {
+        if (!orbStart) orbStart = ts;
+        const raw = Math.min((ts - orbStart) / ORB_MS, 1);
+        const e   = easeInOut(raw);
 
-      // Impact flash
-      orb.style.transition = 'transform 0.13s ease-out, opacity 0.13s ease-out';
-      orb.style.transform  = 'translate(-50%,-50%) scale(6)';
-      orb.style.opacity    = '0';
+        const x = quad(sx, cpx, tx, e);
+        const y = quad(sy, cpy, ty, e);
 
-      requestAnimationFrame(() => {
-        overlay.remove();
-        cvs.style.transition = 'opacity 0.12s';
-        cvs.style.opacity    = '0';
+        // Skip canvas trail on mobile — too expensive on lower-end hardware
+        if (!isMobile) {
+          ctx2d.beginPath();
+          ctx2d.moveTo(prevX, prevY);
+          ctx2d.lineTo(x, y);
+          ctx2d.lineWidth   = lerp(2.5, 0.4, e);
+          ctx2d.strokeStyle = `rgba(107,140,255,${lerp(0.45, 0.06, e)})`;
+          ctx2d.shadowColor = '#6b8cff';
+          ctx2d.shadowBlur  = 10;
+          ctx2d.stroke();
+          ctx2d.shadowBlur  = 0;
+        }
+        prevX = x; prevY = y;
 
-        // Mobile: faster, snappier reveal; desktop: slower cinematic spread
-        const revealDuration = isMobile ? '2.2s' : '5s';
-        const revealEase     = isMobile
-          ? 'cubic-bezier(0.16, 1, 0.3, 1)'
-          : 'cubic-bezier(0.22, 1, 0.36, 1)';
+        const scale = lerp(0.55, 2.6, e);
+        orb.style.left      = x + 'px';
+        orb.style.top       = y + 'px';
+        orb.style.transform = `translate(-50%,-50%) scale(${scale})`;
+
+        if (raw < 1) {
+          requestAnimationFrame(tickOrb);
+        } else {
+          startReveal(tx, ty);
+        }
+      }
+
+      requestAnimationFrame(tickOrb);
+
+      function startReveal(cx, cy) {
+        // Unlock scroll immediately — clip-path handles the visual containment
+        // from here, no reason to block the user through the 2-5s reveal.
+        document.body.style.overflow = '';
+
+        const mainEl = document.querySelector('main');
+
+        // Promote to GPU compositor layer before animating clip-path
+        mainEl.style.willChange = 'clip-path';
+        mainEl.style.clipPath   = `circle(0px at ${cx}px ${cy}px)`;
+
+        // Impact flash: orb blooms then vanishes
+        orb.style.transition = 'transform 0.13s ease-out, opacity 0.13s ease-out';
+        orb.style.transform  = 'translate(-50%,-50%) scale(6)';
+        orb.style.opacity    = '0';
 
         requestAnimationFrame(() => {
-          mainEl.style.transition = `clip-path ${revealDuration} ${revealEase}`;
-          mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
+          overlay.remove();
+          cvs.style.transition = 'opacity 0.12s';
+          cvs.style.opacity    = '0';
 
-          const cleanupDelay = isMobile ? 900 : 1600;
-          setTimeout(cleanup, cleanupDelay);
+          const revealDuration = isMobile ? '2s'  : '5s';
+          const revealEase     = isMobile
+            ? 'cubic-bezier(0.16, 1, 0.3, 1)'
+            : 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+          requestAnimationFrame(() => {
+            mainEl.style.transition = `clip-path ${revealDuration} ${revealEase}`;
+            mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
+
+            // Only need to remove the clip-path styles after the transition ends
+            const cleanupDelay = isMobile ? 2100 : 5200;
+            setTimeout(cleanup, cleanupDelay);
+          });
         });
-      });
-    }
-
-    function cleanup() {
-      const mainEl = document.querySelector('main');
-      if (mainEl) {
-        mainEl.style.transition = '';
-        mainEl.style.clipPath   = '';
-        mainEl.style.willChange = '';
       }
-      [overlay, cvs, orb].forEach(el => el?.remove());
-      // Restore scrolling
-      document.body.style.overflow = '';
-    }
+
+      function cleanup() {
+        const mainEl = document.querySelector('main');
+        if (mainEl) {
+          mainEl.style.transition = '';
+          mainEl.style.clipPath   = '';
+          mainEl.style.willChange = '';
+        }
+        [overlay, cvs, orb].forEach(el => el?.remove());
+      }
+    });
   });
 })();
 
@@ -384,7 +403,6 @@ function isBackForwardNav() {
   const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
   setTimeout(() => {
     intro.remove();
-    // Restore scrolling once all strips are gone
     document.body.style.overflow = '';
   }, totalDone);
 })();
