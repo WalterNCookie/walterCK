@@ -71,7 +71,6 @@ const ROUTINES = {
     { title: "Work/Productive", time: "4:25", subtitle: "Focus time", emoji: "📝", bg: "4ADE80" },
     { title: "Dinner", time: "6:00", subtitle: "Refuel", emoji: "🍝", bg: "FF9800" },
     { title: "Shower & Brush Teeth", time: "6:30", subtitle: "Cold?", emoji: "🚿", bg: "7B1FA2" },
-    { title: "Solid", time: "7:00", subtitle: "End day strong", emoji: "🏋️‍♂️", bg: "8A1538" },
     { title: "Productive", time: "7:10", subtitle: "Finish tasks", emoji: "💻", bg: "35495E" },
     { title: "Sleep", time: "10:00", subtitle: "Dream consciously", emoji: "💤", bg: "0B132B" }
   ],
@@ -80,16 +79,14 @@ const ROUTINES = {
     { title: "Wake up", time: "7:00", subtitle: "Water/Music", emoji: "🌅", bg: "1A1A2E" },
     { title: "Clean Room", time: "7:05", subtitle: "Start fresh", emoji: "🧹", bg: "2E3B73" },
     { title: "Get Dressed", time: "7:10", subtitle: "Fit check", emoji: "👕", bg: "8C5A00" },
-    { title: "Solid", time: "7:15", subtitle: "Warm up body", emoji: "💪", bg: "880000" },
-    { title: "Productive", time: "7:25", subtitle: "Focus mode", emoji: "📝", bg: "4ADE80" },
+    { title: "Productive", time: "7:25", subtitle: "Focuss", emoji: "📝", bg: "4ADE80" },
     { title: "Break & Feed Annie", time: "7:45", subtitle: "Snack & pet", emoji: "🐈", bg: "7C3A2D" },
     { title: "Productive/Family", time: "8:00", subtitle: "Work + chill", emoji: "👨‍👩‍👦", bg: "35495E" },
     { title: "Breakfast", time: "8:45", subtitle: "Fuel up", emoji: "🍳", bg: "FFB400" },
-    { title: "Brush Teeth", time: "8:55", subtitle: "Fresh AF", emoji: "🦷", bg: "00A6FB" },
+    { title: "Brush Teeth", time: "8:55", subtitle: "Fresh ash", emoji: "😬", bg: "00A6FB" },
     { title: "Your Day", time: "9:00", subtitle: "Enjoy it", emoji: "🌇", bg: "FFB84D" },
     { title: "Dinner", time: "6:00", subtitle: "Refuel", emoji: "🍝", bg: "FF9800" },
     { title: "Shower & Brush Teeth", time: "6:30", subtitle: "Reset", emoji: "🚿", bg: "7B1FA2" },
-    { title: "Solid", time: "7:00", subtitle: "End day strong", emoji: "🏋️‍♂️", bg: "8A1538" },
     { title: "Productive", time: "7:10", subtitle: "Finish tasks", emoji: "💻", bg: "35495E" },
     { title: "Sleep", time: "10:00", subtitle: "Dream consciously", emoji: "💤", bg: "0B132B" }
   ]
