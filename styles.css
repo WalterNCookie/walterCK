@@ -1,42 +1,346 @@
-/* ... [Keep all your root variables, reset, and main page styles the exact same] ... */
+/* GLOBAL STYLES */
 
-/* Toolkits Page Specifics */
+/* ─── Variables / Tokens ─── */
+:root {
+  --bg-900: #05070a;
+  --bg-800: #0f1419;
+  --text: #e6eef6;
+  --muted: #94a3b8;
+  --accent: #6b8cff;
+  --accent-glow: rgba(107, 140, 255, 0.25);
+
+  --glass: rgba(255, 255, 255, 0.04);
+  --surface: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+
+  --radius: 16px;
+  --shadow-1: 0 12px 40px rgba(0, 0, 0, 0.6);
+  --container-padding: 24px;
+  --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  color-scheme: dark;
+}
+
+/* font */
+  * {
+  font-family: 'Oxanium', sans-serif;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background-color: var(--bg-900);
+  background-image:
+    radial-gradient(circle at 50% 15%, var(--accent-glow) 0%, transparent 65%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tools Page Background Override */
+html:has(body.toolkit-page),
+body.toolkit-page {
+  background: #0a0d17 !important;
+  background-image: none !important;
+}
+
+/* Scrollbar */
+
+/* Hide */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar { display: none; }
+
+/* Re-enable only on toolkits page with custom style */
+html:has(body.toolkit-page) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(107, 140, 255, 0.45) transparent;
+}
+html:has(body.toolkit-page)::-webkit-scrollbar { display: block; width: 7px; }
+html:has(body.toolkit-page)::-webkit-scrollbar-track { background: transparent; }
+html:has(body.toolkit-page)::-webkit-scrollbar-thumb {
+  background: rgba(107, 140, 255, 0.45);
+  border-radius: 99px;
+}
+html:has(body.toolkit-page)::-webkit-scrollbar-thumb:hover { background: rgba(91, 230, 192, 0.6); }
+
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.page-section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+/* Typography */
+h1 {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+
+h1.strong {
+  font-weight: 1000;
+}
+
+h2 {
+  margin-bottom: 24px;
+  color: var(--text);
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem);
+  letter-spacing: -0.02em;
+}
+
+/* Main Page Specifics */
+.hero-main {
+  padding: 56px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero-main h1 {
+  font-size: clamp(2.2rem, 6vw + 1rem, 4rem);
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: clamp(0.95rem, 2vw + 0.5rem, 1.15rem);
+  margin: 8px 0 0;
+}
+
+.profile-pfp {
+  width: clamp(120px, 15vw + 60px, 160px);
+  height: clamp(120px, 15vw + 60px, 160px);
+  border-radius: 50%;
+  border: 4px solid var(--accent);
+  padding: 4px;
+  background: var(--bg-900);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(107, 140, 255, 0.4);
+  transition: var(--transition);
+}
+
+.profile-pfp:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px rgba(107, 140, 255, 0.6);
+  border-color: var(--accent);
+}
+
+.profile-pfp img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Meta Tags List */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+
+.meta-left {
+  justify-content: flex-start;
+  margin-top: 16px;
+}
+
+.meta li {
+  background: var(--glass);
+  border: 1px solid var(--card-border);
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Contact Links */
+.contact-section {
+  text-align: left;
+}
+
+.contact-section a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.contact-section a:hover {
+  color: var(--accent);
+}
+
+/* Cards Grid (Shared) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+a.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card {
+  padding: 28px 24px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-1);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.tags {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Locked Card */
+.card--locked {
+  cursor: not-allowed;
+  opacity: 0.5;
+  user-select: none;
+}
+
+.card--locked:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--card-border);
+  box-shadow: none;
+}
+
+/* ─── Toolkits Page Layout ─── */
 .toolkit-hero {
-  text-align: left; /* Align to the left to match the grid on mobile */
-  margin-bottom: 40px;
-  padding-top: 0;
-  position: relative;
+  text-align: left; /* Aligns title & desc to the left edge */
+  padding: 40px 0 0 0;
 }
 
 .toolkit-hero h1 {
-  font-size: 3.5rem;
-  letter-spacing: -0.01em;
-  margin-top: 56px;
-  margin-bottom: 56px;
-  line-height: 1.3;
-  background: linear-gradient(
-    90deg,
-    var(--accent) 0%,
-    var(--accent) 40%,
-    #ffffff 50%,
-    var(--accent) 60%,
-    var(--accent) 100%
-  );
-  background-size: 200% 100%;
+  font-size: clamp(2.5rem, 8vw, 3.8rem);
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, var(--accent), #fff, var(--accent));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: script-hero-shine 4s linear infinite;
-  text-shadow: none;
+  animation: script-hero-shine 5s linear infinite;
 }
 
+.toolkit-desc {
+  max-width: 800px; /* Limits width for readability but stays left-aligned */
+  margin: 0 0 40px 0;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.search-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.search {
+  background: var(--glass);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  height: 54px; /* Matches the visual weight of the header */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.search input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+/* Scrollbar Handling */
+body.toolkit-page:not(.json-loaded) {
+  overflow: hidden; /* Hide scrollbar while data is loading */
+}
+
+/* Ensure the grid matches the alignment of the text above it */
+#grid-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Mobile Tweaks */
 @media (max-width: 600px) {
-  .toolkit-hero h1 {
-    font-size: 2.4rem;
-    margin-top: 40px;
-    margin-bottom: 28px;
-    letter-spacing: 0em;
-  }
+  .toolkit-hero { padding-top: 20px; }
+  .search-row { flex-direction: row; } /* Keep back button next to search */
+  .search { height: 50px; }
+  .back-btn { width: 50px; height: 50px; }
 }
 
 /* Sub-header text styling */
@@ -44,8 +348,8 @@
   color: var(--muted);
   font-size: clamp(1rem, 2vw + 0.5rem, 1.15rem); 
   line-height: 1.6;
-  max-width: 100%; /* Matches grid and search bar */
-  margin: -24px 0 40px 0; /* Left aligned margins */
+  max-width: 1200px;
+  margin: -24px auto 40px auto; 
 }
 
 /* Link styling */
@@ -68,10 +372,10 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  max-width: 100%; /* Spans exactly with the title and grid */
-  margin: 0 0 40px 0;
+  max-width: 500px;
+  margin: 0 auto 40px;
   box-sizing: border-box;
-  padding: 0; /* Removed padding so edges are flush with everything else */
+  padding: 0 4px;
 }
 
 .back-btn {
@@ -122,11 +426,131 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-start; /* Align filters to the left too */
+  justify-content: center;
   margin-bottom: 40px;
 }
 
-/* ... [Keep all filter/card styles exactly the same] ... */
+.filter-chip {
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--card-border);
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-chip.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg-900);
+}
+
+.category-section {
+  margin-bottom: 50px;
+}
+
+.category-title {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  opacity: 0.8;
+  text-align: left;
+}
+
+.toolkit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.toolkit-actions button {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  transition: all 0.2s;
+}
+
+.toolkit-actions button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.toolkit-actions button.copied {
+  background: rgba(79, 70, 254, 0.2);
+  color: var(--accent);
+  cursor: default;
+}
+
+#empty {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--muted);
+}
+
+/* Script category highlight */
+
+@keyframes script-hero-shine {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* Filters container glow */
+.filters.script-found {
+  box-shadow:
+    0 0 30px rgba(91,230,192,0.12),
+    inset 0 0 20px rgba(107,140,255,0.08);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+/* Script filter chip - default state */
+.filter-chip.script-highlight {
+  background: linear-gradient(
+    135deg,
+    rgba(91,230,192,0.18),
+    rgba(107,140,255,0.18)
+  );
+  border: 1px solid rgba(91,230,192,0.35);
+  color: #eafffb;
+  box-shadow:
+    0 0 10px rgba(91,230,192,0.2),
+    inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+/* Script filter chip - selected/active state */
+.filter-chip.script-highlight.active {
+  background: linear-gradient(
+    135deg,
+    rgba(91,230,192,0.55),
+    rgba(107,140,255,0.55)
+  );
+  border: 1px solid rgba(91,230,192,0.9);
+  color: #ffffff;
+  box-shadow:
+    0 0 18px rgba(91,230,192,0.5),
+    0 0 40px rgba(107,140,255,0.25),
+    inset 0 0 14px rgba(255,255,255,0.1);
+  text-shadow: 0 0 10px rgba(91,230,192,0.6);
+}
+
+/* Script category title */
+.category-title.script-highlight {
+  color: var(--accent);
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+  text-shadow: 0 6px 30px rgba(91,230,192,0.15);
+}
 
 /* Scrollbars */
 
@@ -139,40 +563,71 @@ body:not(.toolkit-page)::-webkit-scrollbar {
   display: none;
 }
 
-/* Prevent scrolling on toolkit page entirely until JSON is loaded */
-body.toolkit-page:not(.json-loaded) {
-  overflow: hidden;
-}
-
-/* Custom scrollbar on toolkit page ONLY once loaded */
-html:has(body.toolkit-page.json-loaded) {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(107, 140, 255, 0.45) transparent;
-}
-html:has(body.toolkit-page.json-loaded)::-webkit-scrollbar { display: block; width: 7px; }
-html:has(body.toolkit-page.json-loaded)::-webkit-scrollbar-track { background: transparent; }
-html:has(body.toolkit-page.json-loaded)::-webkit-scrollbar-thumb {
-  background: rgba(107, 140, 255, 0.45);
-  border-radius: 99px;
-}
-html:has(body.toolkit-page.json-loaded)::-webkit-scrollbar-thumb:hover { background: rgba(91, 230, 192, 0.6); }
-
-body.toolkit-page.json-loaded {
+/* Custom scrollbar on toolkit page */
+body.toolkit-page {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) var(--bg-800);
 }
-body.toolkit-page.json-loaded::-webkit-scrollbar {
+body.toolkit-page::-webkit-scrollbar {
   width: 5px;
 }
-body.toolkit-page.json-loaded::-webkit-scrollbar-track {
+body.toolkit-page::-webkit-scrollbar-track {
   background: var(--bg-800);
 }
-body.toolkit-page.json-loaded::-webkit-scrollbar-thumb {
+body.toolkit-page::-webkit-scrollbar-thumb {
   background: var(--accent);
   border-radius: 99px;
 }
-body.toolkit-page.json-loaded::-webkit-scrollbar-thumb:hover {
+body.toolkit-page::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
 
-/* ... [Keep INTRO ANIMATIONS exactly the same] ... */
+/* ─── INTRO ANIMATIONS ─── */
+
+/* Main Page Orb Animation */
+#intro-overlay {
+  position: fixed; inset: 0;
+  background: #05070a;
+  z-index: 9000; pointer-events: none;
+}
+#intro-canvas {
+  position: fixed; inset: 0;
+  z-index: 9001; pointer-events: none;
+}
+#intro-orb {
+  position: fixed;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: #6b8cff;
+  box-shadow:
+    0 0  6px  3px  rgba(107,140,255,0.95),
+    0 0 20px  9px  rgba(107,140,255,0.55),
+    0 0 42px 20px  rgba(107,140,255,0.22);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 9002; pointer-events: none;
+  will-change: left, top, transform, opacity;
+}
+
+/* Global Strip Animation (Non-Main Pages) */
+#site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+.intro-strip {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: #05070a;
+  will-change: transform;
+}
+@keyframes stripWipe {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(110%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-strip { animation: none !important; opacity: 0 !important; }
+}
