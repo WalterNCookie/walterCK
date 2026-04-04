@@ -260,87 +260,43 @@ a.card-link {
   box-shadow: none;
 }
 
-/* ─── Toolkits Page Layout ─── */
+/* Toolkits Page Specifics */
 .toolkit-hero {
-  text-align: left; /* Aligns title & desc to the left edge */
-  padding: 40px 0 0 0;
+  text-align: center;
+  margin-bottom: 40px;
+  padding-top: 0;
+  position: relative;
 }
 
 .toolkit-hero h1 {
-  font-size: clamp(2.5rem, 8vw, 3.8rem);
-  margin-bottom: 20px;
-  background: linear-gradient(90deg, var(--accent), #fff, var(--accent));
-  background-size: 200% auto;
+  font-size: 3.5rem;
+  letter-spacing: -0.01em;
+  margin-top: 56px;
+  margin-bottom: 56px;
+  line-height: 1.3;
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent) 40%,
+    #ffffff 50%,
+    var(--accent) 60%,
+    var(--accent) 100%
+  );
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: script-hero-shine 5s linear infinite;
+  animation: script-hero-shine 4s linear infinite;
+  text-shadow: none;
 }
 
-.toolkit-desc {
-  max-width: 800px; /* Limits width for readability but stays left-aligned */
-  margin: 0 0 40px 0;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-.search-row {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-.search {
-  background: var(--glass);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  height: 54px; /* Matches the visual weight of the header */
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.search input {
-  background: transparent;
-  border: none;
-  color: #fff;
-  width: 100%;
-  font-size: 1.1rem;
-  outline: none;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 50px;
-}
-
-/* Scrollbar Handling */
-body.toolkit-page:not(.json-loaded) {
-  overflow: hidden; /* Hide scrollbar while data is loading */
-}
-
-/* Ensure the grid matches the alignment of the text above it */
-#grid-container {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-/* Mobile Tweaks */
 @media (max-width: 600px) {
-  .toolkit-hero { padding-top: 20px; }
-  .search-row { flex-direction: row; } /* Keep back button next to search */
-  .search { height: 50px; }
-  .back-btn { width: 50px; height: 50px; }
+  .toolkit-hero h1 {
+    font-size: 2.4rem;
+    margin-top: 40px;
+    margin-bottom: 28px;
+    letter-spacing: 0em;
+  }
 }
 
 /* Sub-header text styling */
