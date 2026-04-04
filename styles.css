@@ -23,8 +23,6 @@
   --fp-glow:      rgba(107, 140, 255, 0.32);
   --fp-glow-soft: rgba(107, 140, 255, 0.18);
   --fp-dim:       rgba(107, 140, 255, 0.13);
-  --fp-bg-a:      rgba(107, 140, 255, 0.05);
-  --fp-bg-b:      rgba(107, 140, 255, 0.03);
 
   color-scheme: dark;
 }
@@ -484,7 +482,7 @@ a.card-link { display: block; text-decoration: none; color: inherit; }
 #new-banner {
   position: fixed;
   left: -280px;
-  top: 22%;
+  top: 10%;
   z-index: 8000;
   cursor: pointer;
   transition: left 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -576,7 +574,7 @@ a.card-link { display: block; text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 600px) {
-  #new-banner { top: 25%; }
+  #new-banner { top: 10%; }
   .banner-inner { padding: 11px 18px 11px 12px; gap: 9px; }
   .banner-icon-wrap { width: 28px; height: 28px; border-radius: 8px; }
   .banner-eyebrow { font-size: 0.55rem; }
@@ -645,9 +643,9 @@ a.card-link { display: block; text-decoration: none; color: inherit; }
 /* ─────────────────────────────────────────────────────────────────────────── */
 
 /* Full-viewport background — fixed so it spans every scroll position.
-   Colors controlled by --fp-bg-a and --fp-bg-b set in each page's :root. */
+   Uses --fp-glow-soft (set per-page in :root) for both gradient spots. */
 body.featured-page {
-  background-image: none; /* remove the default home gradient */
+  background-image: none;
 }
 body.featured-page::before {
   content: '';
@@ -656,76 +654,44 @@ body.featured-page::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 15% 80%, var(--fp-bg-a, rgba(107,140,255,0.05)) 0%, transparent 45%),
-    radial-gradient(circle at 85% 20%, var(--fp-bg-b, rgba(107,140,255,0.03)) 0%, transparent 40%);
+    radial-gradient(circle at 15% 80%, var(--fp-glow-soft) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, var(--fp-glow-soft) 0%, transparent 40%);
 }
 
-/* ── Sticky top nav ── */
-.fp-topnav {
-  position: sticky;
-  top: 0;
+/* ── Back button — fixed top-left, same design as the toolkit back-btn ── */
+.fp-back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
   z-index: 200;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 13px 24px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--card-border);
-}
-.fp-nav-back {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 50px;
+  height: 52px;
+  border-radius: 14px;
   background: var(--glass);
   border: 1px solid var(--card-border);
   color: var(--text);
   text-decoration: none;
-  flex-shrink: 0;
   transition: all 0.2s;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
-.fp-nav-back:hover { background: var(--fp-color); border-color: var(--fp-color); }
-.fp-nav-back svg { width: 15px; height: 15px; }
-
-.fp-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.78rem;
-  color: var(--muted);
-  overflow: hidden;
-  flex: 1;
-  white-space: nowrap;
-}
-.fp-breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.fp-breadcrumb a:hover { color: var(--text); }
-.fp-breadcrumb .fp-bc-current { color: var(--fp-color); font-weight: 600; }
-
-.fp-nav-cta {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 20px;
+.fp-back-btn:hover {
   background: var(--fp-color);
   color: #fff;
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: all 0.2s;
+  border-color: var(--fp-color);
   box-shadow: 0 0 20px var(--fp-glow-soft);
-  flex-shrink: 0;
 }
-.fp-nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+@media (max-width: 600px) {
+  .fp-back-btn { width: 44px; height: 46px; border-radius: 12px; top: 16px; left: 16px; }
+}
 
 /* ── Hero ── */
 .fp-hero {
   position: relative;
-  padding: 88px 24px 72px;
+  padding: 110px 24px 72px;
   text-align: center;
   border-bottom: 1px solid var(--card-border);
   overflow: hidden;
@@ -844,15 +810,12 @@ body.featured-page::before {
 }
 .fp-btn-secondary:hover { border-color: var(--fp-color); background: var(--fp-dim); transform: translateY(-3px); }
 
-.fp-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-.fp-tag {
-  padding: 5px 14px;
-  background: var(--glass);
-  border: 1px solid var(--card-border);
-  border-radius: 99px;
-  font-size: 0.78rem;
-  color: var(--muted);
-  font-weight: 600;
+.fp-divider {
+  width: 48px; height: 2px;
+  background: var(--fp-color);
+  border-radius: 2px;
+  margin: 0 0 20px;
+  box-shadow: 0 0 10px var(--fp-glow);
 }
 
 /* ── Sections ── */
@@ -937,29 +900,10 @@ body.featured-page::before {
   box-shadow: 0 0 8px var(--fp-glow-soft);
 }
 
-/* ── Bottom CTA ── */
-.fp-bottom {
-  text-align: center;
-  padding: 88px 28px;
-  background: radial-gradient(ellipse at 50% 0%, var(--fp-glow-soft) 0%, transparent 60%);
-}
-.fp-bottom h2 { font-size: clamp(1.8rem, 4vw + 0.5rem, 3rem); font-weight: 800; letter-spacing: -0.03em; margin: 0 0 12px; }
-.fp-bottom p { color: var(--muted); margin-bottom: 36px; }
-
-/* ── Divider accent line ── */
-.fp-divider {
-  width: 48px; height: 2px;
-  background: var(--fp-color);
-  border-radius: 2px;
-  margin: 0 0 20px;
-  box-shadow: 0 0 10px var(--fp-glow);
-}
-
 /* ── Responsive ── */
 @media (max-width: 640px) {
-  .fp-hero    { padding: 56px 20px 48px; }
+  .fp-hero    { padding: 80px 20px 48px; }
   .fp-section { padding: 44px 20px; }
-  .fp-topnav  { padding: 12px 16px; }
   .fp-hero-icon { width: 84px; height: 84px; border-radius: 24px; }
   .fp-hero-icon svg { width: 52px !important; height: 52px !important; }
 }
