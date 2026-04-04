@@ -85,7 +85,28 @@ if (gridContainer) {
     if (found) filters && filters.classList.add('script-found');
     else       filters && filters.classList.remove('script-found');
 
+    highlightFeatured();
     return found;
+  }
+
+  function highlightFeatured() {
+    const filters = document.getElementById('filters');
+    let found = false;
+
+    document.querySelectorAll('.category-title').forEach(el => {
+      if (el.textContent.trim() === 'Featured') {
+        el.classList.add('featured-highlight'); found = true;
+      } else { el.classList.remove('featured-highlight'); }
+    });
+
+    document.querySelectorAll('.filter-chip').forEach(el => {
+      if (el.dataset.cat === 'Featured') {
+        el.classList.add('featured-highlight'); found = true;
+      } else { el.classList.remove('featured-highlight'); }
+    });
+
+    if (found) filters && filters.classList.add('featured-found');
+    else       filters && filters.classList.remove('featured-found');
   }
 
   async function loadAll() {
@@ -150,7 +171,7 @@ if (gridContainer) {
          <button onclick="copyLink(this,'${item.link}')">Copy</button>`;
 
     return `
-      <div class="card">
+      <div class="card${isFeatured ? ' card--featured' : ''}">
         <div style="color:${item.color}; margin-bottom:12px;">
           <i data-lucide="${item.icon}" size="28"></i>
         </div>
@@ -211,8 +232,6 @@ if (gridContainer) {
 }
 
 // ── Back button: flag toolkit → home navigation ────────────────────────────
-// When the back button on the toolkit page is clicked we set a flag so the
-// main-page intro animation is suppressed for that one navigation only.
 const backBtn = document.querySelector('.back-btn');
 if (backBtn) {
   backBtn.addEventListener('click', () => {
@@ -435,7 +454,7 @@ if (hamburger && nav) {
         <div class="banner-inner">
           <div class="banner-stub">NEW</div>
           <div class="banner-body">
-            <span class="banner-icon"><i data-lucide="${newItem.icon}" width="13" height="13"></i></span>
+            <span class="banner-icon"><i data-lucide="${newItem.icon}" width="14" height="14"></i></span>
             <span class="banner-title">${cleanTitle}</span>
           </div>
           <div class="banner-notch"></div>
@@ -447,12 +466,12 @@ if (hamburger && nav) {
       // Render lucide icon inside the banner
       if (typeof lucide !== 'undefined') lucide.createIcons();
 
-      // Appear after the intro animation has had a moment to establish.
-      // If intro was skipped (toolkit back nav), appear quickly.
+      // Appear quickly — no need to wait for the full intro animation.
+      // If intro was skipped (toolkit back nav), appear almost immediately.
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const delay    = window._walterck_intro_skipped
-        ? 500
-        : (isMobile ? 2400 : 5600);
+        ? 150
+        : (isMobile ? 450 : 900);
 
       setTimeout(() => banner.classList.add('visible'), delay);
 
