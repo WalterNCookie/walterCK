@@ -68,6 +68,10 @@ if (gridContainer) {
 
       renderFilters();
       applyFilters();
+      
+      // Unlock scrolling and show scrollbar only after JSON is loaded
+      document.body.classList.add('json-loaded');
+      
     } catch (err) {
       console.error("Failed to load toolkit.json", err);
     }
@@ -186,17 +190,19 @@ if (hamburger && nav) {
 
 
 // ── Main Page Intro: Orb Sweep → Clip-path Reveal ────────────────────────────
-// Only fires on the main page, at the top, and strictly on the first boot-up
 (function () {
   if (!document.querySelector('.hero-main')) return;
   if (window.scrollY > 1)                   return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Ensure it only plays if this is the first boot-up of the session
-  if (sessionStorage.getItem('walterck_main_intro_played')) {
-    return;
+  // Use the Performance API to check if the user arrived via the Back button
+  const navEntries = performance.getEntriesByType("navigation");
+  if (navEntries.length > 0 && navEntries[0].type === "back_forward") {
+    return; // Skip animation if returning via the back button
   }
-  sessionStorage.setItem('walterck_main_intro_played', 'true');
+
+  // Lock scrolling while animation is playing
+  document.body.style.overflow = 'hidden';
 
   /* ── Create DOM elements ── */
   const overlay = document.createElement('div');
@@ -291,6 +297,9 @@ if (hamburger && nav) {
        ──────────────────────────────────────────────────────────────── */
     function startReveal(cx, cy) {
       const mainEl = document.querySelector('main');
+      
+      /* Hint for mobile GPU to process the animation smoothly */
+      mainEl.style.willChange = 'clip-path';
 
       /* Pin the page content inside a zero-radius circle */
       mainEl.style.clipPath = `circle(0px at ${cx}px ${cy}px)`;
@@ -311,7 +320,7 @@ if (hamburger && nav) {
           mainEl.style.transition = 'clip-path 5s cubic-bezier(0.22, 1, 0.36, 1)';
           mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
 
-          setTimeout(cleanup, 1600); // Increased timeout to match the slower animation
+          setTimeout(cleanup, 5100); 
         });
       });
     }
@@ -321,19 +330,24 @@ if (hamburger && nav) {
       if (mainEl) {
         mainEl.style.transition = '';
         mainEl.style.clipPath   = '';
+        mainEl.style.willChange = '';
       }
       [overlay, cvs, orb].forEach(el => el?.remove());
+      
+      // Unlock scrolling
+      document.body.style.overflow = '';
     }
   });
 })();
 
 // ── Global Strip Animation (All Pages EXCEPT Main Page) ──────────────────────
 (function() {
-  // Ignore if on the main page (we have a dedicated animation for that)
   if (document.querySelector('.hero-main')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Create the container dynamically
+  // Lock scrolling while intro plays
+  document.body.style.overflow = 'hidden';
+
   const intro = document.createElement('div');
   intro.id = 'site-intro';
   document.body.appendChild(intro);
@@ -356,7 +370,12 @@ if (hamburger && nav) {
     intro.appendChild(strip);
   }
 
-  // Pull the overlay out of the DOM once the last strip is done
   const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
-  setTimeout(() => intro.remove(), totalDone);
+  setTimeout(() => {
+    intro.remove();
+    // Scrolling unlocks either here OR when the JSON loads (handled by the .json-loaded class)
+    if (!document.body.classList.contains('toolkit-page')) {
+        document.body.style.overflow = '';
+    }
+  }, totalDone);
 })();
