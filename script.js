@@ -308,7 +308,7 @@ if (hamburger && nav) {
 
         /* Apply a slower transition for the clip-path so the spread effect is visible */
         requestAnimationFrame(() => {
-          mainEl.style.transition = 'clip-path 7.5s cubic-bezier(0.22, 1, 0.36, 1)';
+          mainEl.style.transition = 'clip-path 70.5s cubic-bezier(0.22, 1, 0.36, 1)';
           mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
 
           setTimeout(cleanup, 1600); // Increased timeout to match the slower animation
