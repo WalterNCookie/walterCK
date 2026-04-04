@@ -72,7 +72,6 @@ html:has(body.toolkit-page)::-webkit-scrollbar-thumb {
 html:has(body.toolkit-page)::-webkit-scrollbar-thumb:hover { background: rgba(91, 230, 192, 0.6); }
 
 
-
 /* Layout */
 .container {
   width: 100%;
@@ -306,7 +305,7 @@ a.card-link {
   font-size: clamp(1rem, 2vw + 0.5rem, 1.15rem); 
   line-height: 1.6;
   max-width: 1200px;
-  margin: -24px auto 40px auto; /* Negative top margin (-24px) backtracks the title margin */
+  margin: -24px auto 40px auto; 
 }
 
 /* Link styling */
@@ -537,4 +536,54 @@ body.toolkit-page::-webkit-scrollbar-thumb {
 }
 body.toolkit-page::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
+}
+
+/* ─── INTRO ANIMATIONS ─── */
+
+/* Main Page Orb Animation */
+#intro-overlay {
+  position: fixed; inset: 0;
+  background: #05070a;
+  z-index: 9000; pointer-events: none;
+}
+#intro-canvas {
+  position: fixed; inset: 0;
+  z-index: 9001; pointer-events: none;
+}
+#intro-orb {
+  position: fixed;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: #6b8cff;
+  box-shadow:
+    0 0  6px  3px  rgba(107,140,255,0.95),
+    0 0 20px  9px  rgba(107,140,255,0.55),
+    0 0 42px 20px  rgba(107,140,255,0.22);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 9002; pointer-events: none;
+  will-change: left, top, transform, opacity;
+}
+
+/* Global Strip Animation (Non-Main Pages) */
+#site-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+.intro-strip {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: #05070a;
+  will-change: transform;
+}
+@keyframes stripWipe {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(110%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-strip { animation: none !important; opacity: 0 !important; }
 }
