@@ -51,14 +51,14 @@ body.toolkit-page {
 
 /* ─── Scrollbar ─── */
 
-/* Hide on all pages by default */
+/* Hidden everywhere by default */
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 html::-webkit-scrollbar { display: none; }
 
-/* Show custom scrollbar on toolkit page ONLY after JSON has loaded (.loaded class added by JS) */
+/* Toolkit page: only show the scrollbar after JSON loads (.loaded added by JS) */
 html:has(body.toolkit-page.loaded) {
   scrollbar-width: thin;
   scrollbar-color: rgba(107, 140, 255, 0.45) transparent;
@@ -267,7 +267,8 @@ a.card-link {
   box-shadow: none;
 }
 
-/* Toolkits Page Specifics */
+/* ─── Toolkit Page ─── */
+
 .toolkit-hero {
   text-align: center;
   margin-bottom: 40px;
@@ -297,16 +298,7 @@ a.card-link {
   text-shadow: none;
 }
 
-@media (max-width: 600px) {
-  .toolkit-hero h1 {
-    font-size: 2.4rem;
-    margin-top: 40px;
-    margin-bottom: 28px;
-    letter-spacing: 0em;
-  }
-}
-
-/* Sub-header text styling */
+/* Sub-header text */
 .toolkit-desc {
   color: var(--muted);
   font-size: clamp(1rem, 2vw + 0.5rem, 1.15rem);
@@ -315,7 +307,6 @@ a.card-link {
   margin: -24px auto 40px auto;
 }
 
-/* Link styling */
 .toolkit-desc a {
   color: var(--accent);
   text-decoration: none;
@@ -329,7 +320,25 @@ a.card-link {
   text-underline-offset: 4px;
 }
 
-/* Search row: back btn + search bar */
+/* ─── Mobile overrides for toolkit page ─── */
+@media (max-width: 600px) {
+  /* Shrink the hero title so search/filters/tools feel proportional */
+  .toolkit-hero h1 {
+    font-size: 1.75rem;
+    margin-top: 28px;
+    margin-bottom: 16px;
+    letter-spacing: 0em;
+  }
+
+  /* Compact the subtitle too */
+  .toolkit-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+  }
+}
+
+/* Search row: back btn + search input */
 .search-row {
   display: flex;
   align-items: center;
@@ -340,11 +349,12 @@ a.card-link {
   box-sizing: border-box;
 }
 
-/* On mobile: stretch to match the full container width (same as title/desc) */
+/* Mobile: full width, no extra side padding */
 @media (max-width: 600px) {
   .search-row {
     max-width: 100%;
     padding: 0;
+    margin-bottom: 20px;
   }
 }
 
@@ -370,6 +380,15 @@ a.card-link {
   box-shadow: 0 0 20px var(--accent-glow);
 }
 
+/* Bigger back button on mobile */
+@media (max-width: 600px) {
+  .back-btn {
+    width: 56px;
+    height: 58px;
+    border-radius: 14px;
+  }
+}
+
 .search {
   display: flex;
   align-items: center;
@@ -392,6 +411,19 @@ a.card-link {
   font-size: 1rem;
 }
 
+/* Bigger search bar on mobile */
+@media (max-width: 600px) {
+  .search {
+    height: 58px;
+    padding: 16px 18px;
+  }
+
+  .search input {
+    font-size: 1.05rem;
+  }
+}
+
+/* Filter chips row */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -401,10 +433,12 @@ a.card-link {
   width: 100%;
 }
 
-/* On mobile: filters span the same width as everything else */
+/* Mobile: left-align and a bit more gap */
 @media (max-width: 600px) {
   .filters {
     justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 28px;
   }
 }
 
@@ -426,6 +460,14 @@ a.card-link {
   color: var(--bg-900);
 }
 
+/* Bigger chips on mobile */
+@media (max-width: 600px) {
+  .filter-chip {
+    font-size: 0.95rem;
+    padding: 10px 18px;
+  }
+}
+
 .category-section {
   margin-bottom: 50px;
 }
@@ -439,6 +481,26 @@ a.card-link {
   color: var(--text);
   opacity: 0.8;
   text-align: left;
+}
+
+/* Bigger category labels on mobile */
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 1.1rem;
+  }
+
+  .card {
+    padding: 22px 20px;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .card p,
+  .tags {
+    font-size: 0.92rem;
+  }
 }
 
 .toolkit-actions {
@@ -470,20 +532,28 @@ a.card-link {
   cursor: default;
 }
 
+/* Bigger action buttons on mobile */
+@media (max-width: 600px) {
+  .toolkit-actions button {
+    font-size: 0.95rem;
+    padding: 10px 0;
+    border-radius: 12px;
+  }
+}
+
 #empty {
   text-align: center;
   margin-top: 40px;
   color: var(--muted);
 }
 
-/* Script category highlight */
+/* ─── Script category highlight ─── */
 
 @keyframes script-hero-shine {
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
 }
 
-/* Filters container glow */
 .filters.script-found {
   box-shadow:
     0 0 30px rgba(91,230,192,0.12),
@@ -492,7 +562,6 @@ a.card-link {
   padding: 14px;
 }
 
-/* Script filter chip - default state */
 .filter-chip.script-highlight {
   background: linear-gradient(
     135deg,
@@ -506,7 +575,6 @@ a.card-link {
     inset 0 0 10px rgba(255,255,255,0.05);
 }
 
-/* Script filter chip - selected/active state */
 .filter-chip.script-highlight.active {
   background: linear-gradient(
     135deg,
@@ -522,7 +590,6 @@ a.card-link {
   text-shadow: 0 0 10px rgba(91,230,192,0.6);
 }
 
-/* Script category title */
 .category-title.script-highlight {
   color: var(--accent);
   border-left: 4px solid var(--accent);
@@ -530,9 +597,9 @@ a.card-link {
   text-shadow: 0 6px 30px rgba(91,230,192,0.15);
 }
 
-/* ─── INTRO ANIMATIONS ─── */
+/* ─── Intro Animations ─── */
 
-/* Main Page Orb Animation */
+/* Main Page Orb */
 #intro-overlay {
   position: fixed; inset: 0;
   background: #05070a;
@@ -557,7 +624,7 @@ a.card-link {
   will-change: left, top, transform, opacity;
 }
 
-/* Global Strip Animation (Non-Main Pages) */
+/* Global Strip (non-main pages) */
 #site-intro {
   position: fixed;
   inset: 0;
