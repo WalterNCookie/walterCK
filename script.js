@@ -1,4 +1,4 @@
-// script.js ----------------------------------------------------
+// GLOBAL JS
 
 // ── Slug helper (Featured pages + banner) ─────────────────────────────────
 function toSlug(title) {
@@ -125,7 +125,7 @@ if (gridContainer) {
         icon:     it.icon  || 'box',
         color:    it.color || '#007AFF',
         link:     it.link  || '#',
-        slug:     it.slug  || null,     // optional override in JSON
+        slug:     it.slug  || null,
         isNew:    it.new   === true
       }));
 
@@ -160,7 +160,6 @@ if (gridContainer) {
 
   function renderCard(item) {
     const isFeatured = item.category === 'Featured';
-    // Use explicit slug from JSON, or auto-generate from title
     const slug     = item.slug || toSlug(item.title);
     const safeLink = item.link.replace(/'/g, '%27');
 
@@ -250,24 +249,21 @@ if (hamburger && nav) {
 
 // ══════════════════════════════════════════════════════════════════════════
 // ── Main Page Intro: Orb Sweep → Clip-path Reveal ─────────────────────────
-// Always plays — EXCEPT when the user pressed the toolkit page back button.
 // ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (!document.querySelector('.hero-main')) return;
   if (window.scrollY > 1) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // ── Only guard: toolkit back button ───────────────────────────────────
   const BACK_KEY = 'walterck_toolkit_back';
   if (sessionStorage.getItem(BACK_KEY)) {
     sessionStorage.removeItem(BACK_KEY);
-    window._walterck_intro_skipped = true;   // tell banner to appear sooner
+    window._walterck_intro_skipped = true;
     return;
   }
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  // Lock scroll only during the orb flight
   document.body.style.overflow = 'hidden';
 
   const overlay = document.createElement('div');
@@ -282,7 +278,6 @@ if (hamburger && nav) {
   document.body.append(overlay, cvs, orb);
   const ctx2d = cvs.getContext('2d');
 
-  // Wait for fonts before measuring layout (prevents FOUT-shifted positions)
   document.fonts.ready.then(() => {
     requestAnimationFrame(() => {
       const pfp = document.querySelector('.profile-pfp');
@@ -297,12 +292,8 @@ if (hamburger && nav) {
       const cpx = window.innerWidth  * 0.36;
       const cpy = ty - Math.min(105, window.innerHeight * 0.15);
 
-      function quad(p0, p1, p2, t) {
-        return (1-t)*(1-t)*p0 + 2*(1-t)*t*p1 + t*t*p2;
-      }
-      function easeInOut(t) {
-        return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
-      }
+      function quad(p0, p1, p2, t) { return (1-t)*(1-t)*p0 + 2*(1-t)*t*p1 + t*t*p2; }
+      function easeInOut(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2; }
       function lerp(a, b, t) { return a + (b-a)*t; }
 
       const ORB_MS   = isMobile ? 480 : 800;
@@ -345,7 +336,6 @@ if (hamburger && nav) {
       requestAnimationFrame(tickOrb);
 
       function startReveal(cx, cy) {
-        // Unlock scroll — clip-path handles containment from here
         document.body.style.overflow = '';
 
         const mainEl = document.querySelector('main');
@@ -392,7 +382,6 @@ if (hamburger && nav) {
 
 // ══════════════════════════════════════════════════════════════════════════
 // ── Global Strip Animation (All Pages EXCEPT Main Page) ───────────────────
-// Scroll is NOT frozen — strips are decorative and users can scroll freely.
 // ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (document.querySelector('.hero-main')) return;
@@ -426,9 +415,36 @@ if (hamburger && nav) {
 
 
 // ══════════════════════════════════════════════════════════════════════════
+// ── Featured Page: Auto-pull shortcut link from toolkit.json ──────────────
+// Finds the matching item by slug (URL path segment) and sets all
+// elements with class .fp-shortcut-link to the correct iCloud link.
+// ══════════════════════════════════════════════════════════════════════════
+(function () {
+  if (!document.querySelector('.fp-hero')) return;
+
+  // Derive slug from URL: /toolkit/arise/ → 'arise'
+  const slug = window.location.pathname.split('/').filter(Boolean).pop();
+  if (!slug) return;
+
+  fetch('/toolkit/toolkit.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(raw => {
+      const item = raw.find(it => {
+        if (!it.title) return false;
+        return (it.slug || toSlug(it.title)) === slug;
+      });
+      if (!item || !item.link) return;
+
+      document.querySelectorAll('.fp-shortcut-link').forEach(el => {
+        el.href = item.link;
+      });
+    })
+    .catch(() => {}); // fail silently — links degrade to href="#"
+})();
+
+
+// ══════════════════════════════════════════════════════════════════════════
 // ── Homepage "New" Banner ─────────────────────────────────────────────────
-// Reads toolkit.json on the homepage and shows a ticket-shaped banner for
-// any item that has "new": true in its JSON properties.
 // ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (!document.querySelector('.hero-main')) return;
@@ -444,30 +460,41 @@ if (hamburger && nav) {
       banner.tabIndex = 0;
       banner.setAttribute('role', 'button');
       banner.setAttribute('aria-label', `New shortcut: ${newItem.title}`);
-      banner.style.setProperty('--b-color', newItem.color || '#6b8cff');
+
+      // Set the item color as a CSS custom property on the banner
+      // --b-color  = main accent (used for border + icon + eyebrow)
+      // --b-glow   = translucent version for ambient glow
+      const color = newItem.color || '#6b8cff';
+      banner.style.setProperty('--b-color', color);
+
+      // Convert hex → rgba for glow (simple approximation)
+      const hexToRgba = (hex, a) => {
+        const r = parseInt(hex.slice(1,3),16);
+        const g = parseInt(hex.slice(3,5),16);
+        const b = parseInt(hex.slice(5,7),16);
+        return `rgba(${r},${g},${b},${a})`;
+      };
+      banner.style.setProperty('--b-glow', hexToRgba(color.padEnd(7,'0'), 0.18));
 
       const cleanTitle = newItem.title.replace(/[➶→↗▶►]/g, '').trim();
-      // Use explicit slug from JSON or auto-generate
       const slug = newItem.slug || toSlug(newItem.title);
 
       banner.innerHTML = `
         <div class="banner-inner">
-          <div class="banner-stub">NEW</div>
-          <div class="banner-body">
-            <span class="banner-icon"><i data-lucide="${newItem.icon}" width="14" height="14"></i></span>
+          <div class="banner-icon-wrap">
+            <i data-lucide="${newItem.icon}"></i>
+          </div>
+          <div class="banner-text">
+            <span class="banner-eyebrow">New</span>
             <span class="banner-title">${cleanTitle}</span>
           </div>
-          <div class="banner-notch"></div>
         </div>
       `;
 
       document.body.appendChild(banner);
 
-      // Render lucide icon inside the banner
       if (typeof lucide !== 'undefined') lucide.createIcons();
 
-      // Appear quickly — no need to wait for the full intro animation.
-      // If intro was skipped (toolkit back nav), appear almost immediately.
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const delay    = window._walterck_intro_skipped
         ? 150
@@ -475,7 +502,6 @@ if (hamburger && nav) {
 
       setTimeout(() => banner.classList.add('visible'), delay);
 
-      // Navigate on click
       const navigate = async () => {
         const exists = await featuredPageExists(slug);
         window.location.href = exists ? `/toolkit/${slug}/` : '/toolkit/';
@@ -486,5 +512,5 @@ if (hamburger && nav) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(); }
       });
     })
-    .catch(() => {}); // silently fail — banner is decorative
+    .catch(() => {});
 })();
