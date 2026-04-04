@@ -186,40 +186,17 @@ if (hamburger && nav) {
 
 
 // ── Main Page Intro: Orb Sweep → Clip-path Reveal ────────────────────────────
-// Only fires on the main page and only when the user is at the very top.
+// Only fires on the main page, at the top, and strictly on the first boot-up
 (function () {
   if (!document.querySelector('.hero-main')) return;
   if (window.scrollY > 1)                   return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  /* ── Inject animation styles ── */
-  const style = document.createElement('style');
-  style.textContent = `
-    #intro-overlay {
-      position: fixed; inset: 0;
-      background: #05070a;
-      z-index: 9000; pointer-events: none;
-    }
-    #intro-canvas {
-      position: fixed; inset: 0;
-      z-index: 9001; pointer-events: none;
-    }
-    #intro-orb {
-      position: fixed;
-      width: 11px; height: 11px;
-      border-radius: 50%;
-      background: #6b8cff;
-      box-shadow:
-        0 0  6px  3px  rgba(107,140,255,0.95),
-        0 0 20px  9px  rgba(107,140,255,0.55),
-        0 0 42px 20px  rgba(107,140,255,0.22);
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      z-index: 9002; pointer-events: none;
-      will-change: left, top, transform, opacity;
-    }
-  `;
-  document.head.appendChild(style);
+  // Ensure it only plays if this is the first boot-up of the session
+  if (sessionStorage.getItem('walterck_main_intro_played')) {
+    return;
+  }
+  sessionStorage.setItem('walterck_main_intro_played', 'true');
 
   /* ── Create DOM elements ── */
   const overlay = document.createElement('div');
@@ -310,12 +287,7 @@ if (hamburger && nav) {
     requestAnimationFrame(tickOrb);
 
     /* ────────────────────────────────────────────────────────────────
-       PHASE 2 — Page genuinely spreads from the profile pic centre.
-
-       Technique: clip <main> to circle(0px) so content is invisible,
-       then remove the solid overlay (body bg is the same #05070a so
-       the swap is invisible to the eye), then expand the clip to
-       circle(200vmax) — the page pours out from the impact point.
+       PHASE 2 — Page slowly spreads from the profile pic centre.
        ──────────────────────────────────────────────────────────────── */
     function startReveal(cx, cy) {
       const mainEl = document.querySelector('main');
@@ -334,13 +306,12 @@ if (hamburger && nav) {
         cvs.style.transition = 'opacity 0.12s';
         cvs.style.opacity    = '0';
 
-        /* Give the browser one paint to commit circle(0px) before
-           we trigger the transition to the full-size circle */
+        /* Apply a slower transition for the clip-path so the spread effect is visible */
         requestAnimationFrame(() => {
-          mainEl.style.transition = 'clip-path 0.95s cubic-bezier(0.16, 1, 0.3, 1)';
+          mainEl.style.transition = 'clip-path 1.5s cubic-bezier(0.22, 1, 0.36, 1)';
           mainEl.style.clipPath   = `circle(200vmax at ${cx}px ${cy}px)`;
 
-          setTimeout(cleanup, 1000);
+          setTimeout(cleanup, 1600); // Increased timeout to match the slower animation
         });
       });
     }
@@ -351,7 +322,41 @@ if (hamburger && nav) {
         mainEl.style.transition = '';
         mainEl.style.clipPath   = '';
       }
-      [overlay, cvs, orb, style].forEach(el => el?.remove());
+      [overlay, cvs, orb].forEach(el => el?.remove());
     }
   });
+})();
+
+// ── Global Strip Animation (All Pages EXCEPT Main Page) ──────────────────────
+(function() {
+  // Ignore if on the main page (we have a dedicated animation for that)
+  if (document.querySelector('.hero-main')) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Create the container dynamically
+  const intro = document.createElement('div');
+  intro.id = 'site-intro';
+  document.body.appendChild(intro);
+
+  const STRIPS    = 11;
+  const DURATION  = 1;      // seconds per strip
+  const MIN_DELAY = 0.3;
+  const MAX_DELAY = 0.9;
+
+  for (let i = 0; i < STRIPS; i++) {
+    const strip = document.createElement('div');
+    strip.className = 'intro-strip';
+    const delay = MIN_DELAY + Math.random() * (MAX_DELAY - MIN_DELAY);
+    const pct   = 100 / STRIPS;
+    strip.style.cssText = `
+      top: calc(${i * pct}% - 0.5px);
+      height: calc(${pct}% + 1px);
+      animation: stripWipe ${DURATION}s cubic-bezier(0.16, 1, 0.3, 1) forwards ${delay.toFixed(3)}s;
+    `;
+    intro.appendChild(strip);
+  }
+
+  // Pull the overlay out of the DOM once the last strip is done
+  const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
+  setTimeout(() => intro.remove(), totalDone);
 })();
