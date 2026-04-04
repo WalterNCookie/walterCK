@@ -11,35 +11,8 @@
   <meta name="robots" content="noindex">
   
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    /* ─── Intro Strip Animation ─── */
-    #site-intro {
-      position: fixed;
-      inset: 0;
-      z-index: 9998;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .intro-strip {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      background: #05070a;
-      will-change: transform;
-    }
-    @keyframes stripWipe {
-      from { transform: translateX(0%); }
-      to   { transform: translateX(110%); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .intro-strip { animation: none !important; opacity: 0 !important; }
-    }
-  </style>
 </head>
 <body class="toolkit-page">
-
-  <div id="site-intro"></div>
 
   <main class="container">
     <section class="toolkit-hero">
@@ -65,34 +38,6 @@
   </main>
 
   <script src="../script.js"></script>
-
-  <script>
-    (function () {
-      const intro     = document.getElementById('site-intro');
-      const STRIPS    = 11;
-      const DURATION  = 1;      // seconds per strip
-      const MIN_DELAY = 0.3;
-      const MAX_DELAY = 0.9;
-
-      for (let i = 0; i < STRIPS; i++) {
-        const strip = document.createElement('div');
-        strip.className = 'intro-strip';
-        const delay = MIN_DELAY + Math.random() * (MAX_DELAY - MIN_DELAY);
-        const pct   = 100 / STRIPS;
-        // Slight height overshoot kills sub-pixel gaps between strips
-        strip.style.cssText = `
-          top: calc(${i * pct}% - 0.5px);
-          height: calc(${pct}% + 1px);
-          animation: stripWipe ${DURATION}s cubic-bezier(0.16, 1, 0.3, 1) forwards ${delay.toFixed(3)}s;
-        `;
-        intro.appendChild(strip);
-      }
-
-      // Pull the overlay out of the DOM once the last strip is done
-      const totalDone = (MAX_DELAY + DURATION + 0.15) * 1000;
-      setTimeout(() => intro.remove(), totalDone);
-    })();
-  </script>
 
 </body>
 </html>
