@@ -1,4 +1,4 @@
-// GLOBAL JS
+// script.js ----------------------------------------------------
 
 // ── Slug helper (Featured pages + banner) ─────────────────────────────────
 function toSlug(title) {
