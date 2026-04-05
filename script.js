@@ -1,4 +1,4 @@
-// script.js ----------------------------------------------------
+// GLOBAL JS
 
 // ── Slug helper (Featured pages + banner) ─────────────────────────────────
 function toSlug(title) {
@@ -266,15 +266,30 @@ if (hamburger && nav) {
 // ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (!document.querySelector('.hero-main')) return;
-  if (window.scrollY > 1) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const mainEl = document.querySelector('main');
+
+  // ── Early-exit cases: reveal main immediately, skip animation ────────────
+
+  if (window.scrollY > 1) {
+    mainEl.style.visibility = 'visible';
+    return;
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    mainEl.style.visibility = 'visible';
+    return;
+  }
 
   const BACK_KEY = 'walterck_toolkit_back';
   if (sessionStorage.getItem(BACK_KEY)) {
     sessionStorage.removeItem(BACK_KEY);
     window._walterck_intro_skipped = true;
+    mainEl.style.visibility = 'visible';
     return;
   }
+
+  // ── Run animation ─────────────────────────────────────────────────────────
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
@@ -352,7 +367,8 @@ if (hamburger && nav) {
       function startReveal(cx, cy) {
         document.body.style.overflow = '';
 
-        const mainEl = document.querySelector('main');
+        // Make main visible now — clip-path takes over as the visual mask from here
+        mainEl.style.visibility = 'visible';
         mainEl.style.willChange = 'clip-path';
         mainEl.style.clipPath   = `circle(0px at ${cx}px ${cy}px)`;
 
@@ -381,11 +397,11 @@ if (hamburger && nav) {
       }
 
       function cleanup() {
-        const mainEl = document.querySelector('main');
         if (mainEl) {
           mainEl.style.transition = '';
           mainEl.style.clipPath   = '';
           mainEl.style.willChange = '';
+          // visibility stays 'visible' — do not reset
         }
         [overlay, cvs, orb].forEach(el => el?.remove());
       }
@@ -399,6 +415,12 @@ if (hamburger && nav) {
 // ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (document.querySelector('.hero-main')) return;
+
+  // Reveal main immediately — the strips are a fixed overlay on top, so the
+  // content underneath is covered by them while they animate away.
+  const mainEl = document.querySelector('main');
+  if (mainEl) mainEl.style.visibility = 'visible';
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const intro = document.createElement('div');
@@ -429,9 +451,10 @@ if (hamburger && nav) {
 
 
 // ══════════════════════════════════════════════════════════════════════════
-// ── Featured Page: Auto-pull shortcut link from toolkit.json ──────────────
-// Finds the matching item by slug (URL path segment) and sets all
-// elements with class .fp-shortcut-link to the correct iCloud link.
+// ── Featured Page: Auto-pull shortcut link + icon from toolkit.json ────────
+// Finds the matching item by slug (URL path segment) and updates:
+//   - all .fp-shortcut-link hrefs
+//   - the hero icon to match the item's icon in the JSON
 // ══════════════════════════════════════════════════════════════════════════
 (function () {
   if (!document.querySelector('.fp-hero')) return;
@@ -447,13 +470,25 @@ if (hamburger && nav) {
         if (!it.title) return false;
         return (it.slug || toSlug(it.title)) === slug;
       });
-      if (!item || !item.link) return;
+      if (!item) return;
 
-      document.querySelectorAll('.fp-shortcut-link').forEach(el => {
-        el.href = item.link;
-      });
+      // Update shortcut download link
+      if (item.link) {
+        document.querySelectorAll('.fp-shortcut-link').forEach(el => {
+          el.href = item.link;
+        });
+      }
+
+      // Swap hero icon to match JSON — overrides whatever is hardcoded in HTML
+      if (item.icon) {
+        const iconEl = document.querySelector('.fp-hero-icon [data-lucide]');
+        if (iconEl) {
+          iconEl.setAttribute('data-lucide', item.icon);
+          if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+      }
     })
-    .catch(() => {}); // fail silently — links degrade to href="#"
+    .catch(() => {}); // fail silently — icon degrades to whatever is in the HTML
 })();
 
 
@@ -475,13 +510,9 @@ if (hamburger && nav) {
       banner.setAttribute('role', 'button');
       banner.setAttribute('aria-label', `New shortcut: ${newItem.title}`);
 
-      // Set the item color as a CSS custom property on the banner
-      // --b-color  = main accent (used for border + icon + eyebrow)
-      // --b-glow   = translucent version for ambient glow
       const color = newItem.color || '#6b8cff';
       banner.style.setProperty('--b-color', color);
 
-      // Convert hex → rgba for glow (simple approximation)
       const hexToRgba = (hex, a) => {
         const r = parseInt(hex.slice(1,3),16);
         const g = parseInt(hex.slice(3,5),16);
