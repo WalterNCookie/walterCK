@@ -416,6 +416,8 @@ if (navType === 'back_forward' || window.scrollY > 1) {
       }
     });
   });
+  });
+}, 100);
 })();
 
 
