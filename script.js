@@ -289,6 +289,12 @@ if (hamburger && nav) {
     return;
   }
 
+const navType = performance.getEntriesByType('navigation')[0]?.type;
+if (navType === 'back_forward' || window.scrollY > 1) {
+  mainEl.style.visibility = 'visible';
+  return;
+}
+
   // ── Run animation ─────────────────────────────────────────────────────────
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
