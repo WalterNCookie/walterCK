@@ -872,19 +872,31 @@ body.featured-page::before {
   margin-bottom: 12px;
   background: transparent;
   border: none;
-  border-radius: 0;
-  overflow: visible;
+  border-radius: 16px;
+  overflow: hidden;
   transition: all 0.3s;
   display: block;
 }
 .fp-shot:hover { transform: scale(1.015); filter: drop-shadow(0 8px 24px var(--fp-glow-soft)); }
-.fp-shot img { width: 100%; height: auto; display: block; }
+.fp-shot img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-radius: 16px;
+}
+@media (max-width: 700px) { .fp-shot img { height: 280px; } }
+@media (max-width: 420px) { .fp-shot img { height: 240px; } }
 .fp-shot-placeholder {
   width: 100%;
-  aspect-ratio: 9/16;
+  height: 400px;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 10px; color: var(--muted); font-size: 0.8rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
 }
 
 /* ── Requirements ── */
