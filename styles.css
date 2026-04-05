@@ -583,7 +583,7 @@ a.card-link { display: block; text-decoration: none; color: inherit; }
 
 
 /* ─────────────────────────────────────────────────────────────────────────── */
-/* ─── Featured category — fire theme ─────────────────────────────────────── */
+/* ─── Featured category — fire theme (filter chip + title only) ──────────── */
 /* ─────────────────────────────────────────────────────────────────────────── */
 
 @keyframes featured-fire-sweep {
@@ -626,16 +626,34 @@ a.card-link { display: block; text-decoration: none; color: inherit; }
   border-left: 4px solid #ff4500;
   padding-left: 12px;
 }
+
+/* ─── Featured cards — use the item's own color via CSS vars ─── */
+/*
+  --fc-rgb   : "r,g,b" string set by JS from item.color  (for rgba() calls)
+  --fc-color : raw hex string                             (for solid colour)
+*/
 .card--featured {
-  border-color: rgba(255,90,0,0.2);
-  background: linear-gradient(135deg, rgba(255,55,0,0.05) 0%, rgba(255,130,0,0.03) 100%);
+  border-color: rgba(var(--fc-rgb, 255,90,0), 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--fc-rgb, 255,55,0), 0.05) 0%,
+    rgba(var(--fc-rgb, 255,130,0), 0.03) 100%
+  );
 }
 .card--featured:hover {
-  border-color: rgba(255,105,0,0.72);
-  background: linear-gradient(135deg, rgba(255,55,0,0.11) 0%, rgba(255,130,0,0.07) 100%);
-  box-shadow: 0 12px 40px rgba(255,70,0,0.32), 0 0 0 1px rgba(255,100,0,0.15) inset;
+  border-color: rgba(var(--fc-rgb, 255,105,0), 0.72);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--fc-rgb, 255,55,0), 0.11) 0%,
+    rgba(var(--fc-rgb, 255,130,0), 0.07) 100%
+  );
+  box-shadow:
+    0 12px 40px rgba(var(--fc-rgb, 255,70,0), 0.32),
+    0 0 0 1px rgba(var(--fc-rgb, 255,100,0), 0.15) inset;
 }
-.card--featured h3 { color: #ff6a20; }
+.card--featured h3 {
+  color: var(--fc-color, #ff6a20);
+}
 
 
 /* ─────────────────────────────────────────────────────────────────────────── */
