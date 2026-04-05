@@ -415,12 +415,11 @@ if (navType === 'back_forward' || window.scrollY > 1) {
         [overlay, cvs, orb].forEach(el => el?.remove());
       }
     });
-  });
-}, 100);
+    });
+  }, 100);
+})();
 
-// ══════════════════════════════════════════════════════════════════════════
-// ── Global Strip Animation (All Pages EXCEPT Main Page) ───────────────────
-// ══════════════════════════════════════════════════════════════════════════
+// Global Strip Animation (ex main page)
 (function () {
   if (document.querySelector('.hero-main')) return;
 
