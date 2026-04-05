@@ -270,11 +270,12 @@ if (hamburger && nav) {
   const mainEl = document.querySelector('main');
 
   // ── Early-exit cases: reveal main immediately, skip animation ────────────
+const ANIM_KEY = 'walterck_intro_played';
 
-  if (window.scrollY > 1) {
-    mainEl.style.visibility = 'visible';
-    return;
-  }
+if (window.scrollY > 1 || sessionStorage.getItem(ANIM_KEY)) {
+  mainEl.style.visibility = 'visible';
+  return;
+}
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     mainEl.style.visibility = 'visible';
@@ -359,8 +360,10 @@ if (hamburger && nav) {
         orb.style.transform = `translate(-50%,-50%) scale(${scale})`;
 
         if (raw < 1) requestAnimationFrame(tickOrb);
-        else         startReveal(tx, ty);
-      }
+        else {
+          sessionStorage.setItem(ANIM_KEY, '1');
+          startReveal(tx, ty);
+        }
 
       requestAnimationFrame(tickOrb);
 
