@@ -417,8 +417,6 @@ if (navType === 'back_forward' || window.scrollY > 1) {
     });
   });
 }, 100);
-})();
-
 
 // ══════════════════════════════════════════════════════════════════════════
 // ── Global Strip Animation (All Pages EXCEPT Main Page) ───────────────────
