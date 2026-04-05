@@ -278,12 +278,6 @@ if (sessionStorage.getItem(BACK_KEY)) {
   return;
 }
 
-const ANIM_KEY = 'walterck_intro_played';
-if (window.scrollY > 1 || sessionStorage.getItem(ANIM_KEY)) {
-  mainEl.style.visibility = 'visible';
-  return;
-}
-
   // ── Run animation ─────────────────────────────────────────────────────────
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
