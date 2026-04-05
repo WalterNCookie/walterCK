@@ -870,14 +870,14 @@ body.featured-page::before {
   break-inside: avoid;
   width: 100%;
   margin-bottom: 12px;
-  background: rgba(255,255,255,0.025);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
   transition: all 0.3s;
   display: block;
 }
-.fp-shot:hover { border-color: var(--fp-color); box-shadow: 0 8px 32px var(--fp-glow-soft); transform: scale(1.015); }
+.fp-shot:hover { transform: scale(1.015); filter: drop-shadow(0 8px 24px var(--fp-glow-soft)); }
 .fp-shot img { width: 100%; height: auto; display: block; }
 .fp-shot-placeholder {
   width: 100%;
