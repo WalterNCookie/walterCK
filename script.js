@@ -307,9 +307,17 @@ if (navType === 'back_forward' || window.scrollY > 1) {
 
   document.body.append(overlay, cvs, orb);
   const ctx2d = cvs.getContext('2d');
-
-  document.fonts.ready.then(() => {
-    requestAnimationFrame(() => {
+  
+  setTimeout(() => {
+    if (window.scrollY > 1) {
+      mainEl.style.visibility = 'visible';
+      [overlay, cvs, orb].forEach(el => el?.remove());
+      document.body.style.overflow = '';
+      return;
+    }
+  
+    document.fonts.ready.then(() => {
+      requestAnimationFrame(() => {
       const pfp = document.querySelector('.profile-pfp');
       if (!pfp) { cleanup(); return; }
 
