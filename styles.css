@@ -140,7 +140,9 @@ h2 {
   overflow: hidden;
   box-shadow: 0 0 40px rgba(107, 140, 255, 0.4);
   transition: var(--transition);
+  transform: translateZ(0);
 }
+
 .profile-pfp:hover {
   transform: scale(1.05);
   box-shadow: 0 0 60px rgba(107, 140, 255, 0.6);
