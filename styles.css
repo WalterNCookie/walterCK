@@ -859,11 +859,12 @@ body.featured-page::before {
 
 /* ── Screenshots — masonry collage ── */
 .fp-gallery {
-  columns: 2;
+  columns: 3;
   column-gap: 12px;
   margin-top: 28px;
 }
-@media (max-width: 500px) { .fp-gallery { columns: 1; } }
+@media (max-width: 700px) { .fp-gallery { columns: 2; } }
+@media (max-width: 420px) { .fp-gallery { columns: 1; } }
 
 .fp-shot {
   break-inside: avoid;
@@ -877,21 +878,13 @@ body.featured-page::before {
   display: block;
 }
 .fp-shot:hover { transform: scale(1.015); filter: drop-shadow(0 8px 24px var(--fp-glow-soft)); }
-.fp-shot img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-}
+.fp-shot img { width: 100%; height: auto; display: block; }
 .fp-shot-placeholder {
   width: 100%;
   aspect-ratio: 9/16;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   gap: 10px; color: var(--muted); font-size: 0.8rem;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
 }
 
 /* ── Requirements ── */
