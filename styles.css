@@ -249,7 +249,7 @@ a.card-link { display: block; text-decoration: none; color: inherit; }
 
 .toolkit-desc {
   color: var(--muted);
-  font-size: clamp(1rem, 2vw + 0.5rem, 0.15rem);
+  font-size: clamp(0.5rem, 2vw + 0.75rem, 1rem);
   line-height: 1.6;
   max-width: 1200px;
   margin: -24px auto 40px auto;
