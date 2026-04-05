@@ -158,6 +158,15 @@ if (gridContainer) {
     highlightScripts();
   }
 
+  // ── Hex → "r,g,b" string for use in rgba() ────────────────────────────
+  function hexToRgb(hex) {
+    const h = (hex || '#ffffff').replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return `${r},${g},${b}`;
+  }
+
   function renderCard(item) {
     const isFeatured = item.category === 'Featured';
     const slug     = item.slug || toSlug(item.title);
@@ -169,8 +178,13 @@ if (gridContainer) {
       : `<button onclick="window.open('${item.link}','_blank')">Open</button>
          <button onclick="copyLink(this,'${item.link}')">Copy</button>`;
 
+    // Inject per-card CSS vars so the stylesheet can do rgba() without JS colour math
+    const featuredStyle = isFeatured
+      ? ` style="--fc-rgb:${hexToRgb(item.color)};--fc-color:${item.color}"`
+      : '';
+
     return `
-      <div class="card${isFeatured ? ' card--featured' : ''}">
+      <div class="card${isFeatured ? ' card--featured' : ''}"${featuredStyle}>
         <div style="color:${item.color}; margin-bottom:12px;">
           <i data-lucide="${item.icon}" size="28"></i>
         </div>
