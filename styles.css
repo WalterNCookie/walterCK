@@ -27,6 +27,15 @@
   color-scheme: dark;
 }
 
+/*
+  Hide <main> by default so it's never visible before the intro animation
+  starts. script.js sets visibility:visible at the correct moment for each
+  page type (orb reveal on the home page, strip wipe on all others).
+  This stylesheet is loaded in <head> so the rule takes effect before any
+  body content is painted — preventing the flash entirely.
+*/
+main { visibility: hidden; }
+
 /* font */
 * { font-family: 'Oxanium', sans-serif; }
 
