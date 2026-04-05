@@ -271,11 +271,6 @@ if (hamburger && nav) {
 
   // ── Early-exit cases: reveal main immediately, skip animation ────────────
 
-  if (window.scrollY > 1) {
-    mainEl.style.visibility = 'visible';
-    return;
-  }
-
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     mainEl.style.visibility = 'visible';
     return;
