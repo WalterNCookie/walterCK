@@ -270,25 +270,19 @@ if (hamburger && nav) {
   const mainEl = document.querySelector('main');
 
   // ── Early-exit cases: reveal main immediately, skip animation ────────────
-const ANIM_KEY = 'walterck_intro_played';
-
-if (window.scrollY > 1 || sessionStorage.getItem(ANIM_KEY)) {
+const BACK_KEY = 'walterck_toolkit_back';
+if (sessionStorage.getItem(BACK_KEY)) {
+  sessionStorage.removeItem(BACK_KEY);
+  window._walterck_intro_skipped = true;
   mainEl.style.visibility = 'visible';
   return;
 }
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    mainEl.style.visibility = 'visible';
-    return;
-  }
-
-  const BACK_KEY = 'walterck_toolkit_back';
-  if (sessionStorage.getItem(BACK_KEY)) {
-    sessionStorage.removeItem(BACK_KEY);
-    window._walterck_intro_skipped = true;
-    mainEl.style.visibility = 'visible';
-    return;
-  }
+const ANIM_KEY = 'walterck_intro_played';
+if (window.scrollY > 1 || sessionStorage.getItem(ANIM_KEY)) {
+  mainEl.style.visibility = 'visible';
+  return;
+}
 
   // ── Run animation ─────────────────────────────────────────────────────────
 
@@ -364,6 +358,7 @@ if (window.scrollY > 1 || sessionStorage.getItem(ANIM_KEY)) {
           sessionStorage.setItem(ANIM_KEY, '1');
           startReveal(tx, ty);
         }
+      }
 
       requestAnimationFrame(tickOrb);
 
