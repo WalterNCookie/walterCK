@@ -270,13 +270,24 @@ if (hamburger && nav) {
   const mainEl = document.querySelector('main');
 
   // ── Early-exit cases: reveal main immediately, skip animation ────────────
-const BACK_KEY = 'walterck_toolkit_back';
-if (sessionStorage.getItem(BACK_KEY)) {
-  sessionStorage.removeItem(BACK_KEY);
-  window._walterck_intro_skipped = true;
-  mainEl.style.visibility = 'visible';
-  return;
-}
+
+  if (window.scrollY > 1) {
+    mainEl.style.visibility = 'visible';
+    return;
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    mainEl.style.visibility = 'visible';
+    return;
+  }
+
+  const BACK_KEY = 'walterck_toolkit_back';
+  if (sessionStorage.getItem(BACK_KEY)) {
+    sessionStorage.removeItem(BACK_KEY);
+    window._walterck_intro_skipped = true;
+    mainEl.style.visibility = 'visible';
+    return;
+  }
 
   // ── Run animation ─────────────────────────────────────────────────────────
 
@@ -348,10 +359,7 @@ if (sessionStorage.getItem(BACK_KEY)) {
         orb.style.transform = `translate(-50%,-50%) scale(${scale})`;
 
         if (raw < 1) requestAnimationFrame(tickOrb);
-        else {
-          sessionStorage.setItem(ANIM_KEY, '1');
-          startReveal(tx, ty);
-        }
+        else         startReveal(tx, ty);
       }
 
       requestAnimationFrame(tickOrb);
